@@ -12,6 +12,7 @@
 <link href="{{asset('backend')}}/assets/css/components/custom-modal.css" rel="stylesheet" type="text/css" />
 @endpush
 @section('content')
+<div id="posyandu_alert"></div>
 <div class="col-lg-12">
     <div class="statbox widget box box-shadow">
         <div class="widget-header">

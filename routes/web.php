@@ -60,6 +60,15 @@ route::group(['middleware' => ['auth', 'login_check:petugas']], function () {
     Route::post('/simpan-kuis', [DashboardController::class, 'simpankuis']);
     Route::post('/list-kuis', [DashboardController::class, 'listkuis']);
     Route::post('/kuis-hpus', [DashboardController::class, 'kuishpus']);
+
+    Route::get('/posyandu', [RekapPosyanduControler::class, 'index'])->name('posyandu');
+    Route::post('/posyandu/store', [RekapPosyanduControler::class, 'store'])->name('posyandu.store');
+    Route::get('/posyandu/fetch-all', [RekapPosyanduControler::class, 'fetchAll'])->name('posyandu.fetch');
+    Route::post('/posyandu/edit', [RekapPosyanduControler::class, 'edit'])->name('posyandu.edit');
+    Route::delete('/posyandu/delete', [RekapPosyanduControler::class, 'delete'])->name('posyandu.delete');
+    Route::post('/posyandu/detail', [RekapPosyanduControler::class, 'detail'])->name('posyandu.detail');
+
+    Route::post('/geografi-update', [RekapPosyanduControler::class, 'geografiUpdate'])->name('geografi-update');
 });
 
 route::group(['middleware' => ['auth', 'login_check:super-admin']], function () {
@@ -72,7 +81,9 @@ route::group(['middleware' => ['auth', 'login_check:super-admin']], function () 
     Route::delete('/user/delete', [DataUserController::class, 'delete'])->name('user.delete');
     Route::post('/user/detail', [DataUserController::class, 'detail'])->name('user.detail');
 
-    Route::get('/rekap-posyandu', [RekapPosyanduControler::class, 'index'])->name('rekap-posyandu');
+
 
     Route::get('/website', [WebsiteController::class, 'index'])->name('website');
-    Route::post('/web
+    Route::post('/website-image', [WebsiteController::class, 'websiteImageUpdate']);
+    Route::post('/website-update', [WebsiteController::class, 'websiteUpdate']);
+});
