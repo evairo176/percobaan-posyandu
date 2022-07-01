@@ -99,6 +99,7 @@
             $('#register_form').submit(function(e) {
                 e.preventDefault();
                 $('#register_btn').val('please wait...');
+                $('#register_btn').attr('disabled', 'disabled');
                 $.ajax({
                     url: '/register',
                     method: 'post',
@@ -111,11 +112,14 @@
                             showError('email', res.messages.email);
                             showError('password', res.messages.password);
                             showError('cpassword', res.messages.cpassword);
+                            showError('posyandu_id', res.messages.posyandu_id);
+                            $('#register_btn').removeAttr('disabled');
                             $('#register_btn').val('register');
                         } else if (res.status == 200) {
                             $('#show_success_alert').html(showMessage('success', res.messages));
                             $('#register_form')[0].reset();
                             removeValidationClasses('#register_form')
+                            $('#register_btn').removeAttr('disabled');
                             $('#register_btn').val('register');
                         }
 

@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataUserController;
+use App\Http\Controllers\DemografiController;
+use App\Http\Controllers\GeografiController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RekapPosyanduControler;
 use App\Http\Controllers\UserController;
@@ -51,6 +53,13 @@ route::group(['middleware' => ['auth']], function () {
     Route::get('/logout', [UserController::class, 'logout'])->name('auth.logout');
 
     Route::get('/dashboard', [DashboardController::class, 'index']);
+
+    Route::get('/posyandu', [RekapPosyanduControler::class, 'index'])->name('posyandu');
+    Route::post('/posyandu/store', [RekapPosyanduControler::class, 'store'])->name('posyandu.store');
+    Route::get('/posyandu/fetch-all', [RekapPosyanduControler::class, 'fetchAll'])->name('posyandu.fetch');
+    Route::post('/posyandu/edit', [RekapPosyanduControler::class, 'edit'])->name('posyandu.edit');
+    Route::delete('/posyandu/delete', [RekapPosyanduControler::class, 'delete'])->name('posyandu.delete');
+    Route::get('/posyandu/detail/{id}', [RekapPosyanduControler::class, 'detail'])->name('posyandu.detail');
 });
 route::group(['middleware' => ['auth', 'login_check:petugas']], function () {
 
@@ -61,15 +70,19 @@ route::group(['middleware' => ['auth', 'login_check:petugas']], function () {
     Route::post('/list-kuis', [DashboardController::class, 'listkuis']);
     Route::post('/kuis-hpus', [DashboardController::class, 'kuishpus']);
 
-    Route::get('/posyandu', [RekapPosyanduControler::class, 'index'])->name('posyandu');
-    Route::post('/posyandu/store', [RekapPosyanduControler::class, 'store'])->name('posyandu.store');
-    Route::get('/posyandu/fetch-all', [RekapPosyanduControler::class, 'fetchAll'])->name('posyandu.fetch');
-    Route::post('/posyandu/edit', [RekapPosyanduControler::class, 'edit'])->name('posyandu.edit');
-    Route::delete('/posyandu/delete', [RekapPosyanduControler::class, 'delete'])->name('posyandu.delete');
-    Route::get('/posyandu/detail/{id}', [RekapPosyanduControler::class, 'detail'])->name('posyandu.detail');
-    Route::get('/posyandu/cetak-pdf/{id}', [RekapPosyanduControler::class, 'cetakPdf'])->name('posyandu.detail-pdf');
 
-    Route::post('/geografi-update', [RekapPosyanduControler::class, 'geografiUpdate'])->name('geografi-update');
+
+    Route::get('/geografi', [GeografiController::class, 'index'])->name('geografi');
+    Route::post('/geografi/store', [GeografiController::class, 'store'])->name('geografi.store');
+    Route::get('/geografi/fetch-all', [GeografiController::class, 'fetchAll'])->name('geografi.fetch');
+    Route::post('/geografi/edit', [GeografiController::class, 'edit'])->name('geografi.edit');
+
+
+    Route::get('/demografi', [DemografiController::class, 'index'])->name('demografi');
+    Route::post('/demografi/store', [DemografiController::class, 'store'])->name('demografi.store');
+    Route::get('/demografi/fetch-all', [DemografiController::class, 'fetchAll'])->name('demografi.fetch');
+    Route::post('/demografi/edit', [DemografiController::class, 'edit'])->name('demografi.edit');
+    // Route::post('/geografi-update', [RekapPosyanduControler::class, 'geografiUpdate'])->name('geografi-update');
 });
 
 route::group(['middleware' => ['auth', 'login_check:super-admin']], function () {

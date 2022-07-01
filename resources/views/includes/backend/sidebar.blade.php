@@ -43,6 +43,9 @@
                     </div>
                 </a>
                 <ul class="submenu recent-submenu list-unstyled collapse {{ ($menu == 'table') ? 'show' : ''}}" id="menu2" data-parent="#accordionExample" style="">
+                    <li class="{{ ($submenu == 'Input Rekap Posyandu') ? 'active' : ''}}">
+                        <a href="/posyandu">data Rekap Posyandu</a>
+                    </li>
                     <li class="{{ ($submenu == 'user') ? 'active' : ''}}">
                         <a href="/user"> User </a>
                     </li>

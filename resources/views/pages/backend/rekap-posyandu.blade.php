@@ -1,4 +1,5 @@
 @extends('layouts.backend')
+@section('title','posyandu')
 @push('add-styles')
 <link href="{{asset('backend')}}/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="{{asset('backend')}}/assets/css/forms/theme-checkbox-radio.css">
@@ -35,9 +36,12 @@
                         display: flex;
                         align-items: center;">
                         <h4>Table posyandu</h4>
+                        @if(!auth()->user()->status_posyandu)
                         <button type="button" class="btn btn-primary mb-2 mr-2" id="btnposyandu">
                             Add New posyandu
                         </button>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -262,6 +266,8 @@
                         $('#posyandu_btn').removeAttr('disabled');
                         $('#posyanduModal').modal('hide');
                         $('.table').DataTable().ajax.reload();
+                        $('#btnposyandu').addClass('d-none');
+
                     }
                 }
             })

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Posyandu;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+
 class UserController extends Controller
 {
     public function login()
@@ -20,10 +22,10 @@ class UserController extends Controller
     }
     public function register()
     {
-        // if (session()->has('loggedInUser')) {
-        //     return redirect('/profile');
-        // }
-        return view('pages.register');
+        $data = [
+            'pos' => Posyandu::all(),
+        ];
+        return view('pages.register', $data);
     }
     public function forgot()
     {
@@ -47,6 +49,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users|max:100',
             'password' => 'required|min:6|max:50',
             'cpassword' => 'required|min:6|same:password',
+            // 'posyandu_id' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -60,6 +63,7 @@ class UserController extends Controller
             $user->name = request()->name;
             $user->email = request()->email;
             $user->password = hash::make(request()->password);
+            // $user->posyandu_id = request()->posyandu_id;
             $user->save();
             return response()->json([
                 'status' => 200,

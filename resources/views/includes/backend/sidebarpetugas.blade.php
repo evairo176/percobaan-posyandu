@@ -44,7 +44,13 @@
                 </a>
                 <ul class="submenu recent-submenu list-unstyled collapse {{ ($menu == 'table') ? 'show' : ''}}" id="menu2" data-parent="#accordionExample" style="">
                     <li class="{{ ($submenu == 'Input Rekap Posyandu') ? 'active' : ''}}">
-                        <a href="/rekap-posyandu">Input Rekap Posyandu</a>
+                        <a href="/posyandu">Input Rekap Posyandu</a>
+                    </li>
+                    <li class="{{ ($submenu == 'Input Rekap Geografi') ? 'active' : ''}}">
+                        <a href="/geografi">Input Rekap Geografi</a>
+                    </li>
+                    <li class="{{ ($submenu == 'Input Rekap Demografi') ? 'active' : ''}}">
+                        <a href="/demografi">Input Rekap Demografi</a>
                     </li>
 
                 </ul>

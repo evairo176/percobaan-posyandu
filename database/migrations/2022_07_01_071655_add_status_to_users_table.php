@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPosyanduIdToUsersTable extends Migration
+class AddStatusToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddPosyanduIdToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('posyandu_id')->nullable()->after('id');
+            $table->string('status')->nullable()->after('role');
         });
     }
 
@@ -26,7 +26,7 @@ class AddPosyanduIdToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('posyandu_id');
+            $table->dropColumn('status');
         });
     }
 }

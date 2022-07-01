@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Geografi;
 use App\Models\Posyandu;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -24,24 +25,53 @@ class RekapPosyanduControler extends Controller
     }
     public function fetchAll(Request $request)
     {
-        if ($request->ajax()) {
-            $data = Posyandu::latest()->get();
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('created_at', function ($row) {
-                    $date = date('d-m-Y', strtotime($row->created_at));
-                    return $date;
-                })
-                ->addColumn('action', function ($row) {
-                    $actionBtn = '       <td class="text-center">
+        if (auth()->user()->role == 'petugas') {
+            if (auth()->user()->posyandu_id) {
+                if ($request->ajax()) {
+                    $data = Posyandu::where('id', auth()->user()->posyandu_id)->latest()->get();
+                    return Datatables::of($data)
+                        ->addIndexColumn()
+                        ->addColumn('created_at', function ($row) {
+                            $date = date('d-m-Y', strtotime($row->created_at));
+                            return $date;
+                        })
+                        ->addColumn('action', function ($row) {
+                            $actionBtn = '       <td class="text-center">
+                        <ul class="table-controls">
+                        <li><a href="posyandu/detail/' . $row->id . '" id="" class="detailIcon btn btn-secondary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings"><i class="fas fa-print"></i> Print</a> </li>
+                        <li><a href="javascript:void(0);" id="' . $row->id . '" class="editIcon" data-bs-toggle="modal" data-bs-target="#editdataloyeeModal" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>                                       
+                         </ul>';
+                            return $actionBtn;
+                        })
+                        ->rawColumns(['picture', 'action'])
+                        ->make(true);
+                }
+            } else {
+                return response()->json([
+                    'status' => 201,
+                    'messages' => 'Data Tidak ada'
+                ]);
+            }
+        } else {
+            if ($request->ajax()) {
+                $data = Posyandu::latest()->get();
+                return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('created_at', function ($row) {
+                        $date = date('d-m-Y', strtotime($row->created_at));
+                        return $date;
+                    })
+                    ->addColumn('action', function ($row) {
+                        $actionBtn = '       <td class="text-center">
                     <ul class="table-controls">
                     <li><a href="posyandu/detail/' . $row->id . '" id="" class="detailIcon btn btn-secondary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings"><i class="fas fa-print"></i> Print</a> </li>
                     <li><a href="javascript:void(0);" id="' . $row->id . '" class="editIcon" data-bs-toggle="modal" data-bs-target="#editdataloyeeModal" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>                                       
                      </ul>';
-                    return $actionBtn;
-                })
-                ->rawColumns(['picture', 'action'])
-                ->make(true);
+                        return $actionBtn;
+                    })
+                    ->rawColumns(['picture', 'action'])
+                    ->make(true);
+            }
         }
     }
 
@@ -110,7 +140,16 @@ class RekapPosyanduControler extends Controller
                     'kabupaten' => $request->kabupaten,
                 ];
                 // dd($posyanduData);
-                Posyandu::create($posyanduData);
+
+                $pos = Posyandu::create($posyanduData);
+                // dd($pos->id);
+                $user = User::find(auth()->user()->id);
+                $userData = [
+                    'posyandu_id' => $pos->id,
+                    'status_posyandu' => 'sudah',
+                ];
+                $user->update($userData);
+                // dd($user);
                 return response()->json([
                     'status' => 200,
                     'messages' => 'Updated Successfully'
@@ -182,17 +221,42 @@ class RekapPosyanduControler extends Controller
     {
         $id = $id_posyandu;
         // dd($id);
+        // DB::table('tb_kegiatan_utama')
+        //     ->leftJoin('tb_posyandu', 'tb_kegiatan_utama.id_posyandu', '=', 'tb_posyandu.id')
+        //     ->select(
+        //         'tb_kegiatan_utama.*',
+        //         'tb_posyandu.*',
+        //         'tb_kegiatan_utama.id as id_kegiatan_utama',
+        //     )
+        //     ->orderBy('id_kegiatan_utama', 'desc')
+        //     ->get();
         $data = [
             'menu' => 'table',
             'submenu' => 'Input Rekap Posyandu',
-            'pos' =>  Posyandu::find($id),
+            'pos' =>  DB::table('tb_rekap_posyandu')
+                ->leftJoin('tb_geografi', 'tb_rekap_posyandu.id', '=', 'tb_geografi.posyandu_id')
+                ->leftJoin('tb_demografi', 'tb_rekap_posyandu.id', '=', 'tb_demografi.posyandu_id')
+                ->select(
+                    'tb_rekap_posyandu.*',
+                    'tb_geografi.*',
+                    'tb_demografi.*',
+                    'tb_rekap_posyandu.id as id_posyandu',
+                )->where('tb_rekap_posyandu.id', auth()->user()->posyandu_id)
+                ->first(),
         ];
+        // dd($data);
         return view('pages.backend.detail-posyandu', $data);
     }
     public function cetakPdf($id_posyandu)
     {
-        $posyandu = Posyandu::find($id_posyandu)
-        PDF::loadView('pages.backend.detail-posyandu');
-        return $pdf->download('data-' . $posyandu->nama_posyandu . '.pdf');
+        $posyandu = Posyandu::find($id_posyandu);
+        $data = [
+            'menu' => 'table',
+            'submenu' => 'Input Rekap Posyandu',
+            'pos' =>  $posyandu,
+        ];
+        // $pdf = PDF::loadView('pages.backend.cetakPdf', $data);
+        // return $pdf->download('data-' . $posyandu->nama_posyandu . '.pdf');
+        return view('pages.backend.cetakPdf', $data);
     }
 }

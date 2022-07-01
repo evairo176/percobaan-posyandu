@@ -16,7 +16,7 @@ class CreateTbGeografiTable extends Migration
 
         Schema::create('tb_geografi', function (Blueprint $table) {
             $table->id();
-            $table->integer('posyandu_id');
+            $table->integer('posyandu_id')->nullable();
             $table->string('jml_rt')->nullable();
             $table->string('jml_rw')->nullable();
             $table->string('jrk_terdekat')->nullable();

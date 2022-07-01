@@ -12,7 +12,7 @@ $website = DB::table('tb_website')->where('id', 1)->first();
         <ul class="navbar-nav theme-brand flex-row  text-center">
             <li class="nav-item theme-logo">
                 <a href="index.html">
-                    <img src="storage/website/{{$website->picture}}" class="navbar-logo" alt="logo">
+                    <img src="storage/website/Dinas Pemberdayaan Manusia dan Desa-1656654509.png" class="navbar-logo" alt="logo">
                 </a>
             </li>
             <li class="nav-item theme-text">
