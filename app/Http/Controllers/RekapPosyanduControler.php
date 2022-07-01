@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use DataTables;
 use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class RekapPosyanduControler extends Controller
 {
@@ -34,7 +35,7 @@ class RekapPosyanduControler extends Controller
                 ->addColumn('action', function ($row) {
                     $actionBtn = '       <td class="text-center">
                     <ul class="table-controls">
-                    <li><a href="javascript:void(0);" id="' . $row->id . '" class="detailIcon btn btn-secondary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings"><i class="fas fa-print"></i> Print</a> </li>
+                    <li><a href="posyandu/detail/' . $row->id . '" id="" class="detailIcon btn btn-secondary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings"><i class="fas fa-print"></i> Print</a> </li>
                     <li><a href="javascript:void(0);" id="' . $row->id . '" class="editIcon" data-bs-toggle="modal" data-bs-target="#editdataloyeeModal" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>                                       
                      </ul>';
                     return $actionBtn;
@@ -176,5 +177,22 @@ class RekapPosyanduControler extends Controller
         $user = Posyandu::find($id);
         // dd($data->password);
         return response()->json($user);
+    }
+    public function detail($id_posyandu)
+    {
+        $id = $id_posyandu;
+        // dd($id);
+        $data = [
+            'menu' => 'table',
+            'submenu' => 'Input Rekap Posyandu',
+            'pos' =>  Posyandu::find($id),
+        ];
+        return view('pages.backend.detail-posyandu', $data);
+    }
+    public function cetakPdf($id_posyandu)
+    {
+        $posyandu = Posyandu::find($id_posyandu)
+        PDF::loadView('pages.backend.detail-posyandu');
+        return $pdf->download('data-' . $posyandu->nama_posyandu . '.pdf');
     }
 }

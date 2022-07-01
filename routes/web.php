@@ -66,7 +66,8 @@ route::group(['middleware' => ['auth', 'login_check:petugas']], function () {
     Route::get('/posyandu/fetch-all', [RekapPosyanduControler::class, 'fetchAll'])->name('posyandu.fetch');
     Route::post('/posyandu/edit', [RekapPosyanduControler::class, 'edit'])->name('posyandu.edit');
     Route::delete('/posyandu/delete', [RekapPosyanduControler::class, 'delete'])->name('posyandu.delete');
-    Route::post('/posyandu/detail', [RekapPosyanduControler::class, 'detail'])->name('posyandu.detail');
+    Route::get('/posyandu/detail/{id}', [RekapPosyanduControler::class, 'detail'])->name('posyandu.detail');
+    Route::get('/posyandu/cetak-pdf/{id}', [RekapPosyanduControler::class, 'cetakPdf'])->name('posyandu.detail-pdf');
 
     Route::post('/geografi-update', [RekapPosyanduControler::class, 'geografiUpdate'])->name('geografi-update');
 });
