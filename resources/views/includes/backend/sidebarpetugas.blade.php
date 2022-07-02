@@ -55,6 +55,9 @@
                     <li class="{{ ($submenu == 'Input Rekap Pembentukan') ? 'active' : ''}}">
                         <a href="/pembentukan">Input Rekap Pembentukan</a>
                     </li>
+                    <li class="{{ ($submenu == 'Input Rekap Kepengurusan') ? 'active' : ''}}">
+                        <a href="/kepengurusan">Input Rekap Kepengurusan</a>
+                    </li>
 
                 </ul>
             </li>

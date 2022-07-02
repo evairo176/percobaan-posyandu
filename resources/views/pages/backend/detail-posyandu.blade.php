@@ -362,6 +362,116 @@
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            <p class="kat-2">B. Kepengurusan Posyandu</p>
+                            <ul>
+                                <li>
+                                    <p class="kat-3">1. Posyandu Multifungsi</p>
+                                    <ul>
+                                        <li>
+                                            <table class="table">
+                                                <tr>
+                                                    <th>a. Ketua </th>
+                                                    <td>: {{$pos->ket_m}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>b. Bendahara</th>
+                                                    <td>: {{$pos->bend_m}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>c. Seksi / Bidang</th>
+                                                    <td>: {{$pos->ket_m}}</td>
+                                                </tr>
+                                            </table>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p class="kat-3">2. Kelompok Kegiatan Pokok</p>
+                                    <ul>
+                                        <li>
+                                            <table class="table">
+                                                <tr>
+                                                    <th>a. Ketua </th>
+                                                    <td>: {{$pos->ket_kkp}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>b. Bendahara</th>
+                                                    <td>: {{$pos->bend_kkp}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>c. Seksi / Bidang</th>
+                                                    <td>: {{$pos->ket_kkp}}</td>
+                                                </tr>
+                                            </table>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p class="kat-3">3. Kelompok Kegiatan BKB</p>
+                                    <ul>
+                                        <li>
+                                            <table class="table">
+                                                <tr>
+                                                    <th>a. Ketua </th>
+                                                    <td>: {{$pos->ket_kkb}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>b. Bendahara</th>
+                                                    <td>: {{$pos->bend_kkb}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>c. Seksi / Bidang</th>
+                                                    <td>: {{$pos->ket_kkb}}</td>
+                                                </tr>
+                                            </table>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p class="kat-3">4. Kelompok Kegiatan Bidang Pendidikan / PAUD</p>
+                                    <ul>
+                                        <li>
+                                            <table class="table">
+                                                <tr>
+                                                    <th>a. Ketua </th>
+                                                    <td>: {{$pos->ket_kkbp}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>b. Bendahara</th>
+                                                    <td>: {{$pos->bend_kkbp}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>c. Seksi / Bidang</th>
+                                                    <td>: {{$pos->ket_kkbp}}</td>
+                                                </tr>
+                                            </table>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p class="kat-3">5. Kelompok Kegiatan Bidang Ekonomi / UP2K / UPPKS</p>
+                                    <ul>
+                                        <li>
+                                            <table class="table">
+                                                <tr>
+                                                    <th>a. Ketua </th>
+                                                    <td>: {{$pos->ket_kkbe}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>b. Bendahara</th>
+                                                    <td>: {{$pos->bend_kkbe}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>c. Seksi / Bidang</th>
+                                                    <td>: {{$pos->ket_kkbe}}</td>
+                                                </tr>
+                                            </table>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -392,7 +502,6 @@
             $('#btnposyandu').attr('disabled', 'disabled');
             $('#btnposyandu').addClass('d-none');
             window.print();
-
         });
     });
 </script>

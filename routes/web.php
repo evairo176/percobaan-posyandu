@@ -6,10 +6,12 @@ use App\Http\Controllers\DataUserController;
 use App\Http\Controllers\DemografiController;
 use App\Http\Controllers\GeografiController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KepengurusanController;
 use App\Http\Controllers\PembentukanController;
 use App\Http\Controllers\RekapPosyanduControler;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebsiteController;
+use App\Models\Kepengurusan;
 use App\Models\Website;
 use Illuminate\Support\Facades\Route;
 
@@ -90,6 +92,11 @@ route::group(['middleware' => ['auth', 'login_check:petugas']], function () {
     Route::post('/pembentukan/store', [PembentukanController::class, 'store'])->name('pembentukan.store');
     Route::get('/pembentukan/fetch-all', [PembentukanController::class, 'fetchAll'])->name('pembentukan.fetch');
     Route::post('/pembentukan/edit', [PembentukanController::class, 'edit'])->name('pembentukan.edit');
+
+    Route::get('/kepengurusan', [KepengurusanController::class, 'index'])->name('kepengurusan');
+    Route::post('/kepengurusan/store', [KepengurusanController::class, 'store'])->name('pembekepengurusanntukan.store');
+    Route::get('/kepengurusan/fetch-all', [KepengurusanController::class, 'fetchAll'])->name('kepengurusan.fetch');
+    Route::post('/kepengurusan/edit', [KepengurusanController::class, 'edit'])->name('kepengurusan.edit');
     // Route::post('/geografi-update', [RekapPosyanduControler::class, 'geografiUpdate'])->name('geografi-update');
 });
 

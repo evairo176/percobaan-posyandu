@@ -269,35 +269,6 @@
             })
         })
 
-        // edit pembentukan ajax request
-        $(document).on('click', '.editIcon', function(e) {
-            e.preventDefault();
-            let id = $(this).attr('id');
-            var url = 'pembentukan/edit';
-
-            $.ajax({
-                url: url,
-                method: 'post',
-                data: {
-                    id: id,
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(res) {
-                    console.log(res.picture);
-                    $('#pembentukanModalTitle').html('Edit Data pembentukan');
-                    $('#pembentukan_btn').html('Update');
-                    $('#pembentukanModal').modal('show');
-                    $("#pembentukan_id").val(res.id);
-                    $("#nama_pembentukan").val(res.nama_pembentukan);
-                    $("#blok").val(res.blok);
-                    $("#rt").val(res.rt);
-                    $("#rw").val(res.rw);
-                    $("#kelurahan").val(res.kelurahan);
-                    $("#kecamatan").val(res.kecamatan);
-                    $("#kabupaten").val(res.kabupaten);
-                }
-            });
-        });
     });
 </script>
 @endpush
