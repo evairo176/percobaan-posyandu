@@ -1,3 +1,11 @@
+<?php
+
+use Illuminate\Support\Facades\DB;
+
+$website = DB::table('tb_website')->where('id', 1)->first();
+
+// dd($website);
+?>
 <header>
     <a href="#" id="logo_d">
         <img src="storage/website/{{$website->picture}}" class="logo" alt="">

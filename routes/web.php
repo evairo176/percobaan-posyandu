@@ -6,6 +6,7 @@ use App\Http\Controllers\DataUserController;
 use App\Http\Controllers\DemografiController;
 use App\Http\Controllers\GeografiController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PembentukanController;
 use App\Http\Controllers\RekapPosyanduControler;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebsiteController;
@@ -82,6 +83,13 @@ route::group(['middleware' => ['auth', 'login_check:petugas']], function () {
     Route::post('/demografi/store', [DemografiController::class, 'store'])->name('demografi.store');
     Route::get('/demografi/fetch-all', [DemografiController::class, 'fetchAll'])->name('demografi.fetch');
     Route::post('/demografi/edit', [DemografiController::class, 'edit'])->name('demografi.edit');
+
+
+
+    Route::get('/pembentukan', [PembentukanController::class, 'index'])->name('pembentukan');
+    Route::post('/pembentukan/store', [PembentukanController::class, 'store'])->name('pembentukan.store');
+    Route::get('/pembentukan/fetch-all', [PembentukanController::class, 'fetchAll'])->name('pembentukan.fetch');
+    Route::post('/pembentukan/edit', [PembentukanController::class, 'edit'])->name('pembentukan.edit');
     // Route::post('/geografi-update', [RekapPosyanduControler::class, 'geografiUpdate'])->name('geografi-update');
 });
 

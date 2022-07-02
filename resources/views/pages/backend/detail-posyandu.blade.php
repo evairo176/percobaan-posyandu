@@ -43,6 +43,10 @@
         font-weight: 700;
     }
 
+    p.kat-3 {
+        font-weight: 500;
+    }
+
     .ul-1 {
         padding: 0;
         margin-bottom: 30px;
@@ -63,11 +67,11 @@
                     <div class="betwen" style="justify-content: space-between;
                         display: flex;
                         align-items: center;">
-                        <!-- <h4>Table posyandu</h4>
+                        <!-- <h4>Table posyandu</h4> -->
 
-                        <a href="javascript:void(0);" onclick="window.print()" class="btn btn-secondary mb-2 mr-2" id="btnposyandu">
+                        <a href="javascript:void(0);" class="btn btn-secondary mb-2 mr-2" id="btnposyandu">
                             Print to pdf
-                        </a> -->
+                        </a>
 
                     </div>
                 </div>
@@ -299,6 +303,68 @@
                     DATA POSYANDU
                 </div>
             </div>
+            <ul class="ul-1">
+                <li>
+                    <p class="kat-1">1. Kelembagaan Posyandu</p>
+                    <ul>
+                        <li>
+                            <p class="kat-2">A. Pembentukan</p>
+                            <ul>
+                                <li>
+                                    <p class="kat-3">1. Musyawarah pembentukan</p>
+                                    <ul>
+                                        <li>
+                                            <table class="table">
+                                                <tr>
+                                                    <th>a. tanggal musyawarah </th>
+                                                    <td>: {{$pos->tgl_musyawarah}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>b. peserta musyawarah</th>
+                                                    <td>: {{$pos->psr_musyawarah}} orang</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>c. materi musyawarah</th>
+                                                    <td>: {{$pos->mtr_musyawarah}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>d. kesepakatan musyawarah</th>
+                                                    <td>: {{$pos->ksp_musyawarah}} </td>
+                                                </tr>
+                                            </table>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p class="kat-3">2. keputusan kepala desa / lurah</p>
+                                    <ul>
+                                        <li>
+                                            <table class="table">
+                                                <tr>
+                                                    <th>a. kepala desa / lurah </th>
+                                                    <td>: {{$pos->lurah}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>b. nomor</th>
+                                                    <td>: {{$pos->nomor}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>c. tanggal</th>
+                                                    <td>: {{$pos->tgl}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>d. tentang</th>
+                                                    <td>: {{$pos->tentang}} </td>
+                                                </tr>
+                                            </table>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
@@ -321,6 +387,13 @@
 <script src="{{asset('backend')}}/plugins/sweetalerts/sweetalert2.min.js"></script>
 <script src="{{asset('backend')}}/plugins/sweetalerts/custom-sweetalert.js"></script>
 <script>
-    window.print();
+    $(function() {
+        $(document).on('click', '#btnposyandu', function() {
+            $('#btnposyandu').attr('disabled', 'disabled');
+            $('#btnposyandu').addClass('d-none');
+            window.print();
+
+        });
+    });
 </script>
 @endpush

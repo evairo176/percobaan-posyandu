@@ -10,6 +10,6 @@ class User extends Authenticatable
 {
     use HasFactory;
     protected $fillable = [
-        'posyandu_id', 'name', 'email', 'password', 'picture', 'role', 'gender', 'phone', 'dob', 'status_posyandu', 'status_geografi', 'status_demografi'
+        'posyandu_id', 'name', 'email', 'password', 'picture', 'role', 'gender', 'phone', 'dob', 'status_posyandu', 'status_geografi', 'status_demografi', 'status_pembentukan'
     ];
 }

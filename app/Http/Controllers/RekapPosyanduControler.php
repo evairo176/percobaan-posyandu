@@ -157,57 +157,7 @@ class RekapPosyanduControler extends Controller
             }
         }
     }
-    public function geografiSave(Request $request)
-    {
-        $validator  = Validator::make(request()->all(), [
-            'jml_rt' => 'required|numeric',
-            'jml_rw' => 'required|numeric',
-            'jrk_terdekat' => 'required|numeric',
-            'jrk_terjauh' => 'required|numeric',
-            'polindes' => 'required|numeric',
-            'pks_pembantu' => 'required|numeric',
-            'pks' => 'required|numeric',
-            'pkt_dokter' => 'required|numeric',
-            'klinik' => 'required|numeric',
-            'rumah_sakit' => 'required|numeric',
-            'kelurahan_g' => 'required|numeric',
-            'kecamatan_g' => 'required|numeric',
-            'kabupaten_g' => 'required|numeric',
-            'provinsi_g' => 'required|numeric',
-        ]);
 
-        if ($validator->fails()) {
-            // dd($validator->getMessageBag());
-            return response()->json([
-                'status' => 400,
-                'messages' => $validator->getMessageBag()
-            ]);
-        } else {
-            $geografi = Posyandu::find($request->geografi_id);
-            $geografiData = [
-                'jml_rt' => $request->jml_rt,
-                'jml_rw' => $request->jml_rw,
-                'jrk_terdekat' => $request->jrk_terdekat,
-                'jrk_terjauh' => $request->jrk_terjauh,
-                'polindes' => $request->polindes,
-                'pks_pembantu' => $request->pks_pembantu,
-                'pks' => $request->pks,
-                'pkt_dokter' => $request->pkt_dokter,
-                'klinik' => $request->klinik,
-                'rumah_sakit' => $request->rumah_sakit,
-                'kelurahan_g' => $request->kelurahan_g,
-                'kecamatan_g' => $request->kecamatan_g,
-                'kabupaten_g' => $request->kabupaten_g,
-                'provinsi_g' => $request->provinsi_g,
-            ];
-            // dd($geografiData);
-            $geografi->update($geografiData);
-            return response()->json([
-                'status' => 200,
-                'messages' => 'Updated Successfully'
-            ]);
-        }
-    }
 
     public function edit(Request $request)
     {
@@ -220,26 +170,19 @@ class RekapPosyanduControler extends Controller
     public function detail($id_posyandu)
     {
         $id = $id_posyandu;
-        // dd($id);
-        // DB::table('tb_kegiatan_utama')
-        //     ->leftJoin('tb_posyandu', 'tb_kegiatan_utama.id_posyandu', '=', 'tb_posyandu.id')
-        //     ->select(
-        //         'tb_kegiatan_utama.*',
-        //         'tb_posyandu.*',
-        //         'tb_kegiatan_utama.id as id_kegiatan_utama',
-        //     )
-        //     ->orderBy('id_kegiatan_utama', 'desc')
-        //     ->get();
+
         $data = [
             'menu' => 'table',
             'submenu' => 'Input Rekap Posyandu',
             'pos' =>  DB::table('tb_rekap_posyandu')
                 ->leftJoin('tb_geografi', 'tb_rekap_posyandu.id', '=', 'tb_geografi.posyandu_id')
                 ->leftJoin('tb_demografi', 'tb_rekap_posyandu.id', '=', 'tb_demografi.posyandu_id')
+                ->leftJoin('tb_pembentukan', 'tb_rekap_posyandu.id', '=', 'tb_pembentukan.posyandu_id')
                 ->select(
                     'tb_rekap_posyandu.*',
                     'tb_geografi.*',
                     'tb_demografi.*',
+                    'tb_pembentukan.*',
                     'tb_rekap_posyandu.id as id_posyandu',
                 )->where('tb_rekap_posyandu.id', auth()->user()->posyandu_id)
                 ->first(),
