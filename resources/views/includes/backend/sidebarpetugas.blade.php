@@ -21,9 +21,6 @@
                     <li class="{{ ($submenu == 'dashboard') ? 'active' : ''}}">
                         <a href="/dashboard"> Dashboard </a>
                     </li>
-                    <li>
-                        <a href="index2.html"> Analytics </a>
-                    </li>
                 </ul>
             </li>
             <li class="menu {{ ($menu == 'table') ? 'active' : ''}}">
@@ -58,7 +55,9 @@
                     <li class="{{ ($submenu == 'Input Rekap Kepengurusan') ? 'active' : ''}}">
                         <a href="/kepengurusan">Input Rekap Kepengurusan</a>
                     </li>
-
+                    <li class="{{ ($submenu == 'profile') ? 'active' : ''}}">
+                        <a href="/profile"> Profil </a>
+                    </li>
                 </ul>
             </li>
         </ul>

@@ -12,12 +12,16 @@ class KepengurusanController extends Controller
 {
     public function index()
     {
-        $data = [
-            'menu' => 'table',
-            'submenu' => 'Input Rekap Kepengurusan',
-        ];
-        // dd($data);
-        return view('pages.backend.rekap-kepengurusan', $data);
+        if (auth()->user()->posyandu_id) {
+            $data = [
+                'menu' => 'table',
+                'submenu' => 'Input Rekap Kepengurusan',
+            ];
+            // dd($data);
+            return view('pages.backend.rekap-kepengurusan', $data);
+        } else {
+            return redirect()->back();
+        }
     }
     public function fetchAll(Request $request)
     {

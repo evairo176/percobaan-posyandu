@@ -113,7 +113,7 @@ class UserController extends Controller
     public function profile()
     {
         $data = [
-            'menu' => 'profile',
+            'menu' => 'table',
             'submenu' => 'profile',
             'userInfo' => DB::table('users')->where('id', auth()->user()->id)->first(),
         ];

@@ -12,12 +12,16 @@ class GeografiController extends Controller
 {
     public function index()
     {
-        $data = [
-            'menu' => 'table',
-            'submenu' => 'Input Rekap Geografi',
-        ];
-        // dd($data);
-        return view('pages.backend.rekap-geografi', $data);
+        if (auth()->user()->posyandu_id) {
+            $data = [
+                'menu' => 'table',
+                'submenu' => 'Input Rekap Geografi',
+            ];
+            // dd($data);
+            return view('pages.backend.rekap-geografi', $data);
+        } else {
+            return redirect()->back();
+        }
     }
     public function fetchAll(Request $request)
     {

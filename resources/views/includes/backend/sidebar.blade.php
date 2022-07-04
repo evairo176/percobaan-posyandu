@@ -21,9 +21,6 @@
                     <li class="{{ ($submenu == 'dashboard') ? 'active' : ''}}">
                         <a href="/dashboard"> Dashboard </a>
                     </li>
-                    <li>
-                        <a href="index2.html"> Analytics </a>
-                    </li>
                 </ul>
             </li>
             <li class="menu {{ ($menu == 'table') ? 'active' : ''}}">
@@ -51,6 +48,9 @@
                     </li>
                     <li class="{{ ($submenu == 'pengaturan website') ? 'active' : ''}}">
                         <a href="/website"> Pengaturan Website </a>
+                    </li>
+                    <li class="{{ ($submenu == 'profile') ? 'active' : ''}}">
+                        <a href="/profile"> Profil </a>
                     </li>
                 </ul>
             </li>

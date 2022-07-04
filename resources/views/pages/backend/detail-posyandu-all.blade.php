@@ -26,7 +26,7 @@
         }
 
         .mt-k {
-            margin-top: 150px;
+            margin-top: 500px;
         }
 
         li {
@@ -54,10 +54,12 @@
             width: 50%;
         }
 
-        .page-break {
-            page-break-after: always;
+        p {
+            margin-top: 0;
+            margin-bottom: 5px;
         }
     </style>
+    @foreach($pos as $pos)
     <div class="col-lg-12">
         <div id="posyandu_alert"></div>
         <div class="statbox widget box box-shadow">
@@ -68,6 +70,7 @@
                         display: flex;
                         align-items: center;">
 
+
                         </div>
                     </div>
                 </div>
@@ -75,7 +78,7 @@
             <div class="widget-content widget-content-area">
                 <div class="header-posyandu">
                     <div class="img-logo">
-                        <img src="{{public_path('indramayu.png')}}" alt="" class="logo-img">
+                        <img src="{{url('indramayu.png')}}" alt="" class="logo-img">
                     </div>
                     <div class="p-judul">PENDATAAN POS PELAYANAN TERPADU (POSYANDU)
                         <br>
@@ -85,7 +88,7 @@
                     </div>
 
                 </div>
-                <div class="row justify-content-center" style="margin-bottom: 80px">
+                <div class="row justify-content-center" style="margin-bottom: 280px;">
                     <div class="col-lg-8 col-md-8 col-sm-12 mt-k">
                         <table class="table table-t text-left" width="60%">
                             <tr>
@@ -129,14 +132,14 @@
                     </div>
 
                 </div>
-                <div class="page-break"></div>
+
                 <div class="header-posyandu mt-5">
                     <div class="p-judul">BAB I
                         <br>
                         DATA UMUM
                     </div>
                 </div>
-                <ul class="ul-1" style="margin-bottom: 70px;">
+                <ul class="ul-1" style="margin-bottom: 0px;">
                     <li>
                         <p class="kat-1">A. Geografi</p>
                         <ul>
@@ -292,7 +295,6 @@
                         </ul>
                     </li>
                 </ul>
-                <div class="page-break"></div>
                 <div class="header-posyandu ">
                     <div class="p-judul">BAB II
                         <br>
@@ -474,6 +476,10 @@
             </div>
         </div>
     </div>
+    @endforeach
+    <script>
+        window.print();
+    </script>
 </body>
 
 </html>

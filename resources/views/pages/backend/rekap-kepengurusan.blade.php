@@ -71,6 +71,7 @@
                 <table class="table table-hover text-secondary">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Ketua Multifungsi</th>
                             <th>Bendahara Multifungsi</th>
                             <th>Seksi / bidang Multifungsi</th>

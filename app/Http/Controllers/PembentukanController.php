@@ -12,12 +12,16 @@ class PembentukanController extends Controller
 {
     public function index()
     {
-        $data = [
-            'menu' => 'table',
-            'submenu' => 'Input Rekap Pembentukan',
-        ];
-        // dd($data);
-        return view('pages.backend.rekap-pembentukan', $data);
+        if (auth()->user()->posyandu_id) {
+            $data = [
+                'menu' => 'table',
+                'submenu' => 'Input Rekap Pembentukan',
+            ];
+            // dd($data);
+            return view('pages.backend.rekap-pembentukan', $data);
+        } else {
+            return redirect()->back();
+        }
     }
     public function fetchAll(Request $request)
     {

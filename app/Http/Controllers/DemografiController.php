@@ -12,12 +12,16 @@ class DemografiController extends Controller
 {
     public function index()
     {
-        $data = [
-            'menu' => 'table',
-            'submenu' => 'Input Rekap Demografi',
-        ];
-        // dd($data);
-        return view('pages.backend.rekap-demografi', $data);
+        if (auth()->user()->posyandu_id) {
+            $data = [
+                'menu' => 'table',
+                'submenu' => 'Input Rekap Demografi',
+            ];
+            // dd($data);
+            return view('pages.backend.rekap-demografi', $data);
+        } else {
+            return redirect()->back();
+        }
     }
     public function fetchAll(Request $request)
     {

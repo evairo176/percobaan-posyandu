@@ -13,6 +13,7 @@ class DashboardController extends Controller
 {
 	public function index()
 	{
+
 		$posyandu =  DB::table('tb_rekap_posyandu')
 			->leftJoin('tb_geografi', 'tb_rekap_posyandu.id', '=', 'tb_geografi.posyandu_id')
 			->leftJoin('tb_demografi', 'tb_rekap_posyandu.id', '=', 'tb_demografi.posyandu_id')

@@ -8,6 +8,7 @@
 @endpush
 @section('content')
 @if(auth()->user()->role == 'petugas')
+@if(auth()->user()->posyandu_id)
 <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12 layout-spacing">
 
     <div class="widget widget-account-invoice-three">
@@ -15,7 +16,7 @@
         <div class="widget-heading">
             <div class="wallet-usr-info">
                 <div class="usr-name">
-                    <span><img src="storage/picture/{{auth()->user()->picture}}" alt="admin-profile" class="img-fluid"> {{auth()->user()->name}}</span>
+                    <span><img src="storage/picture/{{(auth()->user()->picture) ? auth()->user()->picture : 'profile.png'}}" alt="admin-profile" class="img-fluid"> {{auth()->user()->name}}</span>
                 </div>
                 <div class="add">
                     <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
@@ -92,6 +93,14 @@
     </div>
 </div>
 @else
+<div class="col-lg">
+    <div class="alert alert-danger" role="alert">
+        Data Kosong
+    </div>
+</div>
+@endif
+@else
+@if(auth()->user()->posyandu_id)
 <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12 layout-spacing">
     <div class="widget widget-account-invoice-three">
 
@@ -177,6 +186,7 @@
 
     </div>
 </div>
+@endif
 @endif
 @endsection
 @push('add-scripts')

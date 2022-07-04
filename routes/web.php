@@ -63,6 +63,8 @@ route::group(['middleware' => ['auth']], function () {
     Route::post('/posyandu/edit', [RekapPosyanduControler::class, 'edit'])->name('posyandu.edit');
     Route::delete('/posyandu/delete', [RekapPosyanduControler::class, 'delete'])->name('posyandu.delete');
     Route::get('/posyandu/detail/{id}', [RekapPosyanduControler::class, 'detail'])->name('posyandu.detail');
+    Route::get('/posyandu/cetak-pdf/{id}', [RekapPosyanduControler::class, 'cetakPdf'])->name('posyandu.cetakPdf');
+    Route::get('/posyandu/detail-all/', [RekapPosyanduControler::class, 'detailAll'])->name('posyandu.detailAll');
 });
 route::group(['middleware' => ['auth', 'login_check:petugas']], function () {
 
@@ -115,4 +117,7 @@ route::group(['middleware' => ['auth', 'login_check:super-admin']], function () 
     Route::get('/website', [WebsiteController::class, 'index'])->name('website');
     Route::post('/website-image', [WebsiteController::class, 'websiteImageUpdate']);
     Route::post('/website-update', [WebsiteController::class, 'websiteUpdate']);
+
+    Route::get('/posyandu/cetak-pdf-all/', [RekapPosyanduControler::class, 'cetakPdfAll'])->name('posyandu.cetakPdfAll');
+    Route::delete('/posyandu/delete', [RekapPosyanduControler::class, 'delete'])->name('posyandu.delete');
 });

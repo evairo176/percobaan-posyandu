@@ -58,6 +58,7 @@
             page-break-after: always;
         }
     </style>
+    @foreach($pos as $pos)
     <div class="col-lg-12">
         <div id="posyandu_alert"></div>
         <div class="statbox widget box box-shadow">
@@ -474,6 +475,9 @@
             </div>
         </div>
     </div>
+    <div class="page-break"></div>
+    @endforeach
+
 </body>
 
 </html>
