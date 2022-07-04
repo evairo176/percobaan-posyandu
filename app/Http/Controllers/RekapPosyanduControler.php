@@ -207,12 +207,14 @@ class RekapPosyanduControler extends Controller
                 ->leftJoin('tb_demografi', 'tb_rekap_posyandu.id', '=', 'tb_demografi.posyandu_id')
                 ->leftJoin('tb_pembentukan', 'tb_rekap_posyandu.id', '=', 'tb_pembentukan.posyandu_id')
                 ->leftJoin('tb_kepengurusan', 'tb_rekap_posyandu.id', '=', 'tb_kepengurusan.posyandu_id')
+                ->leftJoin('tb_sarana', 'tb_rekap_posyandu.id', '=', 'tb_sarana.posyandu_id')
                 ->select(
                     'tb_rekap_posyandu.*',
                     'tb_geografi.*',
                     'tb_demografi.*',
                     'tb_pembentukan.*',
                     'tb_kepengurusan.*',
+                    'tb_sarana.*',
                     'tb_rekap_posyandu.id as id_posyandu',
                 )->where('tb_rekap_posyandu.id', auth()->user()->posyandu_id)
                 ->first(),

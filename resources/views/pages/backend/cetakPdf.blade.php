@@ -90,31 +90,31 @@
                         <table class="table table-t text-left" width="60%">
                             <tr>
                                 <th width="50%" class="">Posyandu</th>
-                                <td>:{{$pos->nama_posyandu}}</td>
+                                <td>: {{$pos->nama_posyandu}}</td>
                             </tr>
                             <tr>
                                 <th width="50%">Blok</th>
-                                <td>:{{$pos->blok}}</td>
+                                <td>: {{$pos->blok}}</td>
                             </tr>
                             <tr>
                                 <th width="50%">RT</th>
-                                <td>:{{$pos->rt}}</td>
+                                <td>: {{$pos->rt}}</td>
                             </tr>
                             <tr>
                                 <th width="50%">RW</th>
-                                <td>:{{$pos->rw}}</td>
+                                <td>: {{$pos->rw}}</td>
                             </tr>
                             <tr>
                                 <th width="50%">Kelurahan</th>
-                                <td>:{{$pos->kelurahan}}</td>
+                                <td>: {{$pos->kelurahan}}</td>
                             </tr>
                             <tr>
                                 <th width="50%">Kecamtan</th>
-                                <td>:{{$pos->kecamatan}}</td>
+                                <td>: {{$pos->kecamatan}}</td>
                             </tr>
                             <tr>
                                 <th width="50%">Kabupaten</th>
-                                <td>:{{$pos->kabupaten}}</td>
+                                <td>: {{$pos->kabupaten}}</td>
                             </tr>
                         </table>
                     </div>
@@ -461,6 +461,141 @@
                                                     <tr>
                                                         <th>c. Seksi / Bidang</th>
                                                         <td>: {{$pos->ket_kkbe}}</td>
+                                                    </tr>
+                                                </table>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <p class="kat-2">C. Sarana dan Prasarana</p>
+                                <ul>
+                                    <li>
+                                        <p class="kat-3">1. Gedung</p>
+                                        <ul>
+                                            <li>
+                                                <table class="table">
+                                                    <tr>
+                                                        <th>a. Status </th>
+                                                        <td>: {{$pos->status_g}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>b. Tahun dibangun</th>
+                                                        <td>: {{$pos->th_bgn_g}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>c. Keadaan</th>
+                                                        <td>: {{$pos->keadaan_g}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>d. Luas</th>
+                                                        <td>: {{$pos->luas_g}} <sub>2</sub>m</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>e. Konstruksi</th>
+                                                        <td>: {{$pos->konstruksi_g}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>e. Sumber Dana pembangunan</th>
+                                                        <td>: {{$pos->sdp_g}}</td>
+                                                    </tr>
+                                                </table>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <p class="kat-3">2. Alat Kelengkapan</p>
+                                        <ul>
+                                            <li>
+                                                <table class="table">
+                                                    <tr>
+                                                        <th>a. Dacin </th>
+                                                        <td>
+                                                            @foreach(unserialize($pos->dacin_k) as $item)
+                                                            : {{$item}} <br>
+                                                            @endforeach
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>b. Timbangan Bayi</th>
+                                                        <td>
+                                                            @foreach(unserialize($pos->tb_k) as $item)
+                                                            : {{$item}} <br>
+                                                            @endforeach
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>c. Timbangan Injak</th>
+                                                        <td>
+                                                            @foreach(unserialize($pos->ti_k) as $item)
+                                                            : {{$item}} <br>
+                                                            @endforeach
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>d. Pita LILA</th>
+                                                        <td>
+                                                            @foreach(unserialize($pos->pl_k) as $item)
+                                                            : {{$item}} <br>
+                                                            @endforeach
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>e. Alat Ukur Tinggi Badan</th>
+                                                        <td>
+                                                            @foreach(unserialize($pos->autb_k) as $item)
+                                                            : {{$item}} <br>
+                                                            @endforeach
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>f. Alat Ukur Panjang Badan</th>
+                                                        <td>
+                                                            @foreach(unserialize($pos->aupb_k) as $item)
+                                                            : {{$item}} <br>
+                                                            @endforeach
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>g. Alat Permainan Edukatif (APE)</th>
+                                                        <td>
+                                                            @foreach(unserialize($pos->ape_k) as $item)
+                                                            : {{$item}} <br>
+                                                            @endforeach
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>h. Sarana Penyuluhan</th>
+                                                        <td>
+                                                            @foreach(unserialize($pos->sp_k) as $item)
+                                                            : {{$item}} <br>
+                                                            @endforeach
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>i. Food Model</th>
+                                                        <td>
+                                                            @foreach(unserialize($pos->fm_k) as $item)
+                                                            : {{$item}} <br>
+                                                            @endforeach
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>j. Mebelair</th>
+                                                        <td>
+                                                            @foreach(unserialize($pos->m_k) as $item)
+                                                            : {{$item}} <br>
+                                                            @endforeach
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>k. Papan Nama / plang posyandu</th>
+                                                        <td>
+                                                            @foreach(unserialize($pos->pn_k) as $item)
+                                                            : {{$item}} <br>
+                                                            @endforeach
+                                                        </td>
                                                     </tr>
                                                 </table>
                                             </li>

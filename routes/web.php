@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KepengurusanController;
 use App\Http\Controllers\PembentukanController;
 use App\Http\Controllers\RekapPosyanduControler;
+use App\Http\Controllers\SaranaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebsiteController;
 use App\Models\Kepengurusan;
@@ -96,9 +97,14 @@ route::group(['middleware' => ['auth', 'login_check:petugas']], function () {
     Route::post('/pembentukan/edit', [PembentukanController::class, 'edit'])->name('pembentukan.edit');
 
     Route::get('/kepengurusan', [KepengurusanController::class, 'index'])->name('kepengurusan');
-    Route::post('/kepengurusan/store', [KepengurusanController::class, 'store'])->name('pembekepengurusanntukan.store');
+    Route::post('/kepengurusan/store', [KepengurusanController::class, 'store'])->name('kepengurusan.store');
     Route::get('/kepengurusan/fetch-all', [KepengurusanController::class, 'fetchAll'])->name('kepengurusan.fetch');
     Route::post('/kepengurusan/edit', [KepengurusanController::class, 'edit'])->name('kepengurusan.edit');
+
+    Route::get('/sarana', [SaranaController::class, 'index'])->name('sarana');
+    Route::post('/sarana/store', [SaranaController::class, 'store'])->name('sarana.store');
+    Route::get('/sarana/fetch-all', [SaranaController::class, 'fetchAll'])->name('sarana.fetch');
+    Route::post('/sarana/edit', [SaranaController::class, 'edit'])->name('sarana.edit');
     // Route::post('/geografi-update', [RekapPosyanduControler::class, 'geografiUpdate'])->name('geografi-update');
 });
 
