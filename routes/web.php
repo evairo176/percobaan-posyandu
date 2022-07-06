@@ -7,10 +7,14 @@ use App\Http\Controllers\DemografiController;
 use App\Http\Controllers\GeografiController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KaderController;
+use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\KepengurusanController;
 use App\Http\Controllers\PembentukanController;
+use App\Http\Controllers\PerkembanganController;
+use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RekapPosyanduControler;
 use App\Http\Controllers\SaranaController;
+use App\Http\Controllers\SkdnController;
 use App\Http\Controllers\StrataController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebsiteController;
@@ -119,6 +123,26 @@ route::group(['middleware' => ['auth', 'login_check:petugas']], function () {
     Route::post('/kader/store', [KaderController::class, 'store'])->name('kader.store');
     Route::get('/kader/fetch-all', [KaderController::class, 'fetchAll'])->name('kader.fetch');
     Route::post('/kader/edit', [KaderController::class, 'edit'])->name('kader.edit');
+
+    Route::get('/skdn', [SkdnController::class, 'index'])->name('skdn');
+    Route::post('/skdn/store', [SkdnController::class, 'store'])->name('skdn.store');
+    Route::get('/skdn/fetch-all', [SkdnController::class, 'fetchAll'])->name('skdn.fetch');
+    Route::post('/skdn/edit', [SkdnController::class, 'edit'])->name('skdn.edit');
+
+    Route::get('/kegiatan', [KegiatanController::class, 'index'])->name('kegiatan');
+    Route::post('/kegiatan/store', [KegiatanController::class, 'store'])->name('kegiatan.store');
+    Route::get('/kegiatan/fetch-all', [KegiatanController::class, 'fetchAll'])->name('kegiatan.fetch');
+    Route::post('/kegiatan/edit', [KegiatanController::class, 'edit'])->name('kegiatan.edit');
+
+    Route::get('/program', [ProgramController::class, 'index'])->name('program');
+    Route::post('/program/store', [ProgramController::class, 'store'])->name('program.store');
+    Route::get('/program/fetch-all', [ProgramController::class, 'fetchAll'])->name('program.fetch');
+    Route::post('/program/edit', [ProgramController::class, 'edit'])->name('program.edit');
+
+    Route::get('/perkembangan', [PerkembanganController::class, 'index'])->name('perkembangan');
+    Route::post('/perkembangan/store', [PerkembanganController::class, 'store'])->name('perkembangan.store');
+    Route::get('/perkembangan/fetch-all', [PerkembanganController::class, 'fetchAll'])->name('perkembangan.fetch');
+    Route::post('/perkembangan/edit', [PerkembanganController::class, 'edit'])->name('perkembangan.edit');
 });
 
 route::group(['middleware' => ['auth', 'login_check:super-admin']], function () {

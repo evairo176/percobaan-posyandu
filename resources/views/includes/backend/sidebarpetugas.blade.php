@@ -52,12 +52,26 @@
                     <li class="{{ ($submenu == 'Input Rekap Kepengurusan') ? 'active' : ''}}">
                         <a href="/kepengurusan">Input Rekap Kepengurusan</a>
                     </li>
-                    <li class="{{ ($submenu == 'Input Rekap Strata') ? 'active' : ''}}">
-                        <a href="/strata">Input Rekap Strata</a>
-                    </li>
                     <li class="{{ ($submenu == 'Input Rekap Kader') ? 'active' : ''}}">
                         <a href="/kader">Input Rekap Kader</a>
                     </li>
+                    <li class="{{ ($submenu == 'Input Rekap Strata') ? 'active' : ''}}">
+                        <a href="/strata">Input Rekap Strata</a>
+                    </li>
+                    <li class="{{ ($submenu == 'Input Rekap Skdn') ? 'active' : ''}}">
+                        <a href="/skdn">Input Rekap Skdn</a>
+                    </li>
+                    <li class="{{ ($submenu == 'Input Rekap Kegiatan') ? 'active' : ''}}">
+                        <a href="/kegiatan">Input Rekap Kegiatan</a>
+                    </li>
+                    <li class="{{ ($submenu == 'Input Rekap Program') ? 'active' : ''}}">
+                        <a href="/program">Input Rekap Program</a>
+                    </li>
+                    @if(auth()->user()->status_strata && auth()->user()->status_skdn && auth()->user()->status_kegiatan && auth()->user()->status_program)
+                    <li class="{{ ($submenu == 'Input Rekap Perkembangan') ? 'active' : ''}}">
+                        <a href="/perkembangan">Input Rekap Perkembangan</a>
+                    </li>
+                    @endif
                     <li class="{{ ($submenu == 'profile') ? 'active' : ''}}">
                         <a href="/profile"> Profil </a>
                     </li>

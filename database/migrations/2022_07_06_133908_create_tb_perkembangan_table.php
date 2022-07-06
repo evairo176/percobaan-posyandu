@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTbPerkembanganPosyanduTable extends Migration
+class CreateTbPerkembanganTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateTbPerkembanganPosyanduTable extends Migration
      */
     public function up()
     {
-        Schema::create('tb_perkembangan_posyandu', function (Blueprint $table) {
+        Schema::create('tb_perkembangan', function (Blueprint $table) {
             $table->id();
             $table->integer('posyandu_id')->nullable();
-            $table->integer('kelurahan_id')->nullable();
-            $table->integer('kecamatan_id')->nullable();
+            $table->string('kecamatan_id')->nullable();
+            $table->string('kelurahan_id')->nullable();
+            $table->year('tahun_rekap')->nullable();
             $table->string('pra')->nullable();
             $table->string('mad')->nullable();
             $table->string('pur')->nullable();
@@ -29,7 +30,7 @@ class CreateTbPerkembanganPosyanduTable extends Migration
             $table->string('k')->nullable();
             $table->string('d')->nullable();
             $table->string('n')->nullable();
-            $table->string('vit-a')->nullable();
+            $table->string('vit_a')->nullable();
             $table->string('kb_aktif')->nullable();
             $table->string('k4')->nullable();
             $table->string('fe3')->nullable();
@@ -46,8 +47,8 @@ class CreateTbPerkembanganPosyanduTable extends Migration
             $table->string('bkl')->nullable();
             $table->string('up2k')->nullable();
             $table->string('as')->nullable();
-            $table->string('ingklusi')->nullable();
-            $table->string('dana_sehat')->nullable();
+            $table->string('in')->nullable();
+            $table->string('ds')->nullable();
             $table->timestamps();
         });
     }
@@ -59,6 +60,6 @@ class CreateTbPerkembanganPosyanduTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_perkembangan_posyandu');
+        Schema::dropIfExists('tb_perkembangan');
     }
 }
