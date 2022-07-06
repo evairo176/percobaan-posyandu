@@ -6,10 +6,12 @@ use App\Http\Controllers\DataUserController;
 use App\Http\Controllers\DemografiController;
 use App\Http\Controllers\GeografiController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KaderController;
 use App\Http\Controllers\KepengurusanController;
 use App\Http\Controllers\PembentukanController;
 use App\Http\Controllers\RekapPosyanduControler;
 use App\Http\Controllers\SaranaController;
+use App\Http\Controllers\StrataController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebsiteController;
 use App\Models\Kepengurusan;
@@ -66,6 +68,8 @@ route::group(['middleware' => ['auth']], function () {
     Route::get('/posyandu/detail/{id}', [RekapPosyanduControler::class, 'detail'])->name('posyandu.detail');
     Route::get('/posyandu/cetak-pdf/{id}', [RekapPosyanduControler::class, 'cetakPdf'])->name('posyandu.cetakPdf');
     Route::get('/posyandu/detail-all/', [RekapPosyanduControler::class, 'detailAll'])->name('posyandu.detailAll');
+
+    Route::get('/posyandu/getdesa', [RekapPosyanduControler::class, 'getDesa']);
 });
 route::group(['middleware' => ['auth', 'login_check:petugas']], function () {
 
@@ -105,7 +109,16 @@ route::group(['middleware' => ['auth', 'login_check:petugas']], function () {
     Route::post('/sarana/store', [SaranaController::class, 'store'])->name('sarana.store');
     Route::get('/sarana/fetch-all', [SaranaController::class, 'fetchAll'])->name('sarana.fetch');
     Route::post('/sarana/edit', [SaranaController::class, 'edit'])->name('sarana.edit');
-    // Route::post('/geografi-update', [RekapPosyanduControler::class, 'geografiUpdate'])->name('geografi-update');
+
+    Route::get('/strata', [StrataController::class, 'index'])->name('strata');
+    Route::post('/strata/store', [StrataController::class, 'store'])->name('strata.store');
+    Route::get('/strata/fetch-all', [StrataController::class, 'fetchAll'])->name('strata.fetch');
+    Route::post('/strata/edit', [StrataController::class, 'edit'])->name('strata.edit');
+
+    Route::get('/kader', [KaderController::class, 'index'])->name('kader');
+    Route::post('/kader/store', [KaderController::class, 'store'])->name('kader.store');
+    Route::get('/kader/fetch-all', [KaderController::class, 'fetchAll'])->name('kader.fetch');
+    Route::post('/kader/edit', [KaderController::class, 'edit'])->name('kader.edit');
 });
 
 route::group(['middleware' => ['auth', 'login_check:super-admin']], function () {

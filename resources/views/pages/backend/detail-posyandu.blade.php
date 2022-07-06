@@ -108,15 +108,15 @@
                             </tr>
                             <tr>
                                 <th width="50%">Kelurahan</th>
-                                <td>:{{$pos->kelurahan}}</td>
+                                <td>:{{$pos->kel}}</td>
                             </tr>
                             <tr>
                                 <th width="50%">Kecamtan</th>
-                                <td>:{{$pos->kecamatan}}</td>
+                                <td>:{{$pos->kec}}</td>
                             </tr>
                             <tr>
                                 <th width="50%">Kabupaten</th>
-                                <td>:{{$pos->kabupaten}}</td>
+                                <td>:INDRAMAYU</td>
                             </tr>
                         </table>
                     </div>

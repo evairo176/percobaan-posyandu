@@ -49,6 +49,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users|max:100',
             'password' => 'required|min:6|max:50',
             'cpassword' => 'required|min:6|same:password',
+            'posyandu_id' => 'required',
             // 'posyandu_id' => 'required',
         ]);
 
@@ -63,7 +64,7 @@ class UserController extends Controller
             $user->name = request()->name;
             $user->email = request()->email;
             $user->password = hash::make(request()->password);
-            // $user->posyandu_id = request()->posyandu_id;
+            $user->posyandu_id = request()->posyandu_id;
             $user->save();
             return response()->json([
                 'status' => 200,

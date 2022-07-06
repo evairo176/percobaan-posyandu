@@ -47,6 +47,16 @@
                                     <input id="email" name="email" type="email" class="form-control" placeholder="Email">
                                     <div class="invalid-feedback"></div>
                                 </div>
+                                <div id="username-field" class="field-wrapper input">
+                                    <label for="username">Posyandu</label>
+                                    <select name="posyandu_id" id="posyandu_id" class="form-control">
+                                        <option value="">--pilih posyandu--</option>
+                                        @foreach($pos as $po)
+                                        <option value="{{$po->id}}">{{$po->nama_posyandu}}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="invalid-feedback"></div>
+                                </div>
 
                                 <div id="password-field" class="field-wrapper input">
                                     <div class="d-flex justify-content-between">

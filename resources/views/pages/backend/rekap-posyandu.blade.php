@@ -36,7 +36,6 @@
                         display: flex;
                         align-items: center;">
                         <h4>Table posyandu</h4>
-                        @if(!auth()->user()->status_posyandu)
                         @if(auth()->user()->role == 'super-admin')
                         <div class="row">
                             <a href="/posyandu/cetak-pdf-all" class="btn btn-danger ">
@@ -51,12 +50,11 @@
                             <!-- <button type="button" class="btn btn-primary " id="btnposyandu">
                                 Add New Posyandu
                             </button> -->
+                            <button type="button" class="btn btn-primary" id="btnposyandu">
+                                Add New Posyandu
+                            </button>
                         </div>
                         @else
-                        <button type="button" class="btn btn-primary mb-2 mr-2" id="btnposyandu">
-                            Add New Posyandu
-                        </button>
-                        @endif
                         @endif
 
                     </div>
@@ -125,21 +123,21 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="my-2">
-                        <label for="Kelurahan">Kelurahan</label>
-                        <input type="text" name="kelurahan" id="kelurahan" class="form-control" placeholder="Kelurahan">
+                        <label for="inputState">Kecamatan</label>
+                        <select id="kecamatan_id" class="form-control" name="kecamatan_id">
+                            <option value="" selected>Choose...</option>
+                            @foreach($kecamatan as $data)
+                            <option value="{{ $data->id }}">{{ $data->name }}</option>
+                            @endforeach
+                        </select>
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="my-2">
-                        <label for="Kecamatan">Kecamatan</label>
-                        <input type="text" name="kecamatan" id="kecamatan" class="form-control" placeholder="Kecamatan">
-                        <div class="invalid-feedback"></div>
-                    </div>
-                    <div class="my-2">
-                        <label for="Kabupaten">Kabupaten</label>
-                        <input type="text" name="kabupaten" id="kabupaten" class="form-control" placeholder="Kabupaten">
-                        <div class="invalid-feedback"></div>
+                        <label for="inputState">Desa</label>
+                        <select id="kelurahan_id" class="form-control" name="kelurahan_id">
+                            <option selected>Choose...</option>
+                        </select>
                     </div>
             </div>
             <div class="modal-footer">
@@ -194,12 +192,12 @@
                     name: 'rw'
                 },
                 {
-                    data: 'kelurahan',
-                    name: 'kelurahan'
+                    data: 'kel',
+                    name: 'kel'
                 },
                 {
-                    data: 'kecamatan',
-                    name: 'kecamatan'
+                    data: 'kec',
+                    name: 'kec'
                 },
                 {
                     data: 'created_at',
@@ -219,33 +217,6 @@
             $('#posyanduModalTitle').html('Add Data posyandu');
             $('#posyandu_btn').html('Save');
             $('#posyanduModal').modal('show');
-        });
-        // edit posyandu ajax request
-        $(document).on('click', '.editIcon', function(e) {
-            e.preventDefault();
-            let id = $(this).attr('id');
-            var url = 'posyandu/edit';
-
-            $.ajax({
-                url: url,
-                method: 'post',
-                data: {
-                    id: id,
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(res) {
-                    console.log(res.picture);
-                    $('#posyanduModalTitle').html('Edit Data posyandu');
-                    $('#posyandu_btn').html('Update');
-                    $('#posyanduModal').modal('show');
-                    $("#posyandu_id").val(res.id);
-                    $("#posyandu_picture").val(res.picture);
-                    $("#name").val(res.name);
-                    $("#email").val(res.email);
-                    $("#role").val(res.role);
-                    $("#picture").val(res.picture);
-                }
-            });
         });
         $('#posyandu_form').submit(function(e) {
             e.preventDefault();
@@ -283,8 +254,6 @@
                         $('#posyandu_btn').removeAttr('disabled');
                         $('#posyanduModal').modal('hide');
                         $('.table').DataTable().ajax.reload();
-                        $('#btnposyandu').addClass('d-none');
-
                     }
                 }
             })
@@ -313,9 +282,8 @@
                     $("#blok").val(res.blok);
                     $("#rt").val(res.rt);
                     $("#rw").val(res.rw);
-                    $("#kelurahan").val(res.kelurahan);
-                    $("#kecamatan").val(res.kecamatan);
-                    $("#kabupaten").val(res.kabupaten);
+                    $("#kelurahan_id").val(res.kelurahan_id);
+                    $("#kecamatan_id").val(res.kecamatan_id);
                 }
             });
         });
@@ -359,6 +327,29 @@
                     });
                 }
             });
+        });
+        $('#kecamatan_id').change(function() {
+            var kecID = $(this).val();
+            if (kecID) {
+                $.ajax({
+                    type: "GET",
+                    url: "/posyandu/getdesa?kecID=" + kecID,
+                    dataType: 'JSON',
+                    success: function(res) {
+                        if (res) {
+                            $("#kelurahan_id").empty();
+                            $("#kelurahan_id").append('<option selected>pilih...</option>');
+                            $.each(res, function(nama, kode) {
+                                $("#kelurahan_id").append('<option value="' + kode + '">' + nama + '</option>');
+                            });
+                        } else {
+                            $("#kelurahan_id").empty();
+                        }
+                    }
+                });
+            } else {
+                $("#kelurahan_id").empty();
+            }
         });
     });
 </script>

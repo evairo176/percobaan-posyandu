@@ -40,9 +40,6 @@
                     </div>
                 </a>
                 <ul class="submenu recent-submenu list-unstyled collapse {{ ($menu == 'table') ? 'show' : ''}}" id="menu2" data-parent="#accordionExample" style="">
-                    <li class="{{ ($submenu == 'Input Rekap Posyandu') ? 'active' : ''}}">
-                        <a href="/posyandu">Input Rekap Posyandu</a>
-                    </li>
                     <li class="{{ ($submenu == 'Input Rekap Geografi') ? 'active' : ''}}">
                         <a href="/geografi">Input Rekap Geografi</a>
                     </li>
@@ -55,8 +52,11 @@
                     <li class="{{ ($submenu == 'Input Rekap Kepengurusan') ? 'active' : ''}}">
                         <a href="/kepengurusan">Input Rekap Kepengurusan</a>
                     </li>
-                    <li class="{{ ($submenu == 'Input Rekap Sarana') ? 'active' : ''}}">
-                        <a href="/sarana">Input Rekap Sarana</a>
+                    <li class="{{ ($submenu == 'Input Rekap Strata') ? 'active' : ''}}">
+                        <a href="/strata">Input Rekap Strata</a>
+                    </li>
+                    <li class="{{ ($submenu == 'Input Rekap Kader') ? 'active' : ''}}">
+                        <a href="/kader">Input Rekap Kader</a>
                     </li>
                     <li class="{{ ($submenu == 'profile') ? 'active' : ''}}">
                         <a href="/profile"> Profil </a>

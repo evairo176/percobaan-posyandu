@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Geografi;
+use App\Models\Strata;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DataTables;
 
-class GeografiController extends Controller
+class StrataController extends Controller
 {
     public function index()
     {
         if (auth()->user()->posyandu_id) {
             $data = [
                 'menu' => 'table',
-                'submenu' => 'Input Rekap Geografi',
+                'submenu' => 'Input Rekap Strata',
             ];
             // dd($data);
-            return view('pages.backend.rekap-geografi', $data);
+            return view('pages.backend.rekap-strata', $data);
         } else {
             return redirect()->back();
         }
@@ -27,7 +27,7 @@ class GeografiController extends Controller
     {
         if (auth()->user()->posyandu_id) {
             if ($request->ajax()) {
-                $data = Geografi::where('posyandu_id', auth()->user()->posyandu_id)->latest()->get();
+                $data = Strata::where('posyandu_id', auth()->user()->posyandu_id)->latest()->get();
                 return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('created_at', function ($row) {
@@ -51,24 +51,15 @@ class GeografiController extends Controller
             ]);
         }
     }
-
     public function store(Request $request)
     {
-        if ($request->geografi_id) {
+        if ($request->strata_id) {
             $validator  = Validator::make(request()->all(), [
-                'jml_rt' => 'required|numeric',
-                'jml_rw' => 'required|numeric',
-                'jrk_terdekat' => 'required|numeric',
-                'jrk_terjauh' => 'required|numeric',
-                'polindes' => 'required|numeric',
-                'pks_pembantu' => 'required|numeric',
-                'pks' => 'required|numeric',
-                'pkt_dokter' => 'required|numeric',
-                'klinik' => 'required|numeric',
-                'rumah_sakit' => 'required|numeric',
-                'kelurahan_g' => 'required|numeric',
-                'kecamatan_g' => 'required|numeric',
-                'kabupaten_g' => 'required|numeric',
+                'pra' => 'required',
+                'mad' => 'required',
+                'pur' => 'required',
+                'man' => 'required',
+                'jml_bgn_s' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -78,25 +69,17 @@ class GeografiController extends Controller
                     'messages' => $validator->getMessageBag()
                 ]);
             } else {
-                $geografi = Geografi::find($request->geografi_id);
-                $geografiData = [
+                $strata = Strata::find($request->strata_id);
+                $strataData = [
                     'posyandu_id' => auth()->user()->posyandu_id,
-                    'jml_rt' => $request->jml_rt,
-                    'jml_rw' => $request->jml_rw,
-                    'jrk_terdekat' => $request->jrk_terdekat,
-                    'jrk_terjauh' => $request->jrk_terjauh,
-                    'polindes' => $request->polindes,
-                    'pks_pembantu' => $request->pks_pembantu,
-                    'pks' => $request->pks,
-                    'pkt_dokter' => $request->pkt_dokter,
-                    'klinik' => $request->klinik,
-                    'rumah_sakit' => $request->rumah_sakit,
-                    'kelurahan_g' => $request->kelurahan_g,
-                    'kecamatan_g' => $request->kecamatan_g,
-                    'kabupaten_g' => $request->kabupaten_g,
+                    'pra' => $request->pra,
+                    'mad' => $request->mad,
+                    'pur' => $request->pur,
+                    'man' => $request->man,
+                    'jml_bgn_s' => $request->jml_bgn_s,
                 ];
-                // dd($geografiData);
-                $geografi->update($geografiData);
+                // dd($strataData);
+                $strata->update($strataData);
                 return response()->json([
                     'status' => 200,
                     'messages' => 'Updated Successfully'
@@ -104,19 +87,11 @@ class GeografiController extends Controller
             }
         } else {
             $validator  = Validator::make(request()->all(), [
-                'jml_rt' => 'required|numeric',
-                'jml_rw' => 'required|numeric',
-                'jrk_terdekat' => 'required|numeric',
-                'jrk_terjauh' => 'required|numeric',
-                'polindes' => 'required|numeric',
-                'pks_pembantu' => 'required|numeric',
-                'pks' => 'required|numeric',
-                'pkt_dokter' => 'required|numeric',
-                'klinik' => 'required|numeric',
-                'rumah_sakit' => 'required|numeric',
-                'kelurahan_g' => 'required|numeric',
-                'kecamatan_g' => 'required|numeric',
-                'kabupaten_g' => 'required|numeric',
+                'pra' => 'required',
+                'mad' => 'required',
+                'pur' => 'required',
+                'man' => 'required',
+                'jml_bgn_s' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -126,28 +101,20 @@ class GeografiController extends Controller
                     'messages' => $validator->getMessageBag()
                 ]);
             } else {
-                $geografiData = [
+                $strataData = [
                     'posyandu_id' => auth()->user()->posyandu_id,
-                    'jml_rt' => $request->jml_rt,
-                    'jml_rw' => $request->jml_rw,
-                    'jrk_terdekat' => $request->jrk_terdekat,
-                    'jrk_terjauh' => $request->jrk_terjauh,
-                    'polindes' => $request->polindes,
-                    'pks_pembantu' => $request->pks_pembantu,
-                    'pks' => $request->pks,
-                    'pkt_dokter' => $request->pkt_dokter,
-                    'klinik' => $request->klinik,
-                    'rumah_sakit' => $request->rumah_sakit,
-                    'kelurahan_g' => $request->kelurahan_g,
-                    'kecamatan_g' => $request->kecamatan_g,
-                    'kabupaten_g' => $request->kabupaten_g,
+                    'pra' => $request->pra,
+                    'mad' => $request->mad,
+                    'pur' => $request->pur,
+                    'man' => $request->man,
+                    'jml_bgn_s' => $request->jml_bgn_s,
                 ];
 
-                Geografi::create($geografiData);
+                Strata::create($strataData);
                 $user = User::find(auth()->user()->id);
                 $userData = [
                     'posyandu_id' => auth()->user()->posyandu_id,
-                    'status_geografi' => 'sudah',
+                    'status_strata' => 'sudah',
                 ];
                 $user->update($userData);
                 return response()->json([
@@ -162,7 +129,7 @@ class GeografiController extends Controller
     {
         $id = $request->id;
         // dd($id);
-        $user = Geografi::find($id);
+        $user = Strata::find($id);
         // dd($data->password);
         return response()->json($user);
     }
