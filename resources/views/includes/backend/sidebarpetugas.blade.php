@@ -90,7 +90,7 @@
                         </svg>
                     </div>
                 </a>
-                <ul class="submenu recent-submenu list-unstyled collapse {{ ($menu == 'master pengaturan') ? 'show' : ''}}" id="menu3" data-parent="#accordionExample" style="">
+                <ul class="submenu recent-submenu list-unstyled collapse {{ ($menu == 'master') ? 'show' : ''}}" id="menu3" data-parent="#accordionExample" style="">
                     <li class="{{ ($submenu == 'profile') ? 'active' : ''}}">
                         <a href="/profile"> Profil </a>
                     </li>

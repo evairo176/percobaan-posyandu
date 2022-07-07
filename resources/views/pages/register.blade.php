@@ -50,9 +50,9 @@
                                 <div id="username-field" class="field-wrapper input">
                                     <label for="username">Posyandu</label>
                                     <select name="posyandu_id" id="posyandu_id" class="form-control">
-                                        <option value="">--pilih posyandu--</option>
+                                        <option value="">--pilih posyandu ,kelurahan ,kecamatan--</option>
                                         @foreach($pos as $po)
-                                        <option value="{{$po->id}}">{{$po->nama_posyandu}}</option>
+                                        <option value="{{$po->id}}">{{$po->nama_posyandu}},{{$po->kelurahan}},{{$po->kecamatan}}</option>
                                         @endforeach
                                     </select>
                                     <div class="invalid-feedback"></div>

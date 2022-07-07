@@ -22,8 +22,20 @@ class UserController extends Controller
     }
     public function register()
     {
+        $posyandu =  DB::table('tb_rekap_posyandu')
+            ->leftJoin('districts', 'tb_rekap_posyandu.kecamatan_id', '=', 'districts.id')
+            ->leftJoin('villages', 'tb_rekap_posyandu.kelurahan_id', '=', 'villages.id')
+            ->select(
+                'tb_rekap_posyandu.*',
+                'districts.*',
+                'villages.*',
+                'tb_rekap_posyandu.id as id_posyandu',
+                'districts.name as kecamatan',
+                'villages.name as kelurahan',
+            )->get();
+        // dd($posyandu);
         $data = [
-            'pos' => Posyandu::all(),
+            'pos' => $posyandu,
         ];
         return view('pages.register', $data);
     }
@@ -115,7 +127,7 @@ class UserController extends Controller
     {
         $data = [
             'menu' => 'master',
-            'submenu' => 'master pengaturan',
+            'submenu' => 'profile',
             'userInfo' => DB::table('users')->where('id', auth()->user()->id)->first(),
         ];
         return view('pages.backend.profile', $data);
