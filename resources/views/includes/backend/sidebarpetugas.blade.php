@@ -72,6 +72,25 @@
                         <a href="/perkembangan">Input Rekap Perkembangan</a>
                     </li>
                     @endif
+                </ul>
+            </li>
+            <li class="menu {{ ($menu == 'master') ? 'active' : ''}}">
+                <a href="#menu3" data-toggle="collapse" aria-expanded="{{ ($menu == 'master') ? 'true' : 'false'}}" class="dropdown-toggle collapsed">
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-database">
+                            <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                        </svg>
+                        <span>Master Pengaturan</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </a>
+                <ul class="submenu recent-submenu list-unstyled collapse {{ ($menu == 'master pengaturan') ? 'show' : ''}}" id="menu3" data-parent="#accordionExample" style="">
                     <li class="{{ ($submenu == 'profile') ? 'active' : ''}}">
                         <a href="/profile"> Profil </a>
                     </li>

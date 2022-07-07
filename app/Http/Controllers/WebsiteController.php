@@ -13,7 +13,7 @@ class WebsiteController extends Controller
     public function index()
     {
         $data = [
-            'menu' => 'table',
+            'menu' => 'master',
             'submenu' => 'pengaturan website',
             'websiteInfo' => DB::table('tb_website')->where('id', 1)->first(),
         ];

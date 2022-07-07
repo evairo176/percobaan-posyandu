@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="inv-action">
-                    <a href="/posyandu" class="btn btn-outline-primary view-details">View Details</a>
+                    <a href="/posyandu/cetak-pdf/{{auth()->user()->posyandu_id}}" class="btn btn-outline-primary view-details">View Details</a>
                 </div>
             </div>
         </div>

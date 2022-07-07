@@ -114,8 +114,8 @@ class UserController extends Controller
     public function profile()
     {
         $data = [
-            'menu' => 'table',
-            'submenu' => 'profile',
+            'menu' => 'master',
+            'submenu' => 'master pengaturan',
             'userInfo' => DB::table('users')->where('id', auth()->user()->id)->first(),
         ];
         return view('pages.backend.profile', $data);
