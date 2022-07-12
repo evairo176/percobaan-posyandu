@@ -114,6 +114,16 @@
                         </select>
                         <div class="invalid-feedback"></div>
                     </div>
+                      <div class="my-2">
+                        <label for="name_kader">Terlatih</label>
+                        <select name="terlatih" id="terlatih" class="form-control">
+                            <option value="">--pilih--</option>
+                            <option value="ya">ya</option>
+                            <option value="tidak">tidak</option>
+                             
+                        </select>
+                        <div class="invalid-feedback"></div>
+                    </div>
                     <div class="my-2">
                         <label for="name_kader">tahun pelatihan</label>
                         <select name="tahun_pelatihan" id="tahun_pelatihan" class="form-control">
@@ -185,6 +195,10 @@
                     data: 'tahun_pelatihan',
                     name: 'tahun_pelatihan'
                 },
+                 {
+                    data: 'terlatih',
+                    name: 'terlatih'
+                },
                 {
                     data: 'no_hp',
                     name: 'no_hp'
@@ -203,6 +217,7 @@
         });
         $('#btnkader').on('click', function() {
             // $("#formadddesa")[0].reset();
+            $("#terlatih").find('option').removeAttr('selected');
             $('#kader_form')[0].reset();
             $('#kaderModalTitle').html('Add Data kader');
             $('#kader_btn').html('Save');
@@ -232,6 +247,8 @@
                     $("#tahun_jadi_kader").val(res.tahun_jadi_kader);
                     $("#pendidikan").val(res.pendidikan);
                     $("#tahun_pelatihan").val(res.tahun_pelatihan);
+                    $("#terlatih").val(res.terlatih);
+
                     $("#no_hp").val(res.no_hp);
                 }
             });

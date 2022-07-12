@@ -335,4 +335,264 @@ class RekapPosyanduControler extends Controller
         // dd($desa);
         return response()->json($desa);
     }
+    public function Exportexcel(Request $request)
+    {       
+        $data_excel                     =DB::table('districts')->where('regency_id', 3212)->get(); 
+        $o                              =0;
+        $jumlah_desa    =0;
+        $jml_pos                        =0;
+        $jumlah_pra                     =0;
+        $jumlah_mad                     =0;
+        $jumlah_pur                     =0;
+        $jumlah_man                     =0;
+        $jml_man_persen_ttl             =0;
+        $jml_bangunan_ttl               =0;
+        $jml_bangunan_ttl_persen        =0;
+        $jumlah_kader_ttl               =0;
+        $jumlah_kader_terlatih_ttl      =0;
+        $jumlah_kader_terlatih_per_ttl  =0;
+        $s_ttl                          =0;
+        $k_ttl                          =0;
+        $d_ttl                          =0;
+        $n_ttl                          =0;
+        $d_s_ttl                        =0;
+        $n_d_ttl                        =0;
+        foreach ($data_excel as $key) 
+        {
+          //  echo $key->id.'<br>';
+            $data=DB::table('tb_rekap_posyandu');
+                $data->select(
+                        'tb_rekap_posyandu.id',
+                        'tb_strata.pra', 
+                        'tb_strata.mad',
+                        'tb_strata.pur',
+                        'tb_strata.man',
+                        'tb_strata.jml_bgn_s',
+                        'tb_sarana.id as id_bngn', 
+                        'tb_skdn.s',
+                        'tb_skdn.k',
+                        'tb_skdn.d',
+                        'tb_skdn.n',
+                        'tb_kegiatan_utama.vit_a',
+                        'tb_kegiatan_utama.kb_aktif',
+                        'tb_kegiatan_utama.k4',
+                        'tb_kegiatan_utama.fe3',
+                        'tb_kegiatan_utama.campak',
+                        'tb_kegiatan_utama.bcg',
+                        'tb_kegiatan_utama.dpt',
+                        'tb_kegiatan_utama.hbo',
+                        'tb_kegiatan_utama.polio',
+                        'tb_kegiatan_utama.gizi',
+                        'tb_kegiatan_utama.diare',
+                        // 'tb_perkembangan.paud',
+                        // 'tb_perkembangan.bkb',
+                        // 'tb_perkembangan.bkr',
+                        // 'tb_perkembangan.bkl',
+                        // 'tb_perkembangan.up2k',
+                        // 'tb_perkembangan.as',
+                        // 'tb_perkembangan.in',
+                        // 'tb_perkembangan.ds',
+            );
+            $data->leftJoin('tb_strata','tb_strata.posyandu_id','=','tb_rekap_posyandu.id');
+            $data->leftJoin('tb_sarana','tb_sarana.posyandu_id','=','tb_rekap_posyandu.id'); 
+            $data->leftJoin('tb_skdn','tb_skdn.posyandu_id','=','tb_rekap_posyandu.id');
+            $data->leftJoin('tb_kegiatan_utama','tb_kegiatan_utama.posyandu_id','=','tb_rekap_posyandu.id');
+            //$data->leftJoin('tb_perkembangan','tb_perkembangan.posyandu_id','=','tb_rekap_posyandu.id');
+            $data->where('tb_rekap_posyandu.kecamatan_id',@$key->id);
+            if($request->get('date'))
+            {
+                $data->whereDate('tb_rekap_posyandu.updated_at',$request->get('date'));
+
+            }
+            $posyandu_1                   =$data->get();
+            $data_excel[$o]->jumlah_desa=DB::table('villages')->where('district_id',@$key->id)->count();
+            // echo '<pre>';
+            // print_r($posyandu);
+            // echo '</pre>';
+            $pra                        =0;
+            $mad                        =0;
+            $pur                        =0;
+            $man                        =0;
+            $man_persen                 =0;
+            $jml_bgn_s                  =0;
+            $jml_bangunan               =0;
+            $jumlah_kader               =0;
+            $jumlah_kader_terlatih      =0;
+            $jumlah_kader_terlatih_per  =0; 
+            $s                          =0;
+            $k                          =0;
+            $d                          =0;
+            $n                          =0;
+            $d_s                        =0;
+            $n_d                        =0; 
+            $vit_a                      =0;
+            $kb_aktif                   =0;
+            $k4                         =0;
+            $fe3                        =0;
+            $campak                     =0;
+            $bcg                        =0;
+            $dpt                        =0;
+            $hbo                        =0;
+            $polio                      =0;
+            $gizi                       =0;
+            $diare                      =0; 
+            $paud                       =0;
+            $bkb                        =0;
+            $bkr                        =0;
+            $bkl                        =0;
+            $up2k                       =0;
+            $as                         =0;
+            $in                         =0;
+            $ds                         =0; 
+            $data_excel[$o]->jumlah_posyandu=count($posyandu_1);
+            foreach ($posyandu_1 as $pyd)
+            {
+              //  echo @$pyd->id.'<br>';
+               $pra         +=@$pyd->pra;
+               $mad         +=@$pyd->mad;
+               $pur         +=@$pyd->pur;
+               $man         +=@$pyd->man;
+               $jml_bgn_s   +=@$pyd->jml_bgn_s; 
+               if(@$pyd->id_bngn)
+               {
+                    $jml_bangunan+=1;
+               }
+                $kdr=DB::table('tb_kader')->where('posyandu_id',@$pyd->id)->get();
+                $jumlah_kader+=count($kdr);
+                foreach ($kdr as $kdrkey) 
+                {  
+                    if(@$kdrkey->terlatih=='ya')
+                    {
+                        $jumlah_kader_terlatih+=1;
+                    } 
+                }
+                $s              +=@$pyd->s;
+                $k              +=@$pyd->k;
+                $d              +=@$pyd->d;
+                $n              +=@$pyd->n;
+                $vit_a          +=@$pyd->vit_a;
+                $kb_aktif       +=@$pyd->kb_aktif;
+                $k4             +=@$pyd->k4;
+                $fe3            +=@$pyd->fe3;
+                $campak         +=@$pyd->campak;
+                $bcg            +=@$pyd->bcg;
+                $dpt            +=@$pyd->dpt;
+                $hbo            +=@$pyd->hbo;
+                $polio          +=@$pyd->polio;
+                $gizi           +=@$pyd->gizi;
+                $diare          +=@$pyd->diare;
+                 $tb_perkembangan=DB::table('tb_perkembangan')->where('posyandu_id',@$pyd->id)->get();
+                foreach ($tb_perkembangan as $pkmbkey) 
+                {  
+                    $paud           +=$paud;
+                    $bkb            +=$bkb;
+                    $bkr            +=$bkr;
+                    $bkl            +=$bkl;
+                    $up2k           +=$up2k;
+                    $as             +=$as;
+                    $in             +=$in;
+                    $ds             +=$ds;
+                    
+                }
+
+            }
+
+            $man_persen                 =$man!=0?ceil((count($posyandu_1)/$man)*100):0;
+            $data_excel[$o]->strata     =array(
+                                        'pra'       =>$pra,
+                                        'mad'       =>$mad,
+                                        'pur'       =>$pur,
+                                        'man'       =>$man,
+                                        'jml_bgn_s' =>$jml_bgn_s,
+                                        'man_persen'=>$man_persen);
+
+            $jml_bgn_persen             =$jml_bangunan!=0?ceil((count($posyandu_1)/$jml_bangunan)*100):0;
+            $data_excel[$o]->bangunan   =array( 'jml_bangunan'=>$jml_bangunan,
+                                                'jml_bgn_persen'=>$jml_bgn_persen);
+
+
+            $jumlah_kader_terlatih_per  =$jumlah_kader!=0?ceil(($jumlah_kader/$jumlah_kader_terlatih)*100):0;
+            $data_excel[$o]->kader      =array(
+                                        'jumlah_kader'              =>$jumlah_kader,
+                                        'jumlah_kader_terlatih'     =>$jumlah_kader_terlatih,
+                                        'jumlah_kader_terlatih_per' =>$jumlah_kader_terlatih_per);
+        $d_s                        =$d!=0?ceil(($d/$s)*100):0;
+        $n_d                        =$n!=0?ceil(($n/$d)*100):0;
+        $data_excel[$o]->skdn       =array('s'=>$s,'k'=>$k,'d'=>$d,'n'=>$n,'d_s'=>$d_s,'n_d'=>$n_d);
+        $data_excel[$o]->kegiatan_utama=array(
+                                    'vit_a'=>$vit_a,
+                                    'kb_aktif'=>$kb_aktif,
+                                    'k4'=>$k4,
+                                    'fe3'=>$fe3,
+                                    'campak'=>$campak,
+                                    'bcg'=>$bcg,
+                                    'dpt'=>$dpt,
+                                    'hbo'=>$hbo,
+                                    'polio'=>$polio,
+                                    'gizi'=>$gizi,
+                                    'diare'=>$diare); 
+         $data_excel[$o]->program_pengembangan=array(
+                                            'paud'=>$paud,
+                                            'bkb'=>$bkb,
+                                            'bkr'=>$bkr,
+                                            'bkl'=>$bkl,
+                                            'up2k'=>$up2k,
+                                            'as'=>$as,
+                                            'in'=>$in,
+                                            'ds'=>$ds
+                                            ); 
+        
+        
+        
+          $jumlah_desa                  +=$data_excel[$o]->jumlah_desa;
+          $o++;  
+          $jml_pos                      +=count($posyandu_1);
+          $jumlah_pra                   +=$pra;
+          $jumlah_mad                   +=$mad;
+          $jumlah_pur                   +=$pur;
+          $jumlah_man                   +=$man;
+          $jml_man_persen_ttl           +=$man_persen;
+          $jml_bangunan_ttl             +=$jml_bangunan;
+          $jml_bangunan_ttl_persen      +=$jml_bgn_persen;
+          $jumlah_kader_ttl             +=$jumlah_kader;
+          $jumlah_kader_terlatih_ttl    +=$jumlah_kader_terlatih;
+          $jumlah_kader_terlatih_per_ttl+=$jumlah_kader_terlatih_per;  
+            $s_ttl +=$s;
+            $k_ttl +=$k;
+            $d_ttl +=$d;
+            $n_ttl +=$n;
+            $d_s_ttl+=$d_s;
+            $n_d_ttl+=$n_d;
+} 
+$jml_man_persen_ttl               =$jml_man_persen_ttl!=0?ceil(($jml_man_persen_ttl/$o)*100):0; 
+$jml_bangunan_ttl_persen          =$jml_bangunan_ttl_persen!=0?ceil(($jml_bangunan_ttl_persen/$o)*100):0; 
+$jumlah_kader_terlatih_per_ttl    =$jumlah_kader_terlatih_per_ttl!=0?ceil(($o/$jumlah_kader_terlatih_per_ttl)*100):0;         
+$d_s_ttl                          =$d_s_ttl!=0?ceil(($o/$d_s_ttl)*100):0;
+$n_d_ttl                          =$n_d_ttl!=0?ceil(($o/$n_d_ttl)*100):0; 
+
+
+$jumlah=array(
+    'jumlah_desa'                   =>$jumlah_desa,
+    'jml_pos'                       =>$jml_pos,
+    'jumlah_pra'                    =>$jumlah_pra,
+    'jumlah_mad'                    =>$jumlah_mad,
+    'jumlah_man'                    =>$jumlah_man,
+    'jumlah_pur'                    =>$jumlah_pur,
+    'jml_man_persen_ttl'            =>$jml_man_persen_ttl,
+    'jml_bangunan_ttl'              =>$jml_bangunan_ttl,
+    'jml_bangunan_ttl_persen'       =>$jml_bangunan_ttl_persen,
+    'jumlah_kader_ttl'              =>$jumlah_kader_ttl,
+    'jumlah_kader_terlatih_ttl'     =>$jumlah_kader_terlatih_ttl,
+    'jumlah_kader_terlatih_per_ttl' =>$jumlah_kader_terlatih_per_ttl,
+    's_ttl'                         =>$s_ttl,
+    'k_ttl'                         =>$k_ttl,
+    'd_ttl'                         =>$d_ttl,
+    'n_ttl'                         =>$n_ttl,
+    'd_s_ttl'                       =>$d_s_ttl,
+    'n_d_ttl'                       =>$n_d_ttl,
+
+);
+//dd($jumlah);
+        return view('pages.backend.data_excel_posyandu',compact('data_excel','jumlah'));
+    }
 }

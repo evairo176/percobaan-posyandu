@@ -163,4 +163,8 @@ route::group(['middleware' => ['auth', 'login_check:super-admin']], function () 
 
     Route::get('/posyandu/cetak-pdf-all/', [RekapPosyanduControler::class, 'cetakPdfAll'])->name('posyandu.cetakPdfAll');
     Route::delete('/posyandu/delete', [RekapPosyanduControler::class, 'delete'])->name('posyandu.delete');
+
+  Route::get('/posyandu/export-excel', [RekapPosyanduControler::class, 'Exportexcel'])->name('Exportexcel');
+
+
 });
