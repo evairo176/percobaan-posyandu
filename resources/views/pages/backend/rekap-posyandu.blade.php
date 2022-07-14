@@ -47,9 +47,9 @@
                                     <polyline points="10 9 9 9 8 9"></polyline>
                                 </svg> cetak semua data to pdf
                             </a>
-                             <a type="button" class="btn btn-primary" href="{{route('Exportexcel')}}" >
-                                Export Data Perkembangan Posyandu  
-                            </a>  
+                            <a type="button" class="btn btn-primary" href="{{route('Exportexcel')}}">
+                                Export Data Perkembangan Posyandu
+                            </a>
                             <button type="button" class="btn btn-primary" id="btnposyandu">
                                 Add New Posyandu
                             </button>
@@ -136,7 +136,7 @@
                     <div class="my-2">
                         <label for="inputState">Desa</label>
                         <select id="kelurahan_id" class="form-control" name="kelurahan_id">
-                            <option selected>Choose...</option>
+                            <option selected disabled>Choose...</option>
                         </select>
                     </div>
             </div>
@@ -338,7 +338,7 @@
                     success: function(res) {
                         if (res) {
                             $("#kelurahan_id").empty();
-                            $("#kelurahan_id").append('<option selected>pilih...</option>');
+                            $("#kelurahan_id").append('<option selected disabled>pilih...</option>');
                             $.each(res, function(nama, kode) {
                                 $("#kelurahan_id").append('<option value="' + kode + '">' + nama + '</option>');
                             });

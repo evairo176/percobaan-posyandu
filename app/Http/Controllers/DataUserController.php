@@ -106,7 +106,7 @@ class DataUserController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('picture', function ($row) {
-                    $url = asset('storage/picture/' . $row->picture);
+                    $url = ($row->picture) ? asset('storage/picture/' . $row->picture) : 'boy.png';
                     return '<img src="' . $url . '" border="0" width="40" class="img-rounded" align="center" />';
                 })
                 ->addColumn('created_at', function ($row) {

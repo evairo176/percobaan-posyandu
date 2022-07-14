@@ -56,6 +56,7 @@ class UserController extends Controller
 
     public function saveUser()
     {
+        // dd(request()->all());
         $validator  = Validator::make(request()->all(), [
             'name' => 'required|max:50',
             'email' => 'required|email|unique:users|max:100',

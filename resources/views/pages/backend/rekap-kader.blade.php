@@ -56,6 +56,7 @@
                             <th>tahun jadi kader</th>
                             <th>pendidikan</th>
                             <th>tahun pelatihan</th>
+                            <th>terlatih</th>
                             <th>no hp</th>
                             <th>Action</th>
                         </tr>
@@ -114,13 +115,13 @@
                         </select>
                         <div class="invalid-feedback"></div>
                     </div>
-                      <div class="my-2">
+                    <div class="my-2">
                         <label for="name_kader">Terlatih</label>
                         <select name="terlatih" id="terlatih" class="form-control">
                             <option value="">--pilih--</option>
                             <option value="ya">ya</option>
                             <option value="tidak">tidak</option>
-                             
+
                         </select>
                         <div class="invalid-feedback"></div>
                     </div>
@@ -195,7 +196,7 @@
                     data: 'tahun_pelatihan',
                     name: 'tahun_pelatihan'
                 },
-                 {
+                {
                     data: 'terlatih',
                     name: 'terlatih'
                 },
