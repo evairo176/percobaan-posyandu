@@ -32,7 +32,9 @@ class UserController extends Controller
                 'tb_rekap_posyandu.id as id_posyandu',
                 'districts.name as kecamatan',
                 'villages.name as kelurahan',
-            )->get();
+            )
+            ->where('status_petugas', null)
+            ->get();
         // dd($posyandu);
         $data = [
             'pos' => $posyandu,
@@ -73,12 +75,17 @@ class UserController extends Controller
                 'messages' => $validator->getMessageBag()
             ]);
         } else {
+            $pos = Posyandu::where('id', request()->posyandu_id)->first();
+            $pos->status_petugas = '1';
+            $pos->update();
             $user = new User();
             $user->name = request()->name;
             $user->email = request()->email;
             $user->password = hash::make(request()->password);
             $user->posyandu_id = request()->posyandu_id;
             $user->save();
+
+
             return response()->json([
                 'status' => 200,
                 'messages' => 'Register Successfully'
