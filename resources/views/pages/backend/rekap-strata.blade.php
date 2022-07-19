@@ -82,23 +82,31 @@
                     <div class="my-2">
                         <label for="name_strata">pra</label>
                         <input type="hidden" name="strata_id" id="strata_id" class="form-control">
-                        <input type="text" name="pra" id="pra" class="form-control">
+                        <div class="form-control">
+                        <input type="radio" name="cek" value="pra" id="pra" >
+                    </div>
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="my-2">
                         <label for="name_strata">mad</label>
-                        <input type="text" name="mad" id="mad" class="form-control">
+                        <div class="form-control">
+                            <input type="radio" name="cek" id="mad" value="mad" checked>
+                        </div>
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="my-2">
                         <label for="name_strata">pur</label>
-                        <input type="text" name="pur" id="pur" class="form-control">
-                        <div class="invalid-feedback"></div>
+                        <div class="form-control">
+                            <input type="radio" name="cek" id="pur" value="pur">
+                        </div>
+                         
                     </div>
                     <div class="my-2">
                         <label for="name_strata">man</label>
-                        <input type="text" name="man" id="man" class="form-control">
-                        <div class="invalid-feedback"></div>
+                         <div class="form-control">
+                            <input type="radio" name="cek"  id="man" value="man">
+                        </div>
+                         
                     </div>
                     <div class="my-2">
                         <label for="name_strata">jumlah bangunan</label>
@@ -199,10 +207,28 @@
                     $('#strata_btn').html('Update');
                     $('#strataModal').modal('show');
                     $("#strata_id").val(res.id);
-                    $("#pra").val(res.pra);
-                    $("#mad").val(res.mad);
-                    $("#pur").val(res.pur);
-                    $("#man").val(res.man);
+                    if(res.pra!=0)
+                    { 
+//man
+                         $("#pra").prop('checked',true);
+
+                    }
+                    else if(res.mad!=0)
+                    {
+                        $("#mad").prop('checked',true);
+                    }
+                    else if(res.pur!=0)
+                    {
+                        $("#pur").prop('checked',true);
+                    }
+                    else
+                    {
+                         $("#man").prop('checked',true);
+                    }
+                    // $("#pra").val(res.pra);
+                    // $("#mad").val(res.mad);
+                    // $("#pur").val(res.pur);
+                    // $("#man").val(res.man);
                     $("#jml_bgn_s").val(res.jml_bgn_s);
                 }
             });
