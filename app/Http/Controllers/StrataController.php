@@ -53,15 +53,36 @@ class StrataController extends Controller
     }
     public function store(Request $request)
     {
+        $pra=0;
+        $mad=0;
+        $pur=0;
+        $man=0;
+        switch (@$request->cek)
+            {
+            case 'pra': 
+            $pra=1; 
+            break;
+            case 'mad': 
+            $mad=1; 
+            break;
+            case 'pur':
+            $pur=1;
+
+            break;
+            case 'man':  
+            $man=1;
+
+            break;
+
+        }
         if ($request->strata_id) {
             $validator  = Validator::make(request()->all(), [
-                'pra' => 'required',
-                'mad' => 'required',
-                'pur' => 'required',
-                'man' => 'required',
+                // 'pra' => 'required',
+                // 'mad' => 'required',
+                // 'pur' => 'required',
+                // 'man' => 'required',
                 'jml_bgn_s' => 'required',
             ]);
-
             if ($validator->fails()) {
                 // dd($validator->getMessageBag());
                 return response()->json([
@@ -69,13 +90,14 @@ class StrataController extends Controller
                     'messages' => $validator->getMessageBag()
                 ]);
             } else {
+
                 $strata = Strata::find($request->strata_id);
                 $strataData = [
                     'posyandu_id' => auth()->user()->posyandu_id,
-                    'pra' => $request->pra,
-                    'mad' => $request->mad,
-                    'pur' => $request->pur,
-                    'man' => $request->man,
+                    'pra' => $pra,
+                    'mad' => $mad,
+                    'pur' => $pur,
+                    'man' => $man,
                     'jml_bgn_s' => $request->jml_bgn_s,
                 ];
                 // dd($strataData);
@@ -87,10 +109,10 @@ class StrataController extends Controller
             }
         } else {
             $validator  = Validator::make(request()->all(), [
-                'pra' => 'required',
-                'mad' => 'required',
-                'pur' => 'required',
-                'man' => 'required',
+                // 'pra' => 'required',
+                // 'mad' => 'required',
+                // 'pur' => 'required',
+                // 'man' => 'required',
                 'jml_bgn_s' => 'required',
             ]);
 
@@ -103,10 +125,10 @@ class StrataController extends Controller
             } else {
                 $strataData = [
                     'posyandu_id' => auth()->user()->posyandu_id,
-                    'pra' => $request->pra,
-                    'mad' => $request->mad,
-                    'pur' => $request->pur,
-                    'man' => $request->man,
+                    'pra' => $pra,
+                    'mad' => $mad,
+                    'pur' => $pur,
+                    'man' => $man,
                     'jml_bgn_s' => $request->jml_bgn_s,
                 ];
 
