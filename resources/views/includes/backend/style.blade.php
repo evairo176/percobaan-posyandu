@@ -9,6 +9,8 @@
 <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
 <link href="{{asset('backend')}}/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="{{asset('backend')}}/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+<script src="{{asset('backend')}}/assets/js/libs/jquery-3.1.1.min.js"></script>
+
 <!-- END GLOBAL MANDATORY STYLES -->
 <style>
     .select2-container--open {

@@ -78,119 +78,88 @@ header("Pragma: no-cache");
 	@php
 	$i=1;
 	@endphp
-	@foreach($data_excel as $key)
-	<tr>
-		<td>{{@$i++}}</td>
+	@foreach($data_perkembangan as $key)
+	 <tr>
+                                <td>{{$i++}}</td>
 
-		<td>{{@$key->name}}</td>
-		<td>{{@$key->jumlah_desa}}</td>
-		<td>{{@$key->jumlah_posyandu}}</td>
-		<td>{{@$key->strata['pra']}}</td>
-		<td>{{@$key->strata['mad']}}</td>
-		<td>{{@$key->strata['pur']}}</td>
-		<td>{{@$key->strata['man']}}</td>
-		<td>{{@$key->strata['man_persen']}}%</td>
-		<td>{{@$key->bangunan['jml_bangunan']}}</td>
-		<td>{{@$key->bangunan['jml_bgn_persen']}}%</td>
-		<td>{{@$key->kader['jumlah_kader']}}</td>
-		<td>{{@$key->kader['jumlah_kader_terlatih']}}</td> 
-		<td>{{@$key->kader['jumlah_kader_terlatih_per']}}%</td> 
-		
-		<td>{{@$key->skdn['s']}}</td>
-		<td>{{@$key->skdn['k']}}</td>
-		<td>{{@$key->skdn['d']}}</td>
-		<td>{{@$key->skdn['n']}}</td>
-		<td>{{@$key->skdn['d_s']}}%</td>
-		<td>{{@$key->skdn['n_d']}}%</td>
-		<td>{{@$key->kegiatan_utama['vit_a']}}</td>
-		<td>{{@$key->kegiatan_utama['kb_aktif']}}</td>
-		<td>{{@$key->kegiatan_utama['k4']}}</td>
-		<td>{{@$key->kegiatan_utama['fe3']}}</td>
-		<td>{{@$key->kegiatan_utama['campak']}}</td>
-		<td>{{@$key->kegiatan_utama['bcg']}}</td>
-		<td>{{@$key->kegiatan_utama['dpt']}}</td>
-		<td>{{@$key->kegiatan_utama['hbo']}}</td>
-		<td>{{@$key->kegiatan_utama['polio']}}</td>
-		<td>{{@$key->kegiatan_utama['gizi']}}</td>
-		<td>{{@$key->kegiatan_utama['diare']}}</td>
-		<td>{{@$key->program_pengembangan['paud']}}</td>
-		<td>{{@$key->program_pengembangan['bkb']}}</td>
-		<td>{{@$key->program_pengembangan['bkr']}}</td>
-		<td>{{@$key->program_pengembangan['bkl']}}</td>
-		<td>{{@$key->program_pengembangan['up2k']}}</td>
-		<td>{{@$key->program_pengembangan['as']}}</td>
-		<td>{{@$key->program_pengembangan['in']}}</td>
-		<td>{{@$key->program_pengembangan['ds']}}</td>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	</tr>
+                                <td>{{@$key->name}}</td>
+                                <td>{{@$key->jml_desa}}</td>
+                                <td>{{@$key->jml_pos}}</td>
+                                <td>{{@$key->pra}}</td>
+                                <td>{{@$key->mad}}</td>
+                                <td>{{@$key->pur}}</td>
+                                <td>{{@$key->man}}</td>
+                                <td>{{@$key->man_per}}%</td>
+                                <td>{{@$key->jml_bgn}}</td>
+                                <td>{{@$key->jml_bgn_per}}%</td>
+                                <td>{{@$key->jml_kader}}</td>
+                                <td>{{@$key->jml_terlatih}}</td> 
+                                <td>{{@$key->jml_terlatih_per}}%</td> 
+                                <td>{{@$key->s}}</td>
+                                <td>{{@$key->k}}</td>
+                                <td>{{@$key->d}}</td>
+                                <td>{{@$key->n}}</td>
+                                <td>{{@$key->d_s}}%</td>
+                                <td>{{@$key->n_d}}%</td>
+                                <td>{{@$key->vit_a}}</td>
+                                <td>{{@$key->kb_aktif}}</td>
+                                <td>{{@$key->k4}}</td>
+                                <td>{{@$key->fe3}}</td>
+                                <td>{{@$key->campak}}</td>
+                                <td>{{@$key->bcg}}</td>
+                                <td>{{@$key->dpt}}</td>
+                                <td>{{@$key->hbo}}</td>
+                                <td>{{@$key->polio}}</td>
+                                <td>{{@$key->gizi}}</td>
+                                <td>{{@$key->diare}}</td>
+                                <td>{{@$key->paud}}</td>
+                                <td>{{@$key->bkb}}</td>
+                                <td>{{@$key->bkr}}</td>
+                                <td>{{@$key->bkl}}</td>
+                                <td>{{@$key->up2k}}</td>
+                                <td>{{@$key->as}}</td>
+                                <td>{{@$key->in}}</td>
+                                <td>{{@$key->ds}}</td>  
+                                </tr>
 	@endforeach
 	<tr>
-		<tr>
-		<td colspan="2">Jumlah</td> 
-
-		<td>{{@$jumlah['jumlah_desa']}}</td>
-		<td>{{@$jumlah['jml_pos']}}</td>
-		<td>{{@$jumlah['jumlah_pra']}}</td>
-		<td>{{@$jumlah['jumlah_mad']}}</td>
-		<td>{{@$jumlah['jumlah_pur']}}</td>
-		<td>{{@$jumlah['jumlah_man']}}</td>
-		<td>{{@$jumlah['jml_man_persen_ttl']}}%</td>
-		<td>{{@$jumlah['jml_bangunan_ttl']}}</td>
-		<td>{{@$jumlah['jml_bangunan_ttl_persen']}}%</td>
-		<td>{{@$jumlah['jumlah_kader_ttl']}}</td>
-		<td>{{@$jumlah['jumlah_kader_terlatih_ttl']}}</td> 
-		<td>{{@$jumlah['jumlah_kader_terlatih_per_ttl']}}%</td>  
-		<td>{{@$jumlah['s_ttl']}}</td>
-		<td>{{@$jumlah['k_ttl']}}</td>
-		<td>{{@$jumlah['d_ttl']}}</td>
-		<td>{{@$jumlah['n_ttl']}}</td>
-		<td>{{@$jumlah['d_s_ttl']}}%</td>
-		<td>{{@$jumlah['n_d_ttl']}}%</td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
- 
-	</tr>
-	</tr>
+                                <td colspan="2">Jumlah</td>  
+                                <td>{{@$ttl['ttl_dt_per_kel']}}</td>
+                                <td>{{@$ttl['ttl_posyandu']}}</td>
+                                <td>{{@$ttl['ttl_pra']}}</td>
+                                <td>{{@$ttl['ttl_mad']}}</td>
+                                <td>{{@$ttl['ttl_pur']}}</td>
+                                <td>{{@$ttl['ttl_man']}}</td>
+                                <td>{{@$ttl['ttl_man_per']}}%</td>
+                                <td>{{@$ttl['ttl_jml_bgn']}}</td>
+                                <td>{{@$ttl['ttl_jml_bgn_per']}}%</td>
+                                <td>{{@$ttl['ttl_jml_kader']}}</td>
+                                <td>{{@$ttl['ttl_jml_terlatih']}}</td>
+                                <td>{{@$ttl['jml_terlatih_per']}}%</td> 
+                                <td>{{@$ttl['ttl_s']}}</td> 
+                                <td>{{@$ttl['ttl_k']}}</td>
+                                <td>{{@$ttl['ttl_d']}}</td>
+                                <td>{{@$ttl['ttl_n']}}</td>
+                                <td>{{@$ttl['ttl_d_s_pr']}}%</td>
+                                <td>{{@$ttl['ttl_n_d_pr']}}%</td>
+                                <td>{{@$ttl['ttl_vit_a']}}</td>
+                                <td>{{@$ttl['ttl_kb_aktif']}}</td>
+                                <td>{{@$ttl['ttl_k4']}}</td>
+                                <td>{{@$ttl['ttl_fe3']}}</td>
+                                <td>{{@$ttl['ttl_campak']}}</td>
+                                <td>{{@$ttl['ttl_bcg']}}</td>
+                                <td>{{@$ttl['ttl_dpt']}}</td>
+                                <td>{{@$ttl['ttl_hbo']}}</td>
+                                <td>{{@$ttl['ttl_polio']}}</td>
+                                <td>{{@$ttl['ttl_gizi']}}</td>
+                                <td>{{@$ttl['ttl_diare']}}</td>
+                                <td>{{@$ttl['ttl_paud']}}</td>
+                                <td>{{@$ttl['ttl_bkb']}}</td>
+                                <td>{{@$ttl['ttl_bkr']}}</td>
+                                <td>{{@$ttl['ttl_bkl']}}</td>
+                                <td>{{@$ttl['ttl_up2k']}}</td>
+                                <td>{{@$ttl['ttl_as']}}</td>
+                                <td>{{@$ttl['ttl_in']}}</td>
+                                <td>{{@$ttl['ttl_ds']}}</td>
+                                </tr>
 </table>

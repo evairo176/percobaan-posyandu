@@ -165,4 +165,9 @@ route::group(['middleware' => ['auth', 'login_check:super-admin']], function () 
     Route::delete('/posyandu/delete', [RekapPosyanduControler::class, 'delete'])->name('posyandu.delete');
 
     Route::get('/posyandu/export-excel', [RekapPosyanduControler::class, 'Exportexcel'])->name('Exportexcel');
+    Route::get('/detail-perkembangan', [PerkembanganController::class, 'detailperkembangan']);
+    Route::get('/data-detail-perkembangan', [PerkembanganController::class, 'datadetailperkembangan']);
+    
+
+    
 });

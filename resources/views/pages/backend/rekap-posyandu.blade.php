@@ -47,9 +47,7 @@
                                     <polyline points="10 9 9 9 8 9"></polyline>
                                 </svg> cetak semua data to pdf
                             </a>
-                            <a type="button" class="btn btn-primary" href="{{route('Exportexcel')}}">
-                                Export Data Perkembangan Posyandu
-                            </a>
+                           
                             <button type="button" class="btn btn-primary" id="btnposyandu">
                                 Add New Posyandu
                             </button>
