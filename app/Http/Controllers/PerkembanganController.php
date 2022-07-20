@@ -177,6 +177,7 @@ class PerkembanganController extends Controller
                 $perkembangan = Perkembangan::find($request->perkembangan_id);
                 $perkembanganData = [
                     'posyandu_id' => auth()->user()->posyandu_id,
+                    'user_id' => auth()->user()->id,
                     'kelurahan_id' => $request->kelurahan_id,
                     'kecamatan_id' => $request->kecamatan_id,
                     'tahun_rekap' => $request->tahun_rekap,
@@ -259,6 +260,7 @@ class PerkembanganController extends Controller
 
                 $perkembanganData = [
                     'posyandu_id' => auth()->user()->posyandu_id,
+                    'user_id' => auth()->user()->id,
                     'kelurahan_id' => $request->kelurahan_id,
                     'kecamatan_id' => $request->kecamatan_id,
                     'tahun_rekap' => $request->tahun_rekap,
@@ -316,7 +318,7 @@ class PerkembanganController extends Controller
             'menu' => 'table',
             'submenu' => 'Input Detail Perkembangan'
         ];
-        return view('pages.backend.detailperkembangan', $data);
+        return view('pages.backend.detail-rekap-perkembangan', $data);
     }
     public function datadetailperkembangan(Request $request)
     {

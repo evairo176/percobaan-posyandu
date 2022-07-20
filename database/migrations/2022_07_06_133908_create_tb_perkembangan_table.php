@@ -15,6 +15,7 @@ class CreateTbPerkembanganTable extends Migration
     {
         Schema::create('tb_perkembangan', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id')->nullable();
             $table->integer('posyandu_id')->nullable();
             $table->string('kecamatan_id')->nullable();
             $table->string('kelurahan_id')->nullable();

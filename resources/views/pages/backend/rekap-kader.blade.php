@@ -293,6 +293,47 @@
                 }
             })
         })
+        // delete employee ajax request
+        $(document).on('click', '.deleteIcon', function(e) {
+            e.preventDefault();
+            let id = $(this).attr('id');
+            let csrf = '{{ csrf_token() }}';
+            var url = '{{url("kader/delete")}}';
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true,
+                padding: '2em'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: url,
+                        method: 'delete',
+                        data: {
+                            id: id,
+                            _token: csrf
+                        },
+                        success: function(res) {
+                            if (res.status == 200) {
+                                Swal.fire({
+                                    position: 'bottom-end',
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: res.messages,
+                                    footer: '<a href="#">Do you have question?</a>',
+                                    timer: 1500,
+                                })
+                                $('.table').DataTable().ajax.reload();
+                            }
+                        }
+                    });
+                }
+            });
+        });
     });
 </script>
 @endpush

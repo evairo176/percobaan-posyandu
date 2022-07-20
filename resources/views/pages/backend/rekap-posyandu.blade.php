@@ -47,7 +47,7 @@
                                     <polyline points="10 9 9 9 8 9"></polyline>
                                 </svg> cetak semua data to pdf
                             </a>
-                           
+
                             <button type="button" class="btn btn-primary" id="btnposyandu">
                                 Add New Posyandu
                             </button>
@@ -66,6 +66,7 @@
                         <tr>
                             <th>No</th>
                             <th>Posyandu</th>
+                            <th>Petugas</th>
                             <th>blok</th>
                             <th>rt</th>
                             <th>rw</th>
@@ -176,6 +177,10 @@
                 {
                     data: 'nama_posyandu',
                     name: 'nama_posyandu'
+                },
+                {
+                    data: 'name_petugas',
+                    name: 'name_petugas'
                 },
                 {
                     data: 'blok',

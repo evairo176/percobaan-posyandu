@@ -33,7 +33,7 @@ class UserController extends Controller
                 'districts.name as kecamatan',
                 'villages.name as kelurahan',
             )
-            ->where('status_petugas', null)
+            ->where('user_id', null)
             ->get();
         // dd($posyandu);
         $data = [
@@ -75,16 +75,16 @@ class UserController extends Controller
                 'messages' => $validator->getMessageBag()
             ]);
         } else {
-            $pos = Posyandu::where('id', request()->posyandu_id)->first();
-            $pos->status_petugas = '1';
-            $pos->update();
+
             $user = new User();
             $user->name = request()->name;
             $user->email = request()->email;
             $user->password = hash::make(request()->password);
             $user->posyandu_id = request()->posyandu_id;
             $user->save();
-
+            $pos = Posyandu::where('id', request()->posyandu_id)->first();
+            $pos->user_id = $user->id;
+            $pos->update();
 
             return response()->json([
                 'status' => 200,

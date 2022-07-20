@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AllPerkembanganController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataUserController;
@@ -123,6 +124,7 @@ route::group(['middleware' => ['auth', 'login_check:petugas']], function () {
     Route::post('/kader/store', [KaderController::class, 'store'])->name('kader.store');
     Route::get('/kader/fetch-all', [KaderController::class, 'fetchAll'])->name('kader.fetch');
     Route::post('/kader/edit', [KaderController::class, 'edit'])->name('kader.edit');
+    Route::delete('/kader/delete', [KaderController::class, 'delete'])->name('kader.delete');
 
     Route::get('/skdn', [SkdnController::class, 'index'])->name('skdn');
     Route::post('/skdn/store', [SkdnController::class, 'store'])->name('skdn.store');
@@ -167,7 +169,10 @@ route::group(['middleware' => ['auth', 'login_check:super-admin']], function () 
     Route::get('/posyandu/export-excel', [RekapPosyanduControler::class, 'Exportexcel'])->name('Exportexcel');
     Route::get('/detail-perkembangan', [PerkembanganController::class, 'detailperkembangan']);
     Route::get('/data-detail-perkembangan', [PerkembanganController::class, 'datadetailperkembangan']);
-    
 
-    
+    Route::get('/all-perkembangan', [AllPerkembanganController::class, 'index'])->name('all.perkembangan');
+    Route::post('/all-perkembangan/store', [AllPerkembanganController::class, 'store'])->name('all.perkembangan.store');
+    Route::get('/all-perkembangan/fetch-all', [AllPerkembanganController::class, 'fetchAll'])->name('all.perkembangan.fetch');
+    Route::post('/all-perkembangan/edit', [AllPerkembanganController::class, 'edit'])->name('all.perkembangan.edit');
+    Route::delete('/all-perkembangan/delete', [AllPerkembanganController::class, 'delete'])->name('all.perkembangan.delete');
 });

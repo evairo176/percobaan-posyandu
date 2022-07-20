@@ -343,36 +343,6 @@
                 }
             })
         })
-
-        // edit geografi ajax request
-        $(document).on('click', '.editIcon', function(e) {
-            e.preventDefault();
-            let id = $(this).attr('id');
-            var url = 'geografi/edit';
-
-            $.ajax({
-                url: url,
-                method: 'post',
-                data: {
-                    id: id,
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(res) {
-                    console.log(res.picture);
-                    $('#geografiModalTitle').html('Edit Data geografi');
-                    $('#geografi_btn').html('Update');
-                    $('#geografiModal').modal('show');
-                    $("#geografi_id").val(res.id);
-                    $("#nama_geografi").val(res.nama_geografi);
-                    $("#blok").val(res.blok);
-                    $("#rt").val(res.rt);
-                    $("#rw").val(res.rw);
-                    $("#kelurahan").val(res.kelurahan);
-                    $("#kecamatan").val(res.kecamatan);
-                    $("#kabupaten").val(res.kabupaten);
-                }
-            });
-        });
     });
 </script>
 @endpush

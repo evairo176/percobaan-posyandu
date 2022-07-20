@@ -299,35 +299,7 @@
             })
         })
 
-        // edit demografi ajax request
-        $(document).on('click', '.editIcon', function(e) {
-            e.preventDefault();
-            let id = $(this).attr('id');
-            var url = 'demografi/edit';
 
-            $.ajax({
-                url: url,
-                method: 'post',
-                data: {
-                    id: id,
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(res) {
-                    console.log(res.picture);
-                    $('#demografiModalTitle').html('Edit Data demografi');
-                    $('#demografi_btn').html('Update');
-                    $('#demografiModal').modal('show');
-                    $("#demografi_id").val(res.id);
-                    $("#nama_demografi").val(res.nama_demografi);
-                    $("#blok").val(res.blok);
-                    $("#rt").val(res.rt);
-                    $("#rw").val(res.rw);
-                    $("#kelurahan").val(res.kelurahan);
-                    $("#kecamatan").val(res.kecamatan);
-                    $("#kabupaten").val(res.kabupaten);
-                }
-            });
-        });
     });
 </script>
 @endpush

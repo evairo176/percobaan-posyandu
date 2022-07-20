@@ -21,6 +21,7 @@ class DataUserController extends Controller
     }
     public function store(Request $request)
     {
+        // dd($request->all());
         if ($request->user_id) {
             $validator  = Validator::make(request()->all(), [
                 'email' => 'unique:users,email,' . $request->user_id

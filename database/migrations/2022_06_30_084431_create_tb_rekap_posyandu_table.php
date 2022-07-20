@@ -15,13 +15,14 @@ class CreateTbRekapPosyanduTable extends Migration
     {
         Schema::create('tb_rekap_posyandu', function (Blueprint $table) {
             $table->id('id');
+            $table->integer('user_id');
             $table->string('nama_posyandu');
             $table->string('blok');
             $table->string('rt');
             $table->string('rw');
-            $table->string('kelurahan');
-            $table->string('kecamatan');
-            $table->string('kabupaten');
+            $table->string('kelurahan_id');
+            $table->string('kecamatan_id');
+            $table->string('kabupaten_id');
             $table->timestamps();
         });
     }

@@ -78,6 +78,7 @@ class RekapPosyanduControler extends Controller
                 $data = DB::table('tb_rekap_posyandu')
                     ->leftJoin('districts', 'tb_rekap_posyandu.kecamatan_id', '=', 'districts.id')
                     ->leftJoin('villages', 'tb_rekap_posyandu.kelurahan_id', '=', 'villages.id')
+                    ->leftJoin('users', 'tb_rekap_posyandu.user_id', '=', 'users.id')
                     ->select(
                         'tb_rekap_posyandu.*',
                         'districts.*',
@@ -85,6 +86,7 @@ class RekapPosyanduControler extends Controller
                         'tb_rekap_posyandu.id as id_posyandu',
                         'districts.name as kec',
                         'villages.name as kel',
+                        'users.name as name_petugas',
                     )
                     ->get();
                 return Datatables::of($data)

@@ -43,6 +43,9 @@
                     <li class="{{ ($submenu == 'Input Rekap Posyandu') ? 'active' : ''}}">
                         <a href="/posyandu">Data Posyandu</a>
                     </li>
+                    <li class="{{ ($submenu == 'Input All Rekap Perkembangan') ? 'active' : ''}}">
+                        <a href="/all-perkembangan">Data All perkembangan</a>
+                    </li>
                     <li class="{{ ($submenu == 'Input Detail Perkembangan') ? 'active' : ''}}">
                         <a href="/detail-perkembangan">Data detail perkembangan</a>
                     </li>
