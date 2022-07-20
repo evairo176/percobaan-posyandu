@@ -26,6 +26,7 @@
 </style>
 @endpush
 @section('content')
+
 <div class="col-lg-12">
     <div id="perkembangan_alert"></div>
     <div class="statbox widget box box-shadow">
@@ -95,55 +96,56 @@
                     <div class="row">
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_perkembangan">pra</label>
+                                <label for="name_strata">pra</label>
                                 <input type="hidden" name="perkembangan_id" id="perkembangan_id" class="form-control">
                                 <input type="hidden" name="kelurahan_id" id="kelurahan_id" value="{{$pos->kelurahan_id}}" class="form-control">
                                 <input type="hidden" name="kecamatan_id" id="kelurahan_id" value="{{$pos->kecamatan_id}}" class="form-control">
-                                <input type="text" name="pra" id="pra" value="{{$strata->pra}}" class="form-control" readonly>
+                                <div class="form-control">
+                                    <input type="radio" name="cek" value="pra" id="pra">
+                                </div>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="my-2">
+                                <label for="name_strata">mad</label>
+                                <div class="form-control">
+                                    <input type="radio" name="cek" id="mad" value="mad" checked>
+                                </div>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_perkembangan">mad</label>
-                                <input type="text" name="mad" id="mad" value="{{$strata->mad}}" class="form-control" readonly>
-                                <div class="invalid-feedback"></div>
+                                <label for="name_strata">pur</label>
+                                <div class="form-control">
+                                    <input type="radio" name="cek" id="pur" value="pur">
+                                </div>
+
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_perkembangan">pur</label>
-                                <input type="text" name="pur" id="pur" value="{{$strata->pur}}" class="form-control" readonly>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                        <div class="col-lg">
-                            <div class="my-2">
-                                <label for="name_perkembangan">man</label>
-                                <input type="text" name="man" id="man" value="{{$strata->man}}" class="form-control" readonly>
-                                <div class="invalid-feedback"></div>
+                                <label for="name_strata">man</label>
+                                <div class="form-control">
+                                    <input type="radio" name="cek" id="man" value="man">
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="my-2">
                         <label for="name_perkembangan">jumlah bangunan</label>
-                        <input type="text" name="jml_bgn" id="jml_bgn" value="{{$strata->jml_bgn_s}}" class="form-control" readonly>
+                        <input type="text" name="jml_bgn" id="jml_bgn" value="" class="form-control">
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="row">
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_perkembangan">Jumlah kader</label>
-                                <input type="text" name="jml_kader" id="jml_kader" value="{{$kader}}" class="form-control" readonly>
+                                <input type="text" name="jml_kader" id="jml_kader" value="{{$kaderTotal}}" class="form-control" readonly>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_perkembangan">jumlah kader jml_terlatih</label>
-                                <input type="text" name="jml_terlatih" id="jml_terlatih" value="{{$kader}}" class="form-control" readonly>
+                                <input type="text" name="jml_terlatih" id="jml_terlatih" value="{{$kaderTerlatih}}" class="form-control" readonly>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -152,14 +154,14 @@
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_perkembangan">bayi dan balita sasaran posyandu / S</label>
-                                <input type="text" name="s" id="s" value="{{$skdn->s}}" class="form-control" readonly>
+                                <input type="text" name="s" id="s" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_perkembangan">balita yang memiliki KMS / K</label>
-                                <input type="text" name="k" id="k" value="{{$skdn->s}}" class="form-control" readonly>
+                                <input type="text" name="k" id="k" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -168,14 +170,14 @@
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_perkembangan">bayi dan balita datang ditimbang / D</label>
-                                <input type="text" name="d" id="d" value="{{$skdn->d}}" class="form-control" readonly>
+                                <input type="text" name="d" id="d" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_perkembangan">balita dan balita naik timbangan / N</label>
-                                <input type="text" name="n" id="n" value="{{$skdn->n}}" class="form-control" readonly>
+                                <input type="text" name="n" id="n" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -184,14 +186,14 @@
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_perkembangan">vitamin A</label>
-                                <input type="text" name="vit_a" id="vit_a" value="{{$kegiatan->vit_a}}" class="form-control" readonly>
+                                <input type="text" name="vit_a" id="vit_a" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_perkembangan">peserta kb aktif</label>
-                                <input type="text" name="kb_aktif" id="kb_aktif" value="{{$kegiatan->kb_aktif}}" class="form-control" readonly>
+                                <input type="text" name="kb_aktif" id="kb_aktif" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -200,14 +202,14 @@
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_perkembangan">pemeriksaan ibu hamil k-4</label>
-                                <input type="text" name="k4" id="k4" value="{{$kegiatan->k4}}" class="form-control" readonly>
+                                <input type="text" name="k4" id="k4" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_perkembangan">pemberian table Fe</label>
-                                <input type="text" name="fe3" id="fe3" value="{{$kegiatan->fe3}}" class="form-control" readonly>
+                                <input type="text" name="fe3" id="fe3" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -216,14 +218,14 @@
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_perkembangan">campak</label>
-                                <input type="text" name="campak" id="campak" value="{{$kegiatan->campak}}" class="form-control" readonly>
+                                <input type="text" name="campak" id="campak" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_perkembangan">BCG</label>
-                                <input type="text" name="bcg" id="bcg" value="{{$kegiatan->bcg}}" class="form-control" readonly>
+                                <input type="text" name="bcg" id="bcg" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -232,14 +234,14 @@
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_perkembangan">DPT</label>
-                                <input type="text" name="dpt" id="dpt" value="{{$kegiatan->dpt}}" class="form-control" readonly>
+                                <input type="text" name="dpt" id="dpt" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_perkembangan">HBO</label>
-                                <input type="text" name="hbo" id="hbo" value="{{$kegiatan->hbo}}" class="form-control" readonly>
+                                <input type="text" name="hbo" id="hbo" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -248,51 +250,39 @@
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_perkembangan">Polio</label>
-                                <input type="text" name="polio" id="polio" value="{{$kegiatan->polio}}" class="form-control" readonly>
+                                <input type="text" name="polio" id="polio" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_perkembangan">gizi</label>
-                                <input type="text" name="gizi" id="gizi" value="{{$kegiatan->gizi}}" class="form-control" readonly>
+                                <input type="text" name="gizi" id="gizi" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                     </div>
                     <div class="my-2">
                         <label for="name_perkembangan">diare</label>
-                        <input type="text" name="diare" id="diare" value="{{$kegiatan->diare}}" class="form-control" readonly>
+                        <input type="text" name="diare" id="diare" value="" class="form-control">
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="row">
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_perkembangan">PAUD</label>
-                                <input type="text" name="paud" id="paud" value="{{$program->paud}}" class="form-control" readonly>
+                                <label for="name_strata">paud</label>
+                                <div class="form-control">
+                                    <input type="checkbox" name="paud" id="paud" value="1">
+                                </div>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_perkembangan">BKB</label>
-                                <input type="text" name="bkb" id="bkb" value="{{$program->bkb}}" class="form-control" readonly>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg">
-                            <div class="my-2">
-                                <label for="name_perkembangan">BKR</label>
-                                <input type="text" name="bkr" id="bkr" value="{{$program->bkr}}" class="form-control" readonly>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                        <div class="col-lg">
-                            <div class="my-2">
-                                <label for="name_perkembangan">BKL</label>
-                                <input type="text" name="bkl" id="bkl" value="{{$program->bkl}}" class="form-control" readonly>
+                                <label for="name_strata">bkb</label>
+                                <div class="form-control">
+                                    <input type="checkbox" name="bkb" id="bkb" value="1">
+                                </div>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -300,15 +290,37 @@
                     <div class="row">
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_perkembangan">UP2K</label>
-                                <input type="text" name="up2k" id="up2k" value="{{$program->up2k}}" class="form-control" readonly>
+                                <label for="name_strata">bkr</label>
+                                <div class="form-control">
+                                    <input type="checkbox" name="bkr" id="bkr" value="1">
+                                </div>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg">
+                            <div class="my-2">
+                                <label for="name_strata">bkl</label>
+                                <div class="form-control">
+                                    <input type="checkbox" name="bkl" id="bkl" value="1">
+                                </div>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="my-2">
+                                <label for="name_strata">up2k</label>
+                                <div class="form-control">
+                                    <input type="checkbox" name="up2k" id="up2k" value="1">
+                                </div>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_perkembangan">Angka Stunting</label>
-                                <input type="text" name="as" id="as" value="{{$program->as}}" class="form-control" readonly>
+                                <input type="text" name="as" id="as" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -316,15 +328,17 @@
                     <div class="row">
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_perkembangan">Inklusi</label>
-                                <input type="text" name="in" id="in" value="{{$program->in}}" class="form-control" readonly>
+                                <label for="name_strata">in</label>
+                                <div class="form-control">
+                                    <input type="checkbox" name="in" id="in" value="1">
+                                </div>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_perkembangan">Dana Sehat</label>
-                                <input type="text" name="ds" id="ds" value="{{$program->ds}}" class="form-control" readonly>
+                                <input type="text" name="ds" id="ds" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -434,13 +448,9 @@
                     $("#kelurahan_id").val(res.kelurahan_id);
                     $("#kecamatan_Id").val(res.kecamatan_Id);
                     $("#tahun_rekap").val(res.tahun_rekap);
-                    $("#pra").val(res.pra);
-                    $("#mad").val(res.mad);
-                    $("#pur").val(res.pur);
-                    $("#man").val(res.man);
                     $("#jml_bgn").val(res.jml_bgn);
-                    $("#jml_kader").val(res.jml_kader);
-                    $("#jml_terlatih").val(res.jml_terlatih);
+                    // $("#jml_kader").val(res.jml_kader);
+                    // $("#jml_terlatih").val(res.jml_terlatih);
                     $("#s").val(res.s);
                     $("#k").val(res.k);
                     $("#d").val(res.d);
@@ -456,15 +466,47 @@
                     $("#polio").val(res.polio);
                     $("#gizi").val(res.gizi);
                     $("#diare").val(res.diare);
-                    $("#paud").val(res.paud);
-                    $("#bkb").val(res.bkb);
-                    $("#bkr").val(res.bkr);
-                    $("#bkl").val(res.bkl);
-                    $("#up2k").val(res.up2k);
+                    // $("#paud").val(res.paud);
+                    // $("#bkb").val(res.bkb);
+                    // $("#bkr").val(res.bkr);
+                    // $("#bkl").val(res.bkl);
+                    // $("#up2k").val(res.up2k);
                     $("#as").val(res.as);
-                    $("#in").val(res.in);
+                    // $("#in").val(res.in);
                     $("#ds").val(res.ds);
+                    if (res.pra != 0) {
+                        //man
+                        $("#pra").prop('checked', true);
 
+                    } else if (res.mad != 0) {
+                        $("#mad").prop('checked', true);
+                    } else if (res.pur != 0) {
+                        $("#pur").prop('checked', true);
+                    } else {
+                        $("#man").prop('checked', true);
+                    }
+                    // alert(res.bkb);
+                    if (res.paud != 0) {
+                        $("#paud").prop('checked', true);
+                    }
+                    if (res.bkb != 0) {
+                        $("#bkb").prop('checked', true);
+                    }
+                    if (res.bkr != 0) {
+                        $("#bkr").prop('checked', true);
+                    }
+                    if (res.bkl != 0) {
+                        $("#bkl").prop('checked', true);
+                    }
+                    if (res.up2k != 0) {
+                        $("#up2k").prop('checked', true);
+                    }
+                    if (res.in != 0) {
+                        $("#in").prop('checked', true);
+                    }
+                    // if(res.up2k != null){
+                    //     $("#up2k").prop('checked', true);
+                    // }
                 }
             });
         });

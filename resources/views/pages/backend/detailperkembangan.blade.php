@@ -26,7 +26,7 @@
                 <div class="col-md-12"> 
                     <div class="table-responsive">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-4 mb-4">
                                     
                                         <form>
                                             @php
@@ -45,8 +45,8 @@
                                                 <div class="input-group-append">
                                                     
                                                 <button type="submit" class="btn btn-success btn-sm">cari</button>
-                                                    <a type="button" class="btn btn-primary btn-sm" id="Export" >
-                                                    Export
+                                                    <a type="button" class="btn btn-danger btn-sm" id="Export" >
+                                                    Export <i class="fas fa-print"></i>
                                                     </a>
                                                 </div>
                                             </div>

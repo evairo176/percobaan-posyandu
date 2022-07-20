@@ -97,7 +97,8 @@ class RekapPosyanduControler extends Controller
                         $actionBtn = '       <td class="text-center">
                     <ul class="table-controls">
                     <li><a href="posyandu/cetak-pdf/' . $row->id_posyandu . '" id="" class="detailIcon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></a> </li>
-                    <li><a href="javascript:void(0);" id="' . $row->id_posyandu . '" class="editIcon" data-bs-toggle="modal" data-bs-target="#editdataloyeeModal" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>  
+                    <li><a href="javascript:void(0);" id="' . $row->id_posyandu . '" class="editIcon" data-bs-toggle="modal" data-bs-target="#editdataloyeeModal" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li> 
+                    <li><a href="javascript:void(0);" id="' . $row->id_posyandu . '" class="deleteIcon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-danger"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a></li>                                          
                     </ul>';
                         return $actionBtn;
                     })
@@ -194,6 +195,20 @@ class RekapPosyanduControler extends Controller
         // dd($data->password);
         return response()->json($user);
     }
+    // handle delete an dataloyee ajax request
+    public function delete(Request $request)
+    {
+        $id = $request->id;
+        $posyandu = Posyandu::find($id);
+        $user = User::where('posyandu_id', $id)->first();
+        // dd($user);
+        $posyandu->delete();
+        return Response()->json([
+            'status' => 200,
+            'messages' => 'Deleted Successfully'
+        ]);
+    }
+
     public function detail($id_posyandu)
     {
         $id = $id_posyandu;
@@ -315,19 +330,7 @@ class RekapPosyanduControler extends Controller
         return $pdf->download('data-' . 'semua-data-posyandu' . '.pdf');
         // return view('pages.backend.cetakPdfAll', $data);
     }
-    // handle delete an dataloyee ajax request
-    public function delete(Request $request)
-    {
-        $id = $request->id;
-        $posyandu = Posyandu::find($id);
-        $user = User::where('posyandu_id', $id)->first();
-        // dd($user);
-        $posyandu->delete();
-        return Response()->json([
-            'status' => 200,
-            'messages' => 'Deleted Successfully'
-        ]);
-    }
+
 
     public function getDesa(Request $request)
     {

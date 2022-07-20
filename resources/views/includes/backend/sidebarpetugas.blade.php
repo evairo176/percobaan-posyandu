@@ -55,7 +55,7 @@
                     <li class="{{ ($submenu == 'Input Rekap Kader') ? 'active' : ''}}">
                         <a href="/kader">Input Rekap Kader</a>
                     </li>
-                    <li class="{{ ($submenu == 'Input Rekap Strata') ? 'active' : ''}}">
+                    <!-- <li class="{{ ($submenu == 'Input Rekap Strata') ? 'active' : ''}}">
                         <a href="/strata">Input Rekap Strata</a>
                     </li>
                     <li class="{{ ($submenu == 'Input Rekap Skdn') ? 'active' : ''}}">
@@ -66,12 +66,10 @@
                     </li>
                     <li class="{{ ($submenu == 'Input Rekap Program') ? 'active' : ''}}">
                         <a href="/program">Input Rekap Program</a>
-                    </li>
-                    @if(auth()->user()->status_strata && auth()->user()->status_skdn && auth()->user()->status_kegiatan && auth()->user()->status_program)
+                    </li> -->
                     <li class="{{ ($submenu == 'Input Rekap Perkembangan') ? 'active' : ''}}">
                         <a href="/perkembangan">Input Rekap Perkembangan</a>
                     </li>
-                    @endif
                 </ul>
             </li>
             <li class="menu {{ ($menu == 'master') ? 'active' : ''}}">
