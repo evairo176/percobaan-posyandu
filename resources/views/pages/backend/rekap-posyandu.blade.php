@@ -217,6 +217,7 @@
         $('#btnposyandu').on('click', function() {
             // $("#formadddesa")[0].reset();
             $('#posyandu_form')[0].reset();
+            $('#posyandu_id').val('');
             $('#posyanduModalTitle').html('Add Data posyandu');
             $('#posyandu_btn').html('Save');
             $('#posyanduModal').modal('show');

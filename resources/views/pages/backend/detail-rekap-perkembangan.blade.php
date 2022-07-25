@@ -1,5 +1,5 @@
 @extends('layouts.backend') 
-@section('title','Kuis')
+@section('title','Rekap Perkembangan')
  
 @section('content')
 <style type="text/css">

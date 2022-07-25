@@ -92,6 +92,17 @@
                         </select>
                         <div class="invalid-feedback"></div>
                     </div>
+                    <div class="my-2" id="pilihP">
+                        <label for="role">Pilih Posyandu</label>
+                        <select name="posyandu_id" id="posyandu_id" class="form-control">
+                            <option value="">--pilih posyandu ,kelurahan ,kecamatan--</option>
+                            @foreach($pos as $po)
+                            <option value="{{$po->id_posyandu}}" {{($po->user_id) ? 'disabled' : ''}}>{{$po->nama_posyandu}},{{$po->kelurahan}},{{$po->kecamatan}}</option>
+                            @endforeach
+                        </select>
+                        <div class="invalid-feedback"></div>
+                    </div>
+
                     <div class="my-2">
                         <label for="picture">Select Avatar</label>
                         <input type="file" name="picture" id="picture" class="form-control">
@@ -214,7 +225,9 @@
         $('#btnUser').on('click', function() {
             // $("#formadddesa")[0].reset();
             $('#user_form')[0].reset();
+            $('#user_id').val('');
             $('#userModalTitle').html('Add Data User');
+            $('#pilihP').removeClass('d-none');
             $('#user_btn').html('Save');
             $('#userModal').modal('show');
         });
@@ -223,7 +236,7 @@
             e.preventDefault();
             let id = $(this).attr('id');
             var url = 'user/edit';
-
+            $('#pilihP').addClass('d-none');
             $.ajax({
                 url: url,
                 method: 'post',
@@ -232,11 +245,12 @@
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(res) {
-                    console.log(res.picture);
+                    console.log(res.posyandu_id);
                     $('#userModalTitle').html('Edit Data User');
                     $('#user_btn').html('Update');
                     $('#userModal').modal('show');
                     $("#user_id").val(res.id);
+                    $("#posyandu_id").val(res.posyandu_id);
                     $("#user_picture").val(res.picture);
                     $("#name").val(res.name);
                     $("#email").val(res.email);
@@ -294,7 +308,7 @@
                         showError('cpassword', res.messages.cpassword);
                         showError('role', res.messages.role);
                         showError('picture', res.messages.picture);
-
+                        showError('posyandu_id', res.messages.posyandu_id);
                     } else if (res.status == 200) {
                         Swal.fire({
                             position: 'bottom-end',
@@ -309,6 +323,7 @@
                         removeValidationClasses('#user_form')
                         $('#user_btn').text('save');
                         $('.table').DataTable().ajax.reload();
+                        location.reload();
                     }
                 }
             })

@@ -52,7 +52,7 @@
                                     <select name="posyandu_id" id="posyandu_id" class="form-control">
                                         <option value="">--pilih posyandu ,kelurahan ,kecamatan--</option>
                                         @foreach($pos as $po)
-                                        <option value="{{$po->id_posyandu}}">{{$po->nama_posyandu}},{{$po->kelurahan}},{{$po->kecamatan}}</option>
+                                        <option value="{{$po->id_posyandu}}" {{($po->user_id) ? 'disabled' : ''}}>{{$po->nama_posyandu}},{{$po->kelurahan}},{{$po->kecamatan}}</option>
                                         @endforeach
                                     </select>
                                     <div class="invalid-feedback"></div>

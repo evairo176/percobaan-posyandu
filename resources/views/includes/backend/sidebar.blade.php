@@ -47,7 +47,7 @@
                         <a href="/all-perkembangan">Data All perkembangan</a>
                     </li>
                     <li class="{{ ($submenu == 'Input Detail Perkembangan') ? 'active' : ''}}">
-                        <a href="/detail-perkembangan">Data detail perkembangan</a>
+                        <a href="/detail-perkembangan">Data Detail Perkembangan</a>
                     </li>
                     <li class="{{ ($submenu == 'user') ? 'active' : ''}}">
                         <a href="/user"> User </a>

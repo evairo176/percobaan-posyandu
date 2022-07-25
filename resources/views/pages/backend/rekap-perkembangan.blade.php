@@ -422,6 +422,7 @@
         $('#btnperkembangan').on('click', function() {
             // $("#formadddesa")[0].reset();
             $('#perkembangan_form')[0].reset();
+            $('#perkembangan_id').val('');
             $('#perkembanganModalTitle').html('Add Data perkembangan');
             $('#perkembangan_btn').html('Save');
             $('#perkembanganModal').modal('show');

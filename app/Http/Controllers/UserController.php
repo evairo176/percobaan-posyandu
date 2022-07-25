@@ -33,7 +33,6 @@ class UserController extends Controller
                 'districts.name as kecamatan',
                 'villages.name as kelurahan',
             )
-            ->where('user_id', null)
             ->get();
         // dd($posyandu);
         $data = [

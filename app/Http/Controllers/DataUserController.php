@@ -2,20 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Posyandu;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use DataTables;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class DataUserController extends Controller
 {
     public function index()
     {
+        $posyandu =  DB::table('tb_rekap_posyandu')
+            ->leftJoin('districts', 'tb_rekap_posyandu.kecamatan_id', '=', 'districts.id')
+            ->leftJoin('villages', 'tb_rekap_posyandu.kelurahan_id', '=', 'villages.id')
+            ->select(
+                'tb_rekap_posyandu.*',
+                'districts.*',
+                'villages.*',
+                'tb_rekap_posyandu.id as id_posyandu',
+                'districts.name as kecamatan',
+                'villages.name as kelurahan',
+            )
+            ->get();
+        // $editPosyandu =  DB::table('tb_rekap_posyandu')
+        //     ->leftJoin('districts', 'tb_rekap_posyandu.kecamatan_id', '=', 'districts.id')
+        //     ->leftJoin('villages', 'tb_rekap_posyandu.kelurahan_id', '=', 'villages.id')
+        //     ->select(
+        //         'tb_rekap_posyandu.*',
+        //         'districts.*',
+        //         'villages.*',
+        //         'tb_rekap_posyandu.id as id_posyandu',
+        //         'districts.name as kecamatan',
+        //         'villages.name as kelurahan',
+        //     )
+        //     ->get();
+        // // dd($posyandu);
         $data = [
             'menu' => 'table',
             'submenu' => 'user',
+            'pos' => $posyandu,
+            // 'epos' => $editPosyandu,
         ];
         return view('pages.backend.user', $data);
     }
@@ -24,7 +53,8 @@ class DataUserController extends Controller
         // dd($request->all());
         if ($request->user_id) {
             $validator  = Validator::make(request()->all(), [
-                'email' => 'unique:users,email,' . $request->user_id
+                'email' => 'unique:users,email,' . $request->user_id,
+                // 'picture' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -45,6 +75,7 @@ class DataUserController extends Controller
                 } else {
                     $fileName = $user->picture;
                 }
+                // dd($request->all());
 
                 $userData = [
                     'name' => $request->name,
@@ -52,6 +83,7 @@ class DataUserController extends Controller
                     'password' => hash::make($request->password),
                     'role' => $request->role,
                     'picture' => $fileName,
+                    'posyandu_id' => $request->posyandu_id,
                 ];
 
                 $user->update($userData);
@@ -68,7 +100,8 @@ class DataUserController extends Controller
                 'password' => 'required|min:6|max:50',
                 'cpassword' => 'required|min:6|same:password',
                 'role' => 'required',
-                'picture' => 'mimes:jpg,bmp,png,jpeg,svg',
+                'posyandu_id' => 'required',
+                'picture' => 'required|mimes:jpg,bmp,png,jpeg,svg',
             ]);
 
             if ($validator->fails()) {
@@ -90,9 +123,13 @@ class DataUserController extends Controller
                     'password' => hash::make($request->password),
                     'role' => $request->role,
                     'picture' => $fileName,
+                    'posyandu_id' => $request->posyandu_id,
                 ];
 
-                User::create($userData);
+                $user = User::create($userData);
+                $pos = Posyandu::where('id', request()->posyandu_id)->first();
+                $pos->user_id = $user->id;
+                $pos->update();
                 return response()->json([
                     'status' => 200,
                     'messages' => 'Added Successfully'
@@ -132,7 +169,7 @@ class DataUserController extends Controller
         $id = $request->id;
         // dd($id);
         $user = User::find($id);
-        // dd($data->password);
+        // dd($user);
         return response()->json($user);
     }
 

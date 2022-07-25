@@ -1,4 +1,6 @@
 @extends('layouts.backend')
+@section('title','website')
+
 @push('add-styles')
 <link rel="stylesheet" type="text/css" href="{{asset('backend')}}/plugins/dropify/dropify.min.css">
 <link href="{{asset('backend')}}/assets/css/users/account-setting.css" rel="stylesheet" type="text/css" />

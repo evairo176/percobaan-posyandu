@@ -220,6 +220,7 @@
             // $("#formadddesa")[0].reset();
             $("#terlatih").find('option').removeAttr('selected');
             $('#kader_form')[0].reset();
+            $('#kader_id').val('');
             $('#kaderModalTitle').html('Add Data kader');
             $('#kader_btn').html('Save');
             $('#kaderModal').modal('show');
