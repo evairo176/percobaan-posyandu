@@ -34,13 +34,13 @@
                         <form action="#" method="post" id="website_form">
                             @csrf
                             <div class="my-2">
-                                <label for="name">Full name</label>
+                                <label for="name">Judul</label>
                                 <input value="{{$websiteInfo->judul}}" type="text" name="judul" id="judul" class="form-control rounded-0" placeholder="Nama full">
                                 <input value="{{$websiteInfo->id}}" type="hidden" name="website_id" id="website_id" class="form-control rounded-pill">
                                 <div class="invalid-feedback"></div>
                             </div>
                             <div class="my-2">
-                                <label for="email">E-mail</label>
+                                <label for="email">Keterangan</label>
                                 <input value="{{$websiteInfo->keterangan}}" type="text" name="keterangan" id="keterangan" class="form-control rounded-0" placeholder="Email">
                                 <div class="invalid-feedback"></div>
                             </div>

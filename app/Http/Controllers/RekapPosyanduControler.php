@@ -264,7 +264,7 @@ class RekapPosyanduControler extends Controller
                     'tb_rekap_posyandu.id as id_posyandu',
                     'districts.name as kec',
                     'villages.name as kel',
-                )->where('tb_rekap_posyandu.id', auth()->user()->posyandu_id)
+                )
                 ->first(),
         ];
         // dd($data);
