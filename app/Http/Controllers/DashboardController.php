@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Perkembangan;
 use App\Models\Posyandu;
+use App\Models\User;
 use Illuminate\Http\Request;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Auth;
@@ -74,6 +76,10 @@ class DashboardController extends Controller
 			->select(DB::raw('SUM(jml_pdd_p) as jmlh_p'))
 			->first();
 		// dd($total);
+		$total_posyandu = Posyandu::count();
+		$total_petugas = User::where('role', 'petugas')->count();
+		// dd($total_petugas);
+		$total_perkembangan = Perkembangan::count();
 		$data = [
 			'menu' => 'dashboard',
 			'submenu' => 'dashboard',
@@ -81,6 +87,9 @@ class DashboardController extends Controller
 			'tp' => $totalPenduduk,
 			'tpl' => $totalPendudukl,
 			'tpp' => $totalPendudukp,
+			'total_posyandu' => $total_posyandu,
+			'total_petugas' => $total_petugas,
+			'total_perkembangan' => $total_perkembangan,
 			// 'allPos' => $data
 		];
 		return view('pages.backend.dashboard', $data);

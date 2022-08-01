@@ -101,7 +101,69 @@
 @endif
 @else
 @if(auth()->user()->posyandu_id == null)
-<div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12 layout-spacing">
+
+
+<div class="col-lg-4 col-md-4 col-sm-12 layout-spacing">
+    <div class="widget widget-account-invoice-three">
+        <div class="widget-heading" style="border-bottom-left-radius: 0px; margin-bottom: 0px;">
+            <div class="w-numeric-value">
+                <div class="w-icon">
+                    <svg style="color: #ffff;" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="wallet-balance d-flex jutify-content-between align-items-center">
+                <div style="color: #ffff; font-size: 15px;">Total Posyandu</div>
+                <h5 class=""><span class="w-currency"></span>{{$total_posyandu}}</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-12 layout-spacing">
+    <div class="widget widget-account-invoice-three">
+        <div class="widget-heading" style="border-bottom-left-radius: 0px; margin-bottom: 0px;">
+            <div class="w-numeric-value">
+                <div class="w-icon">
+                    <svg style="color: #ffff;" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="wallet-balance d-flex jutify-content-between align-items-center">
+                <div style="color: #ffff; font-size: 15px;">Total Petugas</div>
+                <h5 class=""><span class="w-currency"></span>{{$total_petugas}}</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-12 layout-spacing">
+    <div class="widget widget-account-invoice-three">
+        <div class="widget-heading" style="border-bottom-left-radius: 0px; margin-bottom: 0px;">
+            <div class="w-numeric-value">
+                <div class="w-icon">
+                    <svg style="color: #ffff;" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="wallet-balance d-flex jutify-content-between align-items-center">
+                <div style="color: #ffff; font-size: 15px;">Total Rekap Perkembangan</div>
+                <h5 class=""><span class="w-currency"></span>{{$total_perkembangan}}</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div class=" col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
     <div class="widget widget-account-invoice-three">
 
         <div class="widget-heading">
@@ -141,9 +203,9 @@
             </div>
 
             <div class="w-a-info {{($tpl->jmlh_l < $tpp->jmlh_p) ? 'funds-received' : 'funds-spent'}} "">
-                <span>Perempuan
-                    @if($tpl->jmlh_l < $tpp->jmlh_p)
-                        <svg xmlns=" http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up">
+                    <span>Perempuan
+                        @if($tpl->jmlh_l < $tpp->jmlh_p)
+                            <svg xmlns=" http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up">
                 <polyline points="18 15 12 9 6 15"></polyline>
                 </svg>
                 @else
@@ -186,6 +248,9 @@
 
     </div>
 </div>
+
+
+
 @endif
 @endif
 @endsection
