@@ -8,6 +8,13 @@
   border-bottom: none;
   border:1px solid;
 }
+.table > tbody > tr > td {
+    vertical-align: middle;
+    color: #515365;
+    font-size: 13px;
+    letter-spacing: 1px;
+    border: 1px solid #4361f1;
+}
 </style>
 <div class="col-lg-12">
     <div class="statbox widget box box-shadow">

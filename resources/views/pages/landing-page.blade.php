@@ -174,10 +174,10 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="slide-box">
                     <div class="owl-carousel owl-theme">
-                        <div class="item"><img src="{{asset('landing-page')}}/images/burger.png" alt=""></div>
-                        <div class="item"><img src="{{asset('landing-page')}}/images/burger_fries.png" alt=""></div>
-                        <div class="item"><img src="{{asset('landing-page')}}/images/french_fries.png" alt=""></div>
-                        <div class="item"><img src="{{asset('landing-page')}}/images/fried_chicken.png" alt=""></div>
+                        <div class="item"><img src="{{asset('landing-page')}}/images/no_image.jpg" alt=""></div>
+                        <div class="item"><img src="{{asset('landing-page')}}/images/no_image.jpg" alt=""></div>
+                        <div class="item"><img src="{{asset('landing-page')}}/images/no_image.jpg" alt=""></div>
+                        <div class="item"><img src="{{asset('landing-page')}}/images/no_image.jpg" alt=""></div>
                     </div>
                 </div>
             </div>
