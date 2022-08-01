@@ -100,7 +100,7 @@
 </div>
 @endif
 @else
-@if(auth()->user()->posyandu_id)
+@if(auth()->user()->posyandu_id == null)
 <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12 layout-spacing">
     <div class="widget widget-account-invoice-three">
 
