@@ -435,7 +435,7 @@ class PerkembanganController extends Controller
                 $gizi           += @$klue->gizi;
                 $diare          += @$klue->diare;
                 $paud           += @$klue->paud;
-                $bkb            += @$klue->bkb;
+                $bkb            += @$klue->bkb; 
                 $bkr            += @$klue->bkr;
                 $bkl            += @$klue->bkl;
                 $up2k           += @$klue->up2k;
@@ -562,7 +562,7 @@ class PerkembanganController extends Controller
             'ttl_up2k' => $ttl_up2k,
             'ttl_as' => $ttl_as,
             'ttl_in' => $ttl_in,
-            'ttl_ds' => $ttl_ds != 0 ? ceil(($ttl_ds / $o) * 100) : 0
+            'ttl_ds' => $ttl_ds != 0 ? ceil(($o / $ttl_ds) * 100) : 0
         );
         if ($request->input('lo') == 'ex') {
             return view('pages.backend.data_excel_posyandu', compact('data_perkembangan', 'ttl'));
@@ -572,3 +572,4 @@ class PerkembanganController extends Controller
         }
     }
 }
+ 
