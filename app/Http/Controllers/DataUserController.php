@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use App\Models\Posyandu;
 use App\Models\User;
+use App\Models\Village;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -40,10 +42,13 @@ class DataUserController extends Controller
         //     )
         //     ->get();
         // // dd($posyandu);
+
+        $districts = District::where('regency_id', 3212)->get();
         $data = [
             'menu' => 'table',
             'submenu' => 'user',
             'pos' => $posyandu,
+            'kecamatan' => $districts,
             // 'epos' => $editPosyandu,
         ];
         return view('pages.backend.user', $data);
@@ -83,6 +88,8 @@ class DataUserController extends Controller
                     'password' => hash::make($request->password),
                     'role' => $request->role,
                     'picture' => $fileName,
+                    'kecamatan_id' => $request->kecamatan_id,
+                    'kelurahan_id' => $request->kelurahan_id,
                     'posyandu_id' => $request->posyandu_id,
                 ];
 
@@ -100,7 +107,7 @@ class DataUserController extends Controller
                 'password' => 'required|min:6|max:50',
                 'cpassword' => 'required|min:6|same:password',
                 'role' => 'required',
-                'posyandu_id' => 'required',
+                // 'posyandu_id' => 'required',
                 'picture' => 'required|mimes:jpg,bmp,png,jpeg,svg',
             ]);
 
@@ -117,12 +124,15 @@ class DataUserController extends Controller
                 $fileName = $request->name . '-' . time() . '.' . $file->getClientOriginalExtension();
                 $file->storeAs('public/picture', $fileName);
 
+                dd($request->kecamatan_id);
                 $userData = [
                     'name' => $request->name,
                     'email' => $request->email,
                     'password' => hash::make($request->password),
                     'role' => $request->role,
                     'picture' => $fileName,
+                    'kecamatan_id' => $request->kecamatan_id,
+                    'kelurahan_id' => $request->kelurahan_id,
                     'posyandu_id' => $request->posyandu_id,
                 ];
 
@@ -196,5 +206,12 @@ class DataUserController extends Controller
         $user = User::find($id);
         // dd($data->password);
         return response()->json($user);
+    }
+
+    public function getDesa(Request $request)
+    {
+        $desa = Village::where("district_id", $request->kecID)->pluck('id', 'name');
+        // dd($desa);
+        return response()->json($desa);
     }
 }

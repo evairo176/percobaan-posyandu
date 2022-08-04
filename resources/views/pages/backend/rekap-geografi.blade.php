@@ -54,9 +54,6 @@
                             <th>jumlah rt</th>
                             <th>jumlah rw</th>
                             <th>puskesmas</th>
-                            <th>kelurahan</th>
-                            <th>kecamatan</th>
-                            <th>kabupaten</th>
                             <th>Created at</th>
                             <th>Action</th>
                         </tr>
@@ -229,18 +226,6 @@
                 {
                     data: 'pks',
                     name: 'pks'
-                },
-                {
-                    data: 'kelurahan_g',
-                    name: 'kelurahan_g'
-                },
-                {
-                    data: 'kecamatan_g',
-                    name: 'kecamatan_g'
-                },
-                {
-                    data: 'kabupaten_g',
-                    name: 'kabupaten_g'
                 },
                 {
                     data: 'created_at',

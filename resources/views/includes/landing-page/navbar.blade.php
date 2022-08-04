@@ -16,12 +16,12 @@ $website = DB::table('tb_website')->where('id', 1)->first();
             <li>
                 <a href="#" class="active">Home</a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="#">Features</a>
-            </li>
-            <li>
+            </li> -->
+            <!-- <li>
                 <a href="#">About</a>
-            </li>
+            </li> -->
             @if($user = Auth::user())
             @if($user->role)
             <li>

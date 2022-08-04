@@ -338,7 +338,7 @@ class RekapPosyanduControler extends Controller
         ];
         // dd($data);
         $pdf = PDF::loadView('pages.backend.cetakPdfAll', $data);
-        return $pdf->download('data-' . 'semua-data-posyandu' . '.pdf');
+        return $pdf->download('data-' . 'semua-data-posyandu' . '.pdf', set_time_limit(300));
         // return view('pages.backend.cetakPdfAll', $data);
     }
 
@@ -488,7 +488,7 @@ class RekapPosyanduControler extends Controller
                 $polio          += @$pyd->polio;
                 $gizi           += @$pyd->gizi;
                 $diare          += @$pyd->diare;
-                $tb_perkembangan = DB::table('tb_perkembangan')->where('posyandu_id', @$pyd->id)->get();
+                $tb_perkembangan = DB::table('tb_perkembangan')->where('posyandu_id', @$pyd->id)->where('status', 'dpmd diterima')->get();
                 foreach ($tb_perkembangan as $pkmbkey) {
                     $paud           += $paud;
                     $bkb            += $bkb;
@@ -601,7 +601,7 @@ class RekapPosyanduControler extends Controller
             'n_d_ttl'                       => $n_d_ttl,
 
         );
-        //dd($jumlah);
+        dd($jumlah);
         return view('pages.backend.data_excel_posyandu', compact('data_excel', 'jumlah'));
     }
 }

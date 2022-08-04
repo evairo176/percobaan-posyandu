@@ -87,7 +87,8 @@
                     <div class="my-2">
                         <label for="role">Role</label>
                         <select name="role" id="role" class="form-control">
-                            <option value="petugas">Petugas</option>
+                            <option value="petugas">Petugas posyandu</option>
+                            <option value="petugas_kecamatan">Petugas kecamatan</option>
                             <option value="super-admin">Super Admin</option>
                         </select>
                         <div class="invalid-feedback"></div>
@@ -107,6 +108,22 @@
                         <label for="picture">Select Avatar</label>
                         <input type="file" name="picture" id="picture" class="form-control">
                         <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="my-2">
+                        <label for="inputState">Kecamatan</label>
+                        <select id="kecamatan_id" class="form-control" name="kecamatan_id">
+                            <option value="" selected>Choose...</option>
+                            @foreach($kecamatan as $data)
+                            <option value="{{ $data->id }}">{{ $data->name }}</option>
+                            @endforeach
+                        </select>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="my-2">
+                        <label for="inputState">Desa</label>
+                        <select id="kelurahan_id" class="form-control" name="kelurahan_id">
+                            <option selected disabled>Choose...</option>
+                        </select>
                     </div>
             </div>
             <div class="modal-footer">
@@ -185,6 +202,13 @@
 <script>
     $(document).ready(function() {
 
+        $('#role').change(function() {
+            if (this.value == 'petugas_kecamatan' || this.value == 'super-admin') {
+                $('#pilihP').addClass('d-none');
+            } else {
+                $('#pilihP').removeClass('d-none');
+            }
+        });
         var table = $('.table').DataTable({
             processing: true,
             serverSide: true,
@@ -256,6 +280,8 @@
                     $("#email").val(res.email);
                     $("#role").val(res.role);
                     $("#picture").val(res.picture);
+                    $("#kelurahan_id").val(res.kelurahan_id);
+                    $("#kecamatan_id").val(res.kecamatan_id);
                 }
             });
         });
@@ -369,6 +395,30 @@
                     });
                 }
             });
+        });
+
+        $('#kecamatan_id').change(function() {
+            var kecID = $(this).val();
+            if (kecID) {
+                $.ajax({
+                    type: "GET",
+                    url: "/posyandu/getdesa?kecID=" + kecID,
+                    dataType: 'JSON',
+                    success: function(res) {
+                        if (res) {
+                            $("#kelurahan_id").empty();
+                            $("#kelurahan_id").append('<option selected disabled>pilih...</option>');
+                            $.each(res, function(nama, kode) {
+                                $("#kelurahan_id").append('<option value="' + kode + '">' + nama + '</option>');
+                            });
+                        } else {
+                            $("#kelurahan_id").empty();
+                        }
+                    }
+                });
+            } else {
+                $("#kelurahan_id").empty();
+            }
         });
     });
 </script>

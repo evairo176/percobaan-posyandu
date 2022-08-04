@@ -18,8 +18,10 @@
         <!--  BEGIN SIDEBAR  -->
         @if(Auth::user()->role=='super-admin')
         @include('includes.backend.sidebar')
+        @elseif(Auth::user()->role =='petugas_kecamatan')
+        @include('includes.backend.sidebar_kecamatan')
         @else
-        @include('includes.backend.sidebarpetugas') 
+        @include('includes.backend.sidebarpetugas')
         @endif
         <!--  END SIDEBAR  -->
 

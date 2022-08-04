@@ -88,29 +88,28 @@
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
-                        <div class="col-lg">
-                            <div class="my-2">
-                                <label for="name_demografi">jumlah penduduk (orang)</label>
-                                <input type="text" name="jml_pdd" id="jml_pdd" class="form-control">
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="row">
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_demografi">jumlah penduduk laki-laki (orang)</label>
-                                <input type="text" name="jml_pdd_l" id="jml_pdd_l" class="form-control">
+                                <input type="text" name="jml_pdd_l" id="jml_pdd_l" class="form-control jml_pdd">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
                                 <label for="name_demografi">jumlah penduduk perempuan (orang)</label>
-                                <input type="text" name="jml_pdd_p" id="jml_pdd_p" class="form-control">
+                                <input type="text" name="jml_pdd_p" id="jml_pdd_p" class="form-control jml_pdd">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
+                    </div>
+                    <div class="my-2">
+                        <label for="name_demografi">jumlah penduduk (orang)</label>
+                        <input type="text" name="jml_pdd" id="jml_pdd" class="form-control" readonly>
+                        <div class="invalid-feedback"></div>
                     </div>
                     <div class="my-2">
                         <label for="name_demografi">jumlah PUS (PUS)</label>
@@ -176,6 +175,12 @@
 <script src="{{asset('backend')}}/plugins/sweetalerts/custom-sweetalert.js"></script>
 <script>
     $(function() {
+        $(".jml_pdd").on("change", function() {
+            var value1 = document.getElementById('jml_pdd_l').value;
+            var value2 = document.getElementById('jml_pdd_p').value;
+            var sum = parseInt(value1) + parseInt(value2);
+            $('#jml_pdd').val(sum);
+        });
         var table = $('.table').DataTable({
             processing: true,
             serverSide: true,

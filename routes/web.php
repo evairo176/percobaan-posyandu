@@ -8,12 +8,14 @@ use App\Http\Controllers\DemografiController;
 use App\Http\Controllers\GeografiController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KaderController;
+use App\Http\Controllers\KecamatanPerkembangan;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\KepengurusanController;
 use App\Http\Controllers\PembentukanController;
 use App\Http\Controllers\PerkembanganController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RekapPosyanduControler;
+use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\SaranaController;
 use App\Http\Controllers\SkdnController;
 use App\Http\Controllers\StrataController;
@@ -175,4 +177,17 @@ route::group(['middleware' => ['auth', 'login_check:super-admin']], function () 
     Route::get('/all-perkembangan/fetch-all', [AllPerkembanganController::class, 'fetchAll'])->name('all.perkembangan.fetch');
     Route::post('/all-perkembangan/edit', [AllPerkembanganController::class, 'edit'])->name('all.perkembangan.edit');
     Route::delete('/all-perkembangan/delete', [AllPerkembanganController::class, 'delete'])->name('all.perkembangan.delete');
+});
+route::group(['middleware' => ['auth', 'login_check:petugas_kecamatan']], function () {
+
+    Route::get('/kecamatan-perkembangan', [KecamatanPerkembangan::class, 'index'])->name('kecamatan.perkembangan');
+    Route::get('/kecamatan/perkembangan/status/detail/{id}', [KecamatanPerkembangan::class, 'detailPer'])->name('detail.kec');
+    Route::get('/kecamatan/perkembangan/status/diterima/{id}', [KecamatanPerkembangan::class, 'updateStatusDiterima'])->name('detail.kec');
+    Route::get('/kecamatan/perkembangan/status/ditolak/{id}', [KecamatanPerkembangan::class, 'updateStatusDitolak'])->name('detail.kec');
+
+
+    Route::get('/riwayat-perkembangan', [RiwayatController::class, 'index']);
+    // Route::post('/all-perkembangan/store', [AllPerkembanganController::class, 'store'])->name('all.perkembangan.store');
+    // Route::post('/all-perkembangan/edit', [AllPerkembanganController::class, 'edit'])->name('all.perkembangan.edit');
+    // Route::delete('/all-perkembangan/delete', [AllPerkembanganController::class, 'delete'])->name('all.perkembangan.delete');
 });

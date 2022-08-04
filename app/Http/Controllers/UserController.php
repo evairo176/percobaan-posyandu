@@ -121,6 +121,12 @@ class UserController extends Controller
                         'status' => 200,
                         'messages' => 'success'
                     ]);
+                } else if (Auth::user()->role == 'petugas_kecamatan') {
+                    $request->session()->regenerate();
+                    return response()->json([
+                        'status' => 200,
+                        'messages' => 'success'
+                    ]);
                 }
             } else {
                 return response()->json([
