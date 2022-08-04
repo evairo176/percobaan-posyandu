@@ -601,7 +601,7 @@ class RekapPosyanduControler extends Controller
             'n_d_ttl'                       => $n_d_ttl,
 
         );
-        dd($jumlah);
+        // dd($jumlah);
         return view('pages.backend.data_excel_posyandu', compact('data_excel', 'jumlah'));
     }
 }
