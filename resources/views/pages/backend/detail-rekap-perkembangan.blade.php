@@ -248,7 +248,10 @@
         $('body').delegate('#Export','click',function(e)
         {   
             e.preventDefault();
-            var cari=$('select[name="tahun"]').val()?'&tahun='+$('select[name="tahun"]').val():'';
+            var cari='';
+              @if(@app('request')->input('tahun'))
+                cari='&tahun={{@app('request')->input('tahun')}}'; 
+                @endif
             window.open('{{url('data-detail-perkembangan')}}?lo=ex'+cari,'blank');
 
         });
