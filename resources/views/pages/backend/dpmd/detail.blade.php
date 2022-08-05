@@ -293,7 +293,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <a href="/kecamatan-perkembangan" id="perkembangan_btn" class="btn btn-danger">Kembali</a>
+                        <a href="/dpmd-perkembangan" id="perkembangan_btn" class="btn btn-danger">Kembali</a>
                     </div>
                 </form>
             </div>

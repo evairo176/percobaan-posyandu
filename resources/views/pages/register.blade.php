@@ -80,6 +80,22 @@
                                     <input name="cpassword" id="cpassword" type="password" class="form-control" placeholder="Password Confirm">
                                     <div class="invalid-feedback"></div>
                                 </div>
+                                <div class="my-2">
+                                    <label for="inputState">Kecamatan</label>
+                                    <select id="kecamatan_id" class="form-control" name="kecamatan_id">
+                                        <option value="" selected>Choose...</option>
+                                        @foreach($kecamatan as $data)
+                                        <option value="{{ $data->id }}">{{ $data->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                <div class="my-2">
+                                    <label for="inputState">Desa</label>
+                                    <select id="kelurahan_id" class="form-control" name="kelurahan_id">
+                                        <option selected disabled>Choose...</option>
+                                    </select>
+                                </div>
                                 <div class="d-sm-flex justify-content-between">
                                     <div class="field-wrapper">
                                         <input id="register_btn" type="submit" value="Register" class="btn btn-primary">
@@ -135,6 +151,29 @@
 
                     }
                 })
+            });
+            $('#kecamatan_id').change(function() {
+                var kecID = $(this).val();
+                if (kecID) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/posyandu/getdesa?kecID=" + kecID,
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res) {
+                                $("#kelurahan_id").empty();
+                                $("#kelurahan_id").append('<option selected disabled>pilih...</option>');
+                                $.each(res, function(nama, kode) {
+                                    $("#kelurahan_id").append('<option value="' + kode + '">' + nama + '</option>');
+                                });
+                            } else {
+                                $("#kelurahan_id").empty();
+                            }
+                        }
+                    });
+                } else {
+                    $("#kelurahan_id").empty();
+                }
             });
         });
     </script>

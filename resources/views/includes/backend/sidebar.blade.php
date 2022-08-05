@@ -44,7 +44,10 @@
                         <a href="/posyandu">Data Posyandu</a>
                     </li>
                     <li class="{{ ($submenu == 'Input All Rekap Perkembangan') ? 'active' : ''}}">
-                        <a href="/all-perkembangan">Data All perkembangan</a>
+                        <a href="/dpmd-perkembangan">Data Semua perkembangan</a>
+                    </li>
+                    <li class="{{ ($submenu == 'Riwayat perkembangan dpmd') ? 'active' : ''}}">
+                        <a href="/dpmd/riwayat-perkembangan">Riwayat perkembangan</a>
                     </li>
                     <li class="{{ ($submenu == 'Input Detail Perkembangan') ? 'active' : ''}}">
                         <a href="/detail-perkembangan">Data Detail Perkembangan</a>

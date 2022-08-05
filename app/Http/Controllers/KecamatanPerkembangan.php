@@ -90,11 +90,11 @@ class KecamatanPerkembangan extends Controller
             'user_id' => $perkembangan->user_id,
             'perkembangan_id' => $perkembangan->id,
             'posyandu_id' => $perkembangan->posyandu_id,
-            'kecamatan_id' => auth()->user()->kecamatan_id,
+            'kecamatan_id' => $perkembangan->kecamatan_id,
             'status' => $perkembangan->status,
         ];
         $detail = Detail::create($data);
-        return redirect('kecamatan-perkembangan');
+        return redirect('kecamatan-perkembangan')->with('error', 'Status perkembangan telah berhasil di update');
     }
     public function updateStatusDiterima($id)
     {
@@ -107,10 +107,10 @@ class KecamatanPerkembangan extends Controller
             'user_id' => $perkembangan->user_id,
             'perkembangan_id' => $perkembangan->id,
             'posyandu_id' => $perkembangan->posyandu_id,
-            'kecamatan_id' => auth()->user()->kecamatan_id,
+            'kecamatan_id' => $perkembangan->kecamatan_id,
             'status' => $perkembangan->status,
         ];
         $detail = Detail::create($data);
-        return redirect('kecamatan-perkembangan');
+        return redirect('kecamatan-perkembangan')->with('success', 'Status perkembangan telah berhasil di update');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Detail;
 use App\Models\Perkembangan;
 use App\Models\Strata;
 use Illuminate\Http\Request;
@@ -68,14 +69,32 @@ class PerkembanganController extends Controller
                         $date = date('d-m-Y', strtotime($row->created_at));
                         return $date;
                     })
-                    ->addColumn('action', function ($row) {
-                        $actionBtn = '       <td class="text-center">
-                    <ul class="table-controls">
-                    <li><a href="javascript:void(0);" id="' . $row->id_per . '" class="editIcon" data-bs-toggle="modal" data-bs-target="#editdataloyeeModal" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>                                       
-                     </ul>';
+                    ->addColumn('status', function ($row) {
+                        if ($row->status == null) {
+                            $actionBtn = '       <td class="text-center">
+                            <ul class="table-controls">
+                            <li><a href="javascript:void(0);" class="btn btn-primary" >menunggu validasi</a></li>                                       
+                             </ul>';
+                        } else {
+                            $actionBtn = '       <td class="text-center">
+                        <ul class="table-controls">
+                        <li><a href="javascript:void(0);" class="btn btn-primary"  data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">' . $row->status . '</a></li>                                       
+                         </ul>';
+                        }
                         return $actionBtn;
                     })
-                    ->rawColumns(['action'])
+                    ->addColumn('action', function ($row) {
+                        if ($row->status == 'dpmd ditolak' || $row->status == 'kecamatan ditolak') {
+                            $actionBtn = '                    <a href="javascript:void(0);" id="' . $row->id_per . '" class="editIcon btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editdataloyeeModal" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">Ajukan Ulang</a>  ';
+                        } else {
+                            $actionBtn = '
+                            <ul class="table-controls">
+                            <li><a href="javascript:void(0);" id="' . $row->id_per . '" class="editIcon" data-bs-toggle="modal" data-bs-target="#editdataloyeeModal" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>                                                                            
+                             </ul>';
+                        }
+                        return $actionBtn;
+                    })
+                    ->rawColumns(['action', 'status'])
                     ->make(true);
             }
         } else {
@@ -175,6 +194,14 @@ class PerkembanganController extends Controller
                 ]);
             } else {
                 $perkembangan = Perkembangan::find($request->perkembangan_id);
+                if ($perkembangan->status == 'kecamatan ditolak' || $perkembangan->status == 'dpmd ditolak') {
+                    $perkembangan->status = null;
+                } else {
+                    $perkembangan->status = $perkembangan->status;
+                }
+                $perkembangan->update();
+
+
                 $perkembanganData = [
                     'posyandu_id' => auth()->user()->posyandu_id,
                     'user_id' => auth()->user()->id,
@@ -214,6 +241,15 @@ class PerkembanganController extends Controller
                 ];
                 // dd($perkembanganData);
                 $perkembangan->update($perkembanganData);
+                $data = [
+                    'nama_admin' =>  auth()->user()->name,
+                    'user_id' => $perkembangan->user_id,
+                    'perkembangan_id' => $perkembangan->id,
+                    'posyandu_id' => $perkembangan->posyandu_id,
+                    'kecamatan_id' => $perkembangan->kecamatan_id,
+                    'status' => 'ajukan ulang',
+                ];
+                $detail = Detail::create($data);
                 return response()->json([
                     'status' => 200,
                     'messages' => 'Updated Successfully'
@@ -435,7 +471,7 @@ class PerkembanganController extends Controller
                 $gizi           += @$klue->gizi;
                 $diare          += @$klue->diare;
                 $paud           += @$klue->paud;
-                $bkb            += @$klue->bkb; 
+                $bkb            += @$klue->bkb;
                 $bkr            += @$klue->bkr;
                 $bkl            += @$klue->bkl;
                 $up2k           += @$klue->up2k;
@@ -572,4 +608,3 @@ class PerkembanganController extends Controller
         }
     }
 }
- 

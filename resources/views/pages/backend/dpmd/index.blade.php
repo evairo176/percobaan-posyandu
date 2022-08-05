@@ -84,11 +84,15 @@
                             <td>{{$per->created_at}}</td>
                             <td>
                                 <div class="btn-group">
-                                    @if($per->status == null)
-                                    <a class="btn btn-success" href="/kecamatan/perkembangan/status/diterima/{{$per->id_per}}">diterima</a>
-                                    <a class="btn btn-danger" href="/kecamatan/perkembangan/status/ditolak/{{$per->id_per}}">ditolak</a>
+                                    @if($per->status == 'kecamatan diterima')
+                                    <a class="btn btn-success" href="/dpmd/perkembangan/status/diterima/{{$per->id_per}}">diterima</a>
+                                    <a class="btn btn-danger" href="/dpmd/perkembangan/status/ditolak/{{$per->id_per}}">ditolak</a>
+                                    <a class="btn btn-warning" href="/dpmd/perkembangan/status/detail/{{$per->id_per}}">lihat detail</a>
+                                    @elseif($per->status == null)
+                                    <a class="btn btn-secondary" href="#">Menunggu validasi kecamatan</a>
+                                    @else
+                                    <a class="btn btn-warning" href="/dpmd/perkembangan/status/detail/{{$per->id_per}}">lihat detail</a>
                                     @endif
-                                    <a class="btn btn-warning" href="/kecamatan/perkembangan/status/detail/{{$per->id_per}}">lihat detail</a>
                                 </div>
                             </td>
                         </tr>
@@ -109,11 +113,10 @@
 
 @push('add-scripts')
 <script src="{{asset('backend')}}/assets/js/scrollspyNav.js"></script>
-<script type="text/javascript" src="{{asset('datatable')}}/datatables.min.js"></script>
+<!-- <script type="text/javascript" src="{{asset('datatable')}}/datatables.min.js"></script> -->
 <script src="{{asset('backend')}}/assets/js/scrollspyNav.js"></script>
 <script src="{{asset('backend')}}/plugins/sweetalerts/sweetalert2.min.js"></script>
 <script src="{{asset('backend')}}/plugins/sweetalerts/custom-sweetalert.js"></script>
-
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="{{asset('backend')}}/plugins/table/datatable/datatables.js"></script>
 <script>

@@ -60,6 +60,7 @@
                             <th>jml_bgn</th>
                             <th>jml_kader</th>
                             <th>tahun rekap</th>
+                            <th>status</th>
                             <th>Created at</th>
                             <th>Action</th>
                         </tr>
@@ -85,7 +86,7 @@
                     @csrf
                     <div class="my-2">
                         <label for="name_kader">tahun rekap</label>
-                        <select name="tahun_rekap" id="tahun_rekap" class="form-control">
+                        <select name="tahun_rekap" id="tahun_rekap" class="form-control" readonly>
                             <option value="">--pilih tahun--</option>
                             <?php for ($i = date('Y'); $i >= date('Y') - 70; $i -= 1) { ?>
                                 <option value="{{$i}}">{{$i}}</option>
@@ -408,6 +409,10 @@
                     name: 'tahun_rekap'
                 },
                 {
+                    data: 'status',
+                    name: 'status'
+                },
+                {
                     data: 'created_at',
                     name: 'created_at'
                 },
@@ -449,6 +454,7 @@
                     $("#kelurahan_id").val(res.kelurahan_id);
                     $("#kecamatan_Id").val(res.kecamatan_Id);
                     $("#tahun_rekap").val(res.tahun_rekap);
+                    // $("#tahun_rekap").prop('disabled', true);
                     $("#jml_bgn").val(res.jml_bgn);
                     // $("#jml_kader").val(res.jml_kader);
                     // $("#jml_terlatih").val(res.jml_terlatih);
@@ -577,34 +583,34 @@
         })
 
         // edit perkembangan ajax request
-        $(document).on('click', '.editIcon', function(e) {
-            e.preventDefault();
-            let id = $(this).attr('id');
-            var url = 'perkembangan/edit';
+        // $(document).on('click', '.editIcon', function(e) {
+        //     e.preventDefault();
+        //     let id = $(this).attr('id');
+        //     var url = 'perkembangan/edit';
 
-            $.ajax({
-                url: url,
-                method: 'post',
-                data: {
-                    id: id,
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(res) {
-                    console.log(res.picture);
-                    $('#perkembanganModalTitle').html('Edit Data perkembangan');
-                    $('#perkembangan_btn').html('Update');
-                    $('#perkembanganModal').modal('show');
-                    $("#perkembangan_id").val(res.id);
-                    $("#nama_perkembangan").val(res.nama_perkembangan);
-                    $("#blok").val(res.blok);
-                    $("#rt").val(res.rt);
-                    $("#rw").val(res.rw);
-                    $("#kelurahan").val(res.kelurahan);
-                    $("#kecamatan").val(res.kecamatan);
-                    $("#kabupaten").val(res.kabupaten);
-                }
-            });
-        });
+        //     $.ajax({
+        //         url: url,
+        //         method: 'post',
+        //         data: {
+        //             id: id,
+        //             _token: '{{ csrf_token() }}'
+        //         },
+        //         success: function(res) {
+        //             console.log(res.picture);
+        //             $('#perkembanganModalTitle').html('Edit Data perkembangan');
+        //             $('#perkembangan_btn').html('Update');
+        //             $('#perkembanganModal').modal('show');
+        //             $("#perkembangan_id").val(res.id);
+        //             $("#nama_perkembangan").val(res.nama_perkembangan);
+        //             $("#blok").val(res.blok);
+        //             $("#rt").val(res.rt);
+        //             $("#rw").val(res.rw);
+        //             $("#kelurahan").val(res.kelurahan);
+        //             $("#kecamatan").val(res.kecamatan);
+        //             $("#kabupaten").val(res.kabupaten);
+        //         }
+        //     });
+        // });
     });
 </script>
 @endpush
