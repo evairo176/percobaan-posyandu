@@ -403,15 +403,16 @@ class PerkembanganController extends Controller
         $ttl_man_per        = 0;
         foreach ($data_perkembangan as $per) {
 
-            $dt         = DB::table('tb_perkembangan')->where('status', 'dpmd diterima');
+            $dt         = DB::table('tb_perkembangan');
             $dt_ps      = DB::table('tb_rekap_posyandu');
             $dt_dsa     = DB::table('villages')->where('district_id', @$per->id)->count();
 
             $dt->where('kecamatan_id', $per->id);
+            $dt->where('status', 'dpmd diterima');
             $dt_ps->where('kecamatan_id', $per->id);
             if ($Getyears) {
                 $dt->where('tahun_rekap', $Getyears);
-               // $dt_ps->whereYear('created_at', $Getyears);
+               $dt_ps->whereYear('created_at', $Getyears);
             }
             $dt_per_kel     = $dt->get();
             $posyandu       = $dt_ps->count();
