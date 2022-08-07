@@ -77,9 +77,15 @@ class DashboardController extends Controller
 			->first();
 		// dd($total);
 		$total_posyandu = Posyandu::count();
+		$total_posyandu_kecamatan = Posyandu::where('kecamatan_id', auth()->user()->kecamatan_id)->count();
 		$total_petugas = User::where('role', 'petugas')->count();
+		$total_petugas_kecamatan = User::where('role', 'petugas_kecamatan')->count();
 		// dd($total_petugas);
 		$total_perkembangan = Perkembangan::count();
+		// $date = Carbon::now()->format('Y');
+		// $tb_perkembangan  = Perkembangan::where('tahun_rekap', $date)->sum('jml_kader');
+		// $tb_perkembangan_tl  = Perkembangan::where('tahun_rekap', $date)->where('jml_terlatih', 'ya')->sum('jml_kader_terlatih');
+		// dd($tb_perkembangan_tl);
 		$data = [
 			'menu' => 'dashboard',
 			'submenu' => 'dashboard',
@@ -88,7 +94,9 @@ class DashboardController extends Controller
 			'tpl' => $totalPendudukl,
 			'tpp' => $totalPendudukp,
 			'total_posyandu' => $total_posyandu,
+			'total_posyandu_kecamatan' => $total_posyandu_kecamatan,
 			'total_petugas' => $total_petugas,
+			'total_petugas_kecamatan' => $total_petugas_kecamatan,
 			'total_perkembangan' => $total_perkembangan,
 			// 'allPos' => $data
 		];

@@ -70,6 +70,9 @@
                     <li class="{{ ($submenu == 'Input Rekap Perkembangan') ? 'active' : ''}}">
                         <a href="/perkembangan">Input Rekap Perkembangan</a>
                     </li>
+                    <li class="{{ ($submenu == 'Riwayat Perkembangan petugas') ? 'active' : ''}}">
+                        <a href="/petugas/riwayat-perkembangan">Riwayat Perkembangan</a>
+                    </li>
                 </ul>
             </li>
             <li class="menu {{ ($menu == 'master') ? 'active' : ''}}">

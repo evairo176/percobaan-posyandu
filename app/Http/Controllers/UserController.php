@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use App\Models\Posyandu;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,9 +35,10 @@ class UserController extends Controller
                 'villages.name as kelurahan',
             )
             ->get();
-        // dd($posyandu);
+        $districts = District::where('regency_id', 3212)->get();
         $data = [
             'pos' => $posyandu,
+            'kecamatan' => $districts,
         ];
         return view('pages.register', $data);
     }
@@ -74,16 +76,21 @@ class UserController extends Controller
                 'messages' => $validator->getMessageBag()
             ]);
         } else {
+            // dd($request->kecamatan_id);
 
             $user = new User();
             $user->name = request()->name;
             $user->email = request()->email;
             $user->password = hash::make(request()->password);
             $user->posyandu_id = request()->posyandu_id;
+            $user->kecamatan_id = request()->kecamatan_id;
+            $user->kelurahan_id = request()->kelurahan_id;
             $user->save();
-            $pos = Posyandu::where('id', request()->posyandu_id)->first();
-            $pos->user_id = $user->id;
-            $pos->update();
+            if (request()->posyandu_id) {
+                $pos = Posyandu::where('id', request()->posyandu_id)->first();
+                $pos->user_id = $user->id;
+                $pos->update();
+            }
 
             return response()->json([
                 'status' => 200,

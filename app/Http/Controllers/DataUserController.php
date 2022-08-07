@@ -90,7 +90,7 @@ class DataUserController extends Controller
                     'picture' => $fileName,
                     'kecamatan_id' => $request->kecamatan_id,
                     'kelurahan_id' => $request->kelurahan_id,
-                    'posyandu_id' => $request->posyandu_id,
+                    'posyandu_id' => $request->posyandu_id ? $request->posyandu_id : null,
                 ];
 
                 $user->update($userData);
@@ -124,7 +124,7 @@ class DataUserController extends Controller
                 $fileName = $request->name . '-' . time() . '.' . $file->getClientOriginalExtension();
                 $file->storeAs('public/picture', $fileName);
 
-                dd($request->kecamatan_id);
+                // dd($request->kecamatan_id);
                 $userData = [
                     'name' => $request->name,
                     'email' => $request->email,
@@ -133,13 +133,15 @@ class DataUserController extends Controller
                     'picture' => $fileName,
                     'kecamatan_id' => $request->kecamatan_id,
                     'kelurahan_id' => $request->kelurahan_id,
-                    'posyandu_id' => $request->posyandu_id,
+                    'posyandu_id' => $request->posyandu_id ? $request->posyandu_id : null,
                 ];
 
                 $user = User::create($userData);
-                $pos = Posyandu::where('id', request()->posyandu_id)->first();
-                $pos->user_id = $user->id;
-                $pos->update();
+                if ($request->posyandu_id) {
+                    $pos = Posyandu::where('id', request()->posyandu_id)->first();
+                    $pos->user_id = $user->id;
+                    $pos->update();
+                }
                 return response()->json([
                     'status' => 200,
                     'messages' => 'Added Successfully'

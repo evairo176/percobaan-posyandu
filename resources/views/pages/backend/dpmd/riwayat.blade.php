@@ -35,25 +35,13 @@
 <div class="col-lg-12">
     <div id="perkembangan_alert"></div>
     <div class="statbox widget box box-shadow">
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-block">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>{{ $message }}</strong>
-        </div>
-        @endif
-        @if ($message = Session::get('error'))
-        <div class="alert alert-danger alert-block">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>{{ $message }}</strong>
-        </div>
-        @endif
         <div class="widget-header">
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                     <div class="betwen" style="justify-content: space-between;
                         display: flex;
                         align-items: center;">
-                        <h4>Table perkembangan</h4>
+                        <h4>Riwayat perkembangan</h4>
 
                     </div>
                 </div>
@@ -66,31 +54,21 @@
                         <tr>
                             <th>No</th>
                             <th>kecamatan</th>
+                            <th>posyandu</th>
                             <th>petugas</th>
-                            <th>nama posyandu</th>
-                            <th>tahun rekap</th>
-                            <th>Created at</th>
-                            <th>Action</th>
+                            <th>status</th>
+                            <th>riwayat oleh</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($perkembangan as $per)
+                        @foreach($riwayat as $ri)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$per->kec}}</td>
-                            <td>{{$per->name_petugas}}</td>
-                            <td>{{$per->nama_posyandu}}</td>
-                            <td>{{$per->tahun_rekap}}</td>
-                            <td>{{$per->created_at}}</td>
-                            <td>
-                                <div class="btn-group">
-                                    @if($per->status == null)
-                                    <a class="btn btn-success" href="/kecamatan/perkembangan/status/diterima/{{$per->id_per}}">diterima</a>
-                                    <a class="btn btn-danger" href="/kecamatan/perkembangan/status/ditolak/{{$per->id_per}}">ditolak</a>
-                                    @endif
-                                    <a class="btn btn-warning" href="/kecamatan/perkembangan/status/detail/{{$per->id_per}}">lihat detail</a>
-                                </div>
-                            </td>
+                            <td>{{$ri->kec}}</td>
+                            <td>{{$ri->nama_posyandu}}</td>
+                            <td>{{$ri->nama_petugas}}</td>
+                            <td>{{$ri->status}}</td>
+                            <td>{{$ri->nama_admin}}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -113,7 +91,6 @@
 <script src="{{asset('backend')}}/assets/js/scrollspyNav.js"></script>
 <script src="{{asset('backend')}}/plugins/sweetalerts/sweetalert2.min.js"></script>
 <script src="{{asset('backend')}}/plugins/sweetalerts/custom-sweetalert.js"></script>
-
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="{{asset('backend')}}/plugins/table/datatable/datatables.js"></script>
 <script>

@@ -57,7 +57,7 @@ route::group(['middleware' => ['guest']], function () {
     Route::post('/login', [UserController::class, 'loginUser'])->name('auth.login');
 });
 
-
+Route::get('/posyandu/getdesa', [RekapPosyanduControler::class, 'getDesa']);
 route::group(['middleware' => ['auth']], function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('auth.profile');
     Route::post('/profile-image', [UserController::class, 'profileImageUpdate'])->name('auth.profile-image-update');
@@ -75,8 +75,6 @@ route::group(['middleware' => ['auth']], function () {
     Route::get('/posyandu/detail/{id}', [RekapPosyanduControler::class, 'detail'])->name('posyandu.detail');
     Route::get('/posyandu/cetak-pdf/{id}', [RekapPosyanduControler::class, 'cetakPdf'])->name('posyandu.cetakPdf');
     Route::get('/posyandu/detail-all/', [RekapPosyanduControler::class, 'detailAll'])->name('posyandu.detailAll');
-
-    Route::get('/posyandu/getdesa', [RekapPosyanduControler::class, 'getDesa']);
 });
 route::group(['middleware' => ['auth', 'login_check:petugas']], function () {
 
@@ -147,6 +145,9 @@ route::group(['middleware' => ['auth', 'login_check:petugas']], function () {
     Route::post('/perkembangan/store', [PerkembanganController::class, 'store'])->name('perkembangan.store');
     Route::get('/perkembangan/fetch-all', [PerkembanganController::class, 'fetchAll'])->name('perkembangan.fetch');
     Route::post('/perkembangan/edit', [PerkembanganController::class, 'edit'])->name('perkembangan.edit');
+
+
+    Route::get('/petugas/riwayat-perkembangan', [RiwayatController::class, 'riwayatPetugas']);
 });
 
 route::group(['middleware' => ['auth', 'login_check:super-admin']], function () {
@@ -172,18 +173,19 @@ route::group(['middleware' => ['auth', 'login_check:super-admin']], function () 
     Route::get('/detail-perkembangan', [PerkembanganController::class, 'detailperkembangan']);
     Route::get('/data-detail-perkembangan', [PerkembanganController::class, 'datadetailperkembangan']);
 
-    Route::get('/all-perkembangan', [AllPerkembanganController::class, 'index'])->name('all.perkembangan');
-    Route::post('/all-perkembangan/store', [AllPerkembanganController::class, 'store'])->name('all.perkembangan.store');
-    Route::get('/all-perkembangan/fetch-all', [AllPerkembanganController::class, 'fetchAll'])->name('all.perkembangan.fetch');
-    Route::post('/all-perkembangan/edit', [AllPerkembanganController::class, 'edit'])->name('all.perkembangan.edit');
-    Route::delete('/all-perkembangan/delete', [AllPerkembanganController::class, 'delete'])->name('all.perkembangan.delete');
+    Route::get('/dpmd-perkembangan', [AllPerkembanganController::class, 'index'])->name('all.perkembangan');
+    Route::get('/dpmd/perkembangan/status/detail/{id}', [AllPerkembanganController::class, 'detailPer']);
+    Route::get('/dpmd/perkembangan/status/diterima/{id}', [AllPerkembanganController::class, 'updateStatusDiterima']);
+    Route::get('/dpmd/perkembangan/status/ditolak/{id}', [AllPerkembanganController::class, 'updateStatusDitolak']);
+
+    Route::get('/dpmd/riwayat-perkembangan', [AllPerkembanganController::class, 'riwayatDPMD']);
 });
 route::group(['middleware' => ['auth', 'login_check:petugas_kecamatan']], function () {
 
     Route::get('/kecamatan-perkembangan', [KecamatanPerkembangan::class, 'index'])->name('kecamatan.perkembangan');
-    Route::get('/kecamatan/perkembangan/status/detail/{id}', [KecamatanPerkembangan::class, 'detailPer'])->name('detail.kec');
-    Route::get('/kecamatan/perkembangan/status/diterima/{id}', [KecamatanPerkembangan::class, 'updateStatusDiterima'])->name('detail.kec');
-    Route::get('/kecamatan/perkembangan/status/ditolak/{id}', [KecamatanPerkembangan::class, 'updateStatusDitolak'])->name('detail.kec');
+    Route::get('/kecamatan/perkembangan/status/detail/{id}', [KecamatanPerkembangan::class, 'detailPer']);
+    Route::get('/kecamatan/perkembangan/status/diterima/{id}', [KecamatanPerkembangan::class, 'updateStatusDiterima']);
+    Route::get('/kecamatan/perkembangan/status/ditolak/{id}', [KecamatanPerkembangan::class, 'updateStatusDitolak']);
 
 
     Route::get('/riwayat-perkembangan', [RiwayatController::class, 'index']);
