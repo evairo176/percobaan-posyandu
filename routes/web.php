@@ -178,7 +178,7 @@ route::group(['middleware' => ['auth', 'login_check:super-admin']], function () 
     Route::get('/dpmd/perkembangan/status/diterima/{id}', [AllPerkembanganController::class, 'updateStatusDiterima']);
     Route::get('/dpmd/perkembangan/status/ditolak/{id}', [AllPerkembanganController::class, 'updateStatusDitolak']);
 
-    Route::get('/dpmd/riwayat-perkembangan', [AllPerkembanganController::class, 'riwayatDPMD']);
+    Route::get('/dpmd/riwayat-perkembangan', [RiwayatController::class, 'riwayatDPMD']);
 });
 route::group(['middleware' => ['auth', 'login_check:petugas_kecamatan']], function () {
 
