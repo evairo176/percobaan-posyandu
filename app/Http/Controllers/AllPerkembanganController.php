@@ -109,30 +109,5 @@ class AllPerkembanganController extends Controller
         $detail = Detail::create($data);
         return redirect('dpmd-perkembangan')->with('success', 'Status perkembangan telah berhasil di update');
     }
-    public function riwayatDPMD()
-    {
-        $riwayat = DB::table('tb_detail')
-            ->leftJoin('districts', 'tb_detail.kecamatan_id', '=', 'districts.id')
-            ->leftJoin('tb_rekap_posyandu', 'tb_detail.posyandu_id', '=', 'tb_rekap_posyandu.id')
-            ->leftJoin('users', 'tb_detail.user_id', '=', 'users.id')
-            ->select(
-                'tb_detail.*',
-                'users.*',
-                'districts.*',
-                'tb_rekap_posyandu.*',
-                'tb_detail.id as id_del',
-                'districts.name as kec',
-                'users.name as nama_petugas',
-            )
-            ->orderBy('tb_detail.updated_at', 'desc')
-            ->get();
-        // dd($riwayat);
-        $data = [
-            'menu' => 'table',
-            'submenu' => 'Riwayat perkembangan dpmd',
-            'riwayat' => $riwayat
-
-        ];
-        return view('pages.backend.dpmd.riwayat', $data);
-    }
+   
 }

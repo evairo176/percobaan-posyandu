@@ -3,32 +3,10 @@
 @push('add-styles')
 <link href="{{asset('backend')}}/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="{{asset('backend')}}/assets/css/forms/theme-checkbox-radio.css">
-<link href="{{asset('backend')}}/assets/css/tables/table-basic.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="{{asset('datatable')}}/datatables.min.css" />
-<script src="{{asset('backend')}}/plugins/sweetalerts/promise-polyfill.js"></script>
-<link href="{{asset('backend')}}/plugins/sweetalerts/sweetalert2.min.css" rel="stylesheet" type="text/css" />
-<link href="{{asset('backend')}}/plugins/sweetalerts/sweetalert.css" rel="stylesheet" type="text/css" />
-<link href="{{asset('backend')}}/assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />
-<link href="{{asset('backend')}}/assets/css/components/custom-modal.css" rel="stylesheet" type="text/css" />
-
 <!-- BEGIN PAGE LEVEL STYLES -->
 <link rel="stylesheet" type="text/css" href="{{asset('backend')}}/plugins/table/datatable/datatables.css">
 <link rel="stylesheet" type="text/css" href="{{asset('backend')}}/plugins/table/datatable/dt-global_style.css">
 <!-- END PAGE LEVEL STYLES -->
-<style>
-    ul.ul-perkembangan {
-        padding: 0;
-        list-style: none;
-    }
-
-    ul.ul-perkembangan-sub {
-        list-style: none;
-    }
-
-    th.mb-2 {
-        width: 50%;
-    }
-</style>
 @endpush
 @section('content')
 
@@ -87,11 +65,9 @@
 
 @push('add-scripts')
 <script src="{{asset('backend')}}/assets/js/scrollspyNav.js"></script>
-<script type="text/javascript" src="{{asset('datatable')}}/datatables.min.js"></script>
-<script src="{{asset('backend')}}/assets/js/scrollspyNav.js"></script>
-<script src="{{asset('backend')}}/plugins/sweetalerts/sweetalert2.min.js"></script>
-<script src="{{asset('backend')}}/plugins/sweetalerts/custom-sweetalert.js"></script>
 
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="{{asset('backend')}}/plugins/table/datatable/datatables.js"></script>
 <script>
     $('#datatable').DataTable({
