@@ -412,9 +412,10 @@ class PerkembanganController extends Controller
             $dt_ps->where('kecamatan_id', $per->id);
             if ($Getyears) {
                 $dt->where('tahun_rekap', $Getyears);
-               $dt_ps->whereYear('created_at', $Getyears);
+              // $dt_ps->whereYear('created_at', $Getyears);
             }
             $dt_per_kel     = $dt->get();
+
             $posyandu       = $dt_ps->count();
             $tahun_rekap    = 0;
             $pra            = 0;
