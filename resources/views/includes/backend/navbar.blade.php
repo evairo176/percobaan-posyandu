@@ -46,7 +46,7 @@ $website = DB::table('tb_website')->where('id', 1)->first();
                             <div class="media-body">
                                 <h5 id="name_user">{{auth()->user()->name}}</h5>
                                 <p id="role_user">
-                                    @if(auth()->user()->role == 'admin')
+                                    @if(auth()->user()->role == 'super-admin')
                                     Admin
                                     @elseif(auth()->user()->role == 'petugas_posyandu')
                                     Posyandu
