@@ -97,9 +97,6 @@
                         <label for="role">Pilih Posyandu</label>
                         <select name="posyandu_id" id="posyandu_id" class="form-control">
                             <option value="">--pilih posyandu ,kelurahan ,kecamatan--</option>
-                            @foreach($pos as $po)
-                            <option value="{{$po->id_posyandu}}" {{($po->user_id) ? 'disabled' : ''}}>{{$po->nama_posyandu}},{{$po->kelurahan}},{{$po->kecamatan}}</option>
-                            @endforeach
                         </select>
                         <div class="invalid-feedback"></div>
                     </div>
@@ -202,6 +199,8 @@
 <script>
     $(document).ready(function() {
 
+        getPosyandu();
+        // console.log(getPosyandu());
         $('#role').change(function() {
             if (this.value == 'petugas_kecamatan' || this.value == 'super-admin') {
                 $('#pilihP').addClass('d-none');
@@ -209,6 +208,22 @@
                 $('#pilihP').removeClass('d-none');
             }
         });
+
+        function getPosyandu() {
+            var url = '/get-data/posyandu';
+            $.ajax({
+                url: url,
+                method: 'get',
+                success: function(res) {
+                    $("#posyandu_id").empty();
+                    $("#posyandu_id").append('<option selected disabled>pilih...</option>');
+                    $.each(res, function(index, item) {
+                        $("#posyandu_id").append('<option value="' + item.id_posyandu + '">' + item.nama_posyandu + " " + item.kelurahan + " " + item.kecamatan + '</option>');
+                    });
+                    console.log('1');
+                }
+            });
+        }
         var table = $('.table').DataTable({
             processing: true,
             serverSide: true,
@@ -259,7 +274,7 @@
         $(document).on('click', '.editIcon', function(e) {
             e.preventDefault();
             let id = $(this).attr('id');
-            var url = 'user/edit';
+            var url = '/user/edit';
             $('#pilihP').addClass('d-none');
             $.ajax({
                 url: url,
@@ -300,7 +315,8 @@
                 },
                 success: function(res) {
                     // console.log(res.picture);
-                    var img = '<img src="storage/picture/' + res.picture + '" border="0" width="40" class="img-rounded" align="center" />';
+                    var linkimage = (res.picture) ? 'storage/picture/' + res.picture + '' : 'boy.png';
+                    var img = `<img src="` + linkimage + `" border="0" width="40" class="img-rounded" align="center" />`;
                     $('#userDetailModalTitle').html('Detail Data User');
                     $('#userDetailModal').modal('show');
                     $("#dpicture").html(img);
@@ -344,12 +360,12 @@
                             footer: '<a href="#">Do you have question?</a>',
                             timer: 1500,
                         })
+                        getPosyandu();
                         $('#userModal').modal('hide');
                         $('#user_form')[0].reset();
                         removeValidationClasses('#user_form')
                         $('#user_btn').text('save');
                         $('.table').DataTable().ajax.reload();
-                        location.reload();
                     }
                 }
             })

@@ -50,10 +50,6 @@
                                 <div id="username-field" class="field-wrapper input">
                                     <label for="username">Posyandu</label>
                                     <select name="posyandu_id" id="posyandu_id" class="form-control">
-                                        <option value="">--pilih posyandu ,kelurahan ,kecamatan--</option>
-                                        @foreach($pos as $po)
-                                        <option value="{{$po->id_posyandu}}" {{($po->user_id) ? 'disabled' : ''}}>{{$po->nama_posyandu}},{{$po->kelurahan}},{{$po->kecamatan}}</option>
-                                        @endforeach
                                     </select>
                                     <div class="invalid-feedback"></div>
                                 </div>
@@ -122,6 +118,25 @@
     <script src="{{asset('js')}}/function.js"></script>
     <script>
         $(function() {
+
+            getPosyandu();
+
+            function getPosyandu() {
+                var url = '/get-data/posyandu';
+                $.ajax({
+                    url: url,
+                    method: 'get',
+                    success: function(res) {
+                        $("#posyandu_id").empty();
+                        $("#posyandu_id").append('<option selected disabled>pilih...</option>');
+                        $.each(res, function(index, item) {
+                            $("#posyandu_id").append('<option value="' + item.id_posyandu + '">' + item.nama_posyandu + " " + item.kelurahan + " " + item.kecamatan + '</option>');
+                        });
+                        console.log('1');
+                    }
+                });
+            }
+
             $('#register_form').submit(function(e) {
                 e.preventDefault();
                 $('#register_btn').val('please wait...');

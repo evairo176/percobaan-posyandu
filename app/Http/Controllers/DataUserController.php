@@ -53,6 +53,25 @@ class DataUserController extends Controller
         ];
         return view('pages.backend.user', $data);
     }
+    public function dataPosyandu()
+    {
+        $posyandu =  DB::table('tb_rekap_posyandu')
+            ->leftJoin('districts', 'tb_rekap_posyandu.kecamatan_id', '=', 'districts.id')
+            ->leftJoin('villages', 'tb_rekap_posyandu.kelurahan_id', '=', 'villages.id')
+            ->select(
+                'tb_rekap_posyandu.*',
+                'districts.*',
+                'villages.*',
+                'tb_rekap_posyandu.id as id_posyandu',
+                'districts.name as kecamatan',
+                'villages.name as kelurahan',
+            )
+            ->where('user_id', null)
+            ->get();
+
+        // dd($posyandu);
+        return $posyandu;
+    }
     public function store(Request $request)
     {
         // dd($request->all());
@@ -101,6 +120,7 @@ class DataUserController extends Controller
             }
         } else {
 
+            // dd($request->posyandu_id);
             $validator  = Validator::make(request()->all(), [
                 'name' => 'required|max:50',
                 'email' => 'required|email|unique:users|max:100',
@@ -133,7 +153,7 @@ class DataUserController extends Controller
                     'picture' => $fileName,
                     'kecamatan_id' => $request->kecamatan_id,
                     'kelurahan_id' => $request->kelurahan_id,
-                    'posyandu_id' => $request->posyandu_id ? $request->posyandu_id : null,
+                    'posyandu_id' => ($request->posyandu_id) ? $request->posyandu_id : null,
                 ];
 
                 $user = User::create($userData);

@@ -45,7 +45,15 @@ $website = DB::table('tb_website')->where('id', 1)->first();
                             </a>
                             <div class="media-body">
                                 <h5 id="name_user">{{auth()->user()->name}}</h5>
-                                <p id="role_user">{{auth()->user()->role}}</p>
+                                <p id="role_user">
+                                    @if(auth()->user()->role == 'admin')
+                                    Admin
+                                    @elseif(auth()->user()->role == 'petugas_posyandu')
+                                    Posyandu
+                                    @else
+                                    Kecamatan
+                                    @endif
+                                </p>
                             </div>
                         </div>
                     </div>

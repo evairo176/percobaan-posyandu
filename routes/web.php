@@ -43,6 +43,7 @@ Route::get('/kategori', [KategoriController::class, 'index']);
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/cetak-pdf/{id_data}', [HomeController::class, 'cetakpdf']);
 
+Route::get('/get-data/posyandu', [DataUserController::class, 'dataPosyandu']);
 
 
 
