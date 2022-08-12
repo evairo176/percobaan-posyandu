@@ -33,6 +33,7 @@ class KecamatanPerkembangan extends Controller
             ->orderBy('tb_perkembangan.id', 'DESC')
             ->where('tb_perkembangan.kecamatan_id', auth()->user()->kecamatan_id)
             ->get();
+
         $data = [
             'menu' => 'table',
             'submenu' => 'Input All Rekap Perkembangan',

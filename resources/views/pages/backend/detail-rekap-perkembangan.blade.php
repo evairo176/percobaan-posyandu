@@ -15,6 +15,14 @@
     letter-spacing: 1px;
     border: 1px solid #4361f1;
 }
+.table > thead > tr > th {
+    color: #4361ee;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
 </style>
 <div class="col-lg-12">
     <div class="statbox widget box box-shadow">
@@ -62,7 +70,7 @@
                                 </div>
                             </div>
                            <table class="table table-t text-left">
-                                                <thead>
+                                                <thead style="background: yellow;text-align:center;">
                                                     <tr>
                                 <th rowspan="3">No</th>
                                 <th rowspan="3">Kec</th>
@@ -126,7 +134,7 @@
 
                             </tr>
                                                 </thead> 
-                                                <tbody id="lsidt"></tbody> 
+                                                <tbody id="lsidt" style="text-align:center;"></tbody> 
                                              </table>    
                     </div>
                 </div>

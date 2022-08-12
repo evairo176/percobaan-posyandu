@@ -1,6 +1,22 @@
 <div class="sidebar-wrapper sidebar-theme">
 
     <nav id="sidebar">
+        <div class="profile-info">
+            <figure class="user-cover-image"></figure>
+            <div class="user-info">
+                <img src="storage/picture/{{(auth()->user()->picture) ? auth()->user()->picture : 'profile.png'}}" alt="avatar">
+                <h6 class="">{{auth()->user()->name}}</h6>
+                <p class="">
+                    @if(auth()->user()->role == 'super-admin')
+                    Admin
+                    @elseif(auth()->user()->role == 'petugas')
+                    Posyandu
+                    @else
+                    Kecamatan
+                    @endif
+                </p>
+            </div>
+        </div>
         <ul class="list-unstyled menu-categories" id="accordionExample">
             <li class="menu {{ ($menu == 'dashboard') ? 'active' : ''}}">
                 <a href="#menu1" data-toggle="collapse" aria-expanded="{{ ($menu == 'dashboard') ? 'true' : 'false'}}" class="dropdown-toggle collapsed">

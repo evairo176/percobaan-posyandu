@@ -28,7 +28,7 @@ class AllPerkembanganController extends Controller
                 'users.name as name_petugas',
                 'tb_rekap_posyandu.nama_posyandu as nama_posyandu',
             )
-            ->orderBy('tb_perkembangan.id', 'DESC')
+            ->orderBy('tb_perkembangan.status', 'DESC')
             ->get();
         $data = [
             'menu' => 'table',
@@ -109,5 +109,4 @@ class AllPerkembanganController extends Controller
         $detail = Detail::create($data);
         return redirect('dpmd-perkembangan')->with('success', 'Status perkembangan telah berhasil di update');
     }
-   
 }

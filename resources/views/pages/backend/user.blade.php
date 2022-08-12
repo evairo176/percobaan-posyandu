@@ -22,9 +22,17 @@
                         display: flex;
                         align-items: center;">
                         <h4>Table User</h4>
-                        <button type="button" class="btn btn-primary mb-2 mr-2" id="btnUser">
-                            Add New User
-                        </button>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary mb-2 mr-2" id="btnUser">
+                                Add New User
+                            </button>
+                            <button id="genUsPos" type="button" class="btn btn-success mb-2 mr-2">
+                                Generate Pos
+                            </button>
+                            <button id="genUsKec" type="button" class="btn btn-success mb-2 mr-2">
+                                Generate Kec
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -39,12 +47,30 @@
                             <th>Name</th>
                             <th>E-mail</th>
                             <th>Role</th>
-                            <th>Created at</th>
+                            <th>Kecamatan</th>
+                            <th>Desa</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
                 </table>
+            </div>
+            <div class="btn-group">
+                <button id="deletegenUsPos" type="button" class="btn btn-danger mb-2 mr-2">
+                    Generate delete User Pos
+                </button>
+                <button id="deletegenUsKec" type="button" class="btn btn-danger mb-2 mr-2">
+                    Generate delete User Kec
+                </button>
+                <!-- <button id="cetakExcel" type="button" class="btn btn-success mb-2 mr-2">
+                    Cetak Excel
+                </button> -->
+                <form action="/user/cetak" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-success mb-2 mr-2">
+                        Cetak Excel
+                    </button>
+                </form>
             </div>
         </div>
     </div>
@@ -158,6 +184,10 @@
                                 <td id="demail"></td>
                             </tr>
                             <tr>
+                                <th>password :</th>
+                                <td id="password_asli"></td>
+                            </tr>
+                            <tr>
                                 <th>Gender :</th>
                                 <td id="dgender"></td>
                             </tr>
@@ -168,6 +198,14 @@
                             <tr>
                                 <th>Role :</th>
                                 <td id="drole"></td>
+                            </tr>
+                            <tr>
+                                <th>Kecamatan :</th>
+                                <td id="kecamatan"></td>
+                            </tr>
+                            <tr>
+                                <th>Kelurahan :</th>
+                                <td id="kelurahan"></td>
                             </tr>
                         </thead>
                         <tbody>
@@ -238,8 +276,8 @@
                     name: 'picture'
                 },
                 {
-                    data: 'name',
-                    name: 'name'
+                    data: 'name_user',
+                    name: 'name_user'
                 },
                 {
                     data: 'email',
@@ -250,8 +288,12 @@
                     name: 'role'
                 },
                 {
-                    data: 'created_at',
-                    name: 'created_at'
+                    data: 'kecamatan',
+                    name: 'kecamatan'
+                },
+                {
+                    data: 'kelurahan',
+                    name: 'kelurahan'
                 },
                 {
                     data: 'action',
@@ -305,7 +347,15 @@
             e.preventDefault();
             let id = $(this).attr('id');
             var url = 'user/detail';
-
+            $("#dpicture").html('');
+            $("#dname").text('');
+            $("#demail").text('');
+            $("#dgender").text('');
+            $("#dphone").text('');
+            $("#drole").text('');
+            $("#password_asli").text('');
+            $("#kecamatan").text('');
+            $("#kelurahan").text('');
             $.ajax({
                 url: url,
                 method: 'post',
@@ -320,11 +370,16 @@
                     $('#userDetailModalTitle').html('Detail Data User');
                     $('#userDetailModal').modal('show');
                     $("#dpicture").html(img);
-                    $("#dname").text(res.name);
+                    $("#dname").text(res.name_user);
                     $("#demail").text(res.email);
                     $("#dgender").text(res.gender);
                     $("#dphone").text(res.phone);
                     $("#drole").text(res.role);
+                    $("#kelurahan").text(res.kelurahan);
+                    $("#kecamatan").text(res.kecamatan);
+                    if (res.role != 'super-admin') {
+                        $("#password_asli").text(res.password_asli);
+                    }
                 }
             });
         });
@@ -393,6 +448,202 @@
                         method: 'delete',
                         data: {
                             id: id,
+                            _token: csrf
+                        },
+                        success: function(res) {
+                            if (res.status == 200) {
+                                Swal.fire({
+                                    position: 'bottom-end',
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: res.messages,
+                                    footer: '<a href="#">Do you have question?</a>',
+                                    timer: 1500,
+                                })
+                                $('.table').DataTable().ajax.reload();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        $(document).on('click', '#cetakExcel', function(e) {
+            e.preventDefault();
+            let csrf = '{{ csrf_token() }}';
+            var url = '{{url("user/cetak")}}';
+            Swal.fire({
+                title: 'Apakah Anda Yakin ?',
+                text: "Anda akan membuat akun user petugas posyandu secara otomatis!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, buat sekarang!',
+                cancelButtonText: 'Tidak, Batalkan!',
+                reverseButtons: true,
+                padding: '2em'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: url,
+                        method: 'post',
+                        data: {
+                            _token: csrf
+                        },
+                        success: function(res) {
+                            if (res.status == 200) {
+                                Swal.fire({
+                                    position: 'bottom-end',
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: res.messages,
+                                    footer: '<a href="#">Do you have question?</a>',
+                                    timer: 1500,
+                                })
+                                $('.table').DataTable().ajax.reload();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        $(document).on('click', '#genUsPos', function(e) {
+            e.preventDefault();
+            let id = $(this).attr('id');
+            let csrf = '{{ csrf_token() }}';
+            var url = '{{url("user/generate")}}';
+            Swal.fire({
+                title: 'Apakah Anda Yakin ?',
+                text: "Anda akan membuat akun user petugas posyandu secara otomatis!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, buat sekarang!',
+                cancelButtonText: 'Tidak, Batalkan!',
+                reverseButtons: true,
+                padding: '2em'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: url,
+                        method: 'post',
+                        data: {
+                            _token: csrf
+                        },
+                        success: function(res) {
+                            if (res.status == 200) {
+                                Swal.fire({
+                                    position: 'bottom-end',
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: res.messages,
+                                    footer: '<a href="#">Do you have question?</a>',
+                                    timer: 1500,
+                                })
+                                $('.table').DataTable().ajax.reload();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        $(document).on('click', '#genUsKec', function(e) {
+            e.preventDefault();
+            let id = $(this).attr('id');
+            let csrf = '{{ csrf_token() }}';
+            var url = '{{url("kecamatan/generate")}}';
+            Swal.fire({
+                title: 'Apakah Anda Yakin ?',
+                text: "Anda akan membuat akun user petugas kecamatan secara otomatis!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, buat sekarang!',
+                cancelButtonText: 'Tidak, Batalkan!',
+                reverseButtons: true,
+                padding: '2em'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: url,
+                        method: 'post',
+                        data: {
+                            _token: csrf
+                        },
+                        success: function(res) {
+                            if (res.status == 200) {
+                                Swal.fire({
+                                    position: 'bottom-end',
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: res.messages,
+                                    footer: '<a href="#">Do you have question?</a>',
+                                    timer: 1500,
+                                })
+                                $('.table').DataTable().ajax.reload();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+        $(document).on('click', '#deletegenUsPos', function(e) {
+            e.preventDefault();
+            let id = $(this).attr('id');
+            let csrf = '{{ csrf_token() }}';
+            var url = '{{url("user/generate/delete")}}';
+            Swal.fire({
+                title: 'Apakah Anda Yakin ?',
+                text: "Anda akan menghapus semua akun user petugas posyandu secara otomatis!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, hapus sekarang!',
+                cancelButtonText: 'Tidak, Batalkan!',
+                reverseButtons: true,
+                padding: '2em'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: url,
+                        method: 'post',
+                        data: {
+                            _token: csrf
+                        },
+                        success: function(res) {
+                            if (res.status == 200) {
+                                Swal.fire({
+                                    position: 'bottom-end',
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: res.messages,
+                                    footer: '<a href="#">Do you have question?</a>',
+                                    timer: 1500,
+                                })
+                                $('.table').DataTable().ajax.reload();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+        $(document).on('click', '#deletegenUsKec', function(e) {
+            e.preventDefault();
+            let id = $(this).attr('id');
+            let csrf = '{{ csrf_token() }}';
+            var url = '{{url("kecamatan/generate/delete")}}';
+            Swal.fire({
+                title: 'Apakah Anda Yakin ?',
+                text: "Anda akan menghapus semua akun user petugas kecamatan secara otomatis!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, hapus sekarang!',
+                cancelButtonText: 'Tidak, Batalkan!',
+                reverseButtons: true,
+                padding: '2em'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: url,
+                        method: 'post',
+                        data: {
                             _token: csrf
                         },
                         success: function(res) {

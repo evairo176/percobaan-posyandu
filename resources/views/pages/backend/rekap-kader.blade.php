@@ -58,6 +58,7 @@
                             <th>tahun pelatihan</th>
                             <th>terlatih</th>
                             <th>no hp</th>
+                            <th>created_at</th>
                             <th>Action</th>
                         </tr>
                     </thead>

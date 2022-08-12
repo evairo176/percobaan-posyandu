@@ -16,6 +16,7 @@ class DashboardController extends Controller
 	public function index()
 	{
 
+		// dd(auth()->user()->kecamatan_id);
 		$posyandu =  DB::table('tb_rekap_posyandu')
 			->leftJoin('districts', 'tb_rekap_posyandu.kecamatan_id', '=', 'districts.id')
 			->leftJoin('villages', 'tb_rekap_posyandu.kelurahan_id', '=', 'villages.id')

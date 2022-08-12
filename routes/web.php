@@ -44,8 +44,12 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/cetak-pdf/{id_data}', [HomeController::class, 'cetakpdf']);
 
 Route::get('/get-data/posyandu', [DataUserController::class, 'dataPosyandu']);
+Route::post('/user/generate', [DataUserController::class, 'generateUser']);
+Route::post('/kecamatan/generate', [DataUserController::class, 'generateUserKecamatan']);
+Route::post('/user/generate/delete', [DataUserController::class, 'generateUserHapus']);
+Route::post('/kecamatan/generate/delete', [DataUserController::class, 'generateUserKecamatanHapus']);
 
-
+Route::post('/user/cetak', [DataUserController::class, 'cetakUser']);
 
 route::group(['middleware' => ['guest']], function () {
 
@@ -141,6 +145,8 @@ route::group(['middleware' => ['auth', 'login_check:petugas']], function () {
     Route::post('/program/store', [ProgramController::class, 'store'])->name('program.store');
     Route::get('/program/fetch-all', [ProgramController::class, 'fetchAll'])->name('program.fetch');
     Route::post('/program/edit', [ProgramController::class, 'edit'])->name('program.edit');
+
+    Route::get('/perkembangan/tahun-rekap', [PerkembanganController::class, 'tahunRekap']);
 
     Route::get('/perkembangan', [PerkembanganController::class, 'index'])->name('perkembangan');
     Route::post('/perkembangan/store', [PerkembanganController::class, 'store'])->name('perkembangan.store');

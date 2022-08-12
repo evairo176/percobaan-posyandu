@@ -61,7 +61,6 @@
                             <th>jml_kader</th>
                             <th>tahun rekap</th>
                             <th>status</th>
-                            <th>Created at</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -85,12 +84,9 @@
                 <form action="#" method="post" id="perkembangan_form">
                     @csrf
                     <div class="my-2">
-                        <label for="name_kader">tahun rekap</label>
-                        <select name="tahun_rekap" id="tahun_rekap" class="form-control" readonly>
-                            <option value="">--pilih tahun--</option>
-                            <?php for ($i = date('Y'); $i >= date('Y') - 70; $i -= 1) { ?>
-                                <option value="{{$i}}">{{$i}}</option>
-                            <?php } ?>
+                        <label for="name_kader">Tahun Rekap</label>
+                        <select name="tahun_rekap" id="tahun_rekap" class="form-control">
+
                         </select>
                         <div class="invalid-feedback"></div>
                     </div>
@@ -218,14 +214,14 @@
                     <div class="row">
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_perkembangan">campak</label>
+                                <label for="name_perkembangan">imunisasi campak</label>
                                 <input type="text" name="campak" id="campak" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_perkembangan">BCG</label>
+                                <label for="name_perkembangan">imunisasi BCG</label>
                                 <input type="text" name="bcg" id="bcg" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
@@ -234,14 +230,14 @@
                     <div class="row">
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_perkembangan">DPT</label>
+                                <label for="name_perkembangan">imunisasi DPT</label>
                                 <input type="text" name="dpt" id="dpt" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_perkembangan">HBO</label>
+                                <label for="name_perkembangan">imunisasi HBO</label>
                                 <input type="text" name="hbo" id="hbo" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
@@ -250,21 +246,21 @@
                     <div class="row">
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_perkembangan">Polio</label>
+                                <label for="name_perkembangan">imunisasi Polio</label>
                                 <input type="text" name="polio" id="polio" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_perkembangan">gizi</label>
+                                <label for="name_perkembangan">imunisasi gizi</label>
                                 <input type="text" name="gizi" id="gizi" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                     </div>
                     <div class="my-2">
-                        <label for="name_perkembangan">diare</label>
+                        <label for="name_perkembangan">imunisasi diare</label>
                         <input type="text" name="diare" id="diare" value="" class="form-control">
                         <div class="invalid-feedback"></div>
                     </div>
@@ -280,7 +276,7 @@
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_strata">bkb</label>
+                                <label for="name_strata">Bina Keluarga Balita (BKB)</label>
                                 <div class="form-control">
                                     <input type="checkbox" name="bkb" id="bkb" value="1">
                                 </div>
@@ -291,7 +287,7 @@
                     <div class="row">
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_strata">bkr</label>
+                                <label for="name_strata">Bina Keluarga Remaja (BKR)</label>
                                 <div class="form-control">
                                     <input type="checkbox" name="bkr" id="bkr" value="1">
                                 </div>
@@ -300,7 +296,7 @@
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_strata">bkl</label>
+                                <label for="name_strata">bina Keluarga Lansia (BKL)</label>
                                 <div class="form-control">
                                     <input type="checkbox" name="bkl" id="bkl" value="1">
                                 </div>
@@ -311,7 +307,7 @@
                     <div class="row">
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_strata">up2k</label>
+                                <label for="name_strata">Kegiatan Ekonomi (UP2K)</label>
                                 <div class="form-control">
                                     <input type="checkbox" name="up2k" id="up2k" value="1">
                                 </div>
@@ -320,7 +316,7 @@
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_perkembangan">Angka Stunting</label>
+                                <label for="name_perkembangan">Angka Stunting (pertumbuhan tinggi badan dibawah standar)</label>
                                 <input type="text" name="as" id="as" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
@@ -329,7 +325,7 @@
                     <div class="row">
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_strata">in</label>
+                                <label for="name_strata">Inklusi (toleransi masyarakat)</label>
                                 <div class="form-control">
                                     <input type="checkbox" name="in" id="in" value="1">
                                 </div>
@@ -338,7 +334,7 @@
                         </div>
                         <div class="col-lg">
                             <div class="my-2">
-                                <label for="name_perkembangan">Dana Sehat</label>
+                                <label for="name_perkembangan">Dana Sehat (Meningkatkan kesehatan)</label>
                                 <input type="text" name="ds" id="ds" value="" class="form-control">
                                 <div class="invalid-feedback"></div>
                             </div>
@@ -367,6 +363,26 @@
 <script src="{{asset('backend')}}/plugins/sweetalerts/custom-sweetalert.js"></script>
 <script>
     $(function() {
+
+        tahunRekap()
+
+        function tahunRekap() {
+            var url = '/perkembangan/tahun-rekap';
+            $.ajax({
+                url: url,
+                method: 'get',
+                success: function(res) {
+                    // dd(res);
+                    $("#tahun_rekap").empty();
+                    $("#tahun_rekap").append('<option selected disabled>pilih...</option>');
+                    $.each(res, function(index, item) {
+                        // dd(item);
+                        $("#tahun_rekap").append('<option value="' + item + '">' + item + '</option>');
+                    });
+                    // console.log('1');
+                }
+            });
+        }
         var table = $('.table').DataTable({
             processing: true,
             serverSide: true,
@@ -413,10 +429,6 @@
                     name: 'status'
                 },
                 {
-                    data: 'created_at',
-                    name: 'created_at'
-                },
-                {
                     data: 'action',
                     name: 'action',
                     orderable: true,
@@ -427,6 +439,7 @@
         $('#btnperkembangan').on('click', function() {
             // $("#formadddesa")[0].reset();
             $('#perkembangan_form')[0].reset();
+            tahunRekap()
             $('#perkembangan_id').val('');
             $('#perkembanganModalTitle').html('Add Data perkembangan');
             $('#perkembangan_btn').html('Save');
@@ -437,7 +450,7 @@
             e.preventDefault();
             let id = $(this).attr('id');
             var url = 'perkembangan/edit';
-
+            $("#tahun_rekap").empty();
             $.ajax({
                 url: url,
                 method: 'post',
@@ -446,14 +459,15 @@
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(res) {
-                    console.log(res.picture);
+                    // console.log(res.picture);
                     $('#perkembanganModalTitle').html('Edit Data perkembangan');
                     $('#perkembangan_btn').html('Update');
                     $('#perkembanganModal').modal('show');
                     $("#perkembangan_id").val(res.id);
                     $("#kelurahan_id").val(res.kelurahan_id);
                     $("#kecamatan_Id").val(res.kecamatan_Id);
-                    $("#tahun_rekap").val(res.tahun_rekap);
+                    // $("#tahun_rekap").val(res.tahun_rekap);
+                    $("#tahun_rekap").append('<option selected value="' + res.tahun_rekap + '">' + res.tahun_rekap + '</option>');
                     // $("#tahun_rekap").prop('disabled', true);
                     $("#jml_bgn").val(res.jml_bgn);
                     // $("#jml_kader").val(res.jml_kader);
@@ -577,6 +591,7 @@
                         $('#perkembangan_btn').removeAttr('disabled');
                         $('#perkembanganModal').modal('hide');
                         $('.table').DataTable().ajax.reload();
+                        tahunRekap()
                     }
                 }
             })

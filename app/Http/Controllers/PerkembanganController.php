@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Detail;
 use App\Models\Perkembangan;
+use App\Models\Posyandu;
 use App\Models\Strata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -14,18 +15,24 @@ class PerkembanganController extends Controller
 {
     public function index()
     {
+        // dd(date('Y'));
         if (auth()->user()->posyandu_id) {
             if (Perkembangan::all()) {
                 $perkembangan =  DB::table('tb_perkembangan')->where('posyandu_id', auth()->user()->posyandu_id)->get();
                 $posyandu = DB::table('tb_rekap_posyandu')->where('id', auth()->user()->posyandu_id)->first();
                 // $strata = DB::table('tb_strata')->where('posyandu_id', auth()->user()->posyandu_id)->first();
                 $kaderTotal = DB::table('tb_kader')->where('posyandu_id', auth()->user()->posyandu_id)->count();
-                $kaderTerlatih = DB::table('tb_kader')->where('posyandu_id', auth()->user()->posyandu_id)->where('terlatih', '!=', 'ya')->count();
+                $kaderTerlatih = DB::table('tb_kader')->where('posyandu_id', auth()->user()->posyandu_id)->where('terlatih', 'ya')->count();
                 // $skdn = DB::table('tb_skdn')->where('posyandu_id', auth()->user()->posyandu_id)->first();
                 // $kegiatan = DB::table('tb_kegiatan_utama')->where('posyandu_id', auth()->user()->posyandu_id)->first();
                 // $program = DB::table('tb_program')->where('posyandu_id', auth()->user()->posyandu_id)->first();
                 // dd($perkembangan->tahun_rekap);
                 // dd($kaderTotal);
+                // dd($perkembangan[0]->tahun_rekap);
+                // dd($perkembangan->count());
+                // dd($years);
+                // dd($tahun);
+                // dd($tahun);
                 $data = [
                     'menu' => 'table',
                     'submenu' => 'Input Rekap Perkembangan',
@@ -34,6 +41,7 @@ class PerkembanganController extends Controller
                     // 'strata' => $strata,
                     'kaderTotal' => $kaderTotal,
                     'kaderTerlatih' => $kaderTerlatih,
+                    // 'tahun' => $tahun,
                     // 'skdn' => $skdn,
                     // 'kegiatan' => $kegiatan,
                     // 'program' => $program,
@@ -44,6 +52,28 @@ class PerkembanganController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+    public function tahunRekap()
+    {
+        $perkembangan =  DB::table('tb_perkembangan')->where('posyandu_id', auth()->user()->posyandu_id)->get();
+
+        if ($perkembangan->count() > 0) {
+            for ($i = date('Y'); $i >= date('Y') - 70; $i -= 1) {
+                $years[] = $i;
+            }
+            foreach ($perkembangan as $value) {
+                $arrPerkembangan[] = $value->tahun_rekap;
+            }
+            // dd($tahun);
+            // $arrPerkembangan = $perkembangan->toArray();
+            $tahun = array_diff($years, $arrPerkembangan);
+        } else {
+            for ($i = date('Y'); $i >= date('Y') - 70; $i -= 1) {
+                $years[] = $i;
+            }
+            $tahun = $years;
+        }
+        return $tahun;
     }
     public function fetchAll(Request $request)
     {
@@ -358,7 +388,9 @@ class PerkembanganController extends Controller
     }
     public function datadetailperkembangan(Request $request)
     {
-        $data_perkembangan  = DB::table('districts')->where('regency_id', 3212)->get();
+        $data_perkembangan  = DB::table('districts')->where('regency_id', 3212)
+            ->orderBy('name', 'asc')
+            ->get();
         $Getyears           = $request->input('tahun');
         $o                  = 0;
         $ttl_kel            = 0;
@@ -412,8 +444,16 @@ class PerkembanganController extends Controller
             $dt_ps->where('kecamatan_id', $per->id);
             if ($Getyears) {
                 $dt->where('tahun_rekap', $Getyears);
-              // $dt_ps->whereYear('created_at', $Getyears);
+                // $dt_ps->whereYear('created_at', $Getyears);
+            } else {
+                $dt->where('tahun_rekap', date('Y'));
             }
+
+            // $dataK = DB::table('tb_perkembangan')->where('kecamatan_id', $per->id)
+            // ->where('status', 'dpmd diterima')
+            // ->where('tahun_rekap', $Getyears)
+            // ->where()
+            // ->get()
             $dt_per_kel     = $dt->get();
 
             $posyandu       = $dt_ps->count();

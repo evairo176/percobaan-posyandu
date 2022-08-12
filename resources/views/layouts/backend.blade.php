@@ -15,6 +15,8 @@
 
     <!--  BEGIN MAIN CONTAINER  -->
     <div class="main-container" id="container">
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
         <!--  BEGIN SIDEBAR  -->
         @if(Auth::user()->role=='super-admin')
         @include('includes.backend.sidebar')
