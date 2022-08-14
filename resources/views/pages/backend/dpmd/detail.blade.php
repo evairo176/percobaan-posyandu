@@ -293,7 +293,11 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        @if(auth()->user()->role == 'super-admin')
                         <a href="/dpmd-perkembangan" id="perkembangan_btn" class="btn btn-danger">Kembali</a>
+                        @else(auth()->user()->role == 'petugas_kecamatan')
+                        <a href="/perkembangan" id="perkembangan_btn" class="btn btn-danger">Kembali</a>
+                        @endif
                     </div>
                 </form>
             </div>

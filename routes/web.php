@@ -84,11 +84,11 @@ route::group(['middleware' => ['auth']], function () {
 route::group(['middleware' => ['auth', 'login_check:petugas']], function () {
 
 
-    Route::get('/kuis-petugas', [DashboardController::class, 'kuispetugas']);
-    Route::post('/get-data-kuis', [DashboardController::class, 'getdatakuis']);
-    Route::post('/simpan-kuis', [DashboardController::class, 'simpankuis']);
-    Route::post('/list-kuis', [DashboardController::class, 'listkuis']);
-    Route::post('/kuis-hpus', [DashboardController::class, 'kuishpus']);
+    // Route::get('/kuis-petugas', [DashboardController::class, 'kuispetugas']);
+    // Route::post('/get-data-kuis', [DashboardController::class, 'getdatakuis']);
+    // Route::post('/simpan-kuis', [DashboardController::class, 'simpankuis']);
+    // Route::post('/list-kuis', [DashboardController::class, 'listkuis']);
+    // Route::post('/kuis-hpus', [DashboardController::class, 'kuishpus']);
 
 
 
@@ -152,6 +152,7 @@ route::group(['middleware' => ['auth', 'login_check:petugas']], function () {
     Route::post('/perkembangan/store', [PerkembanganController::class, 'store'])->name('perkembangan.store');
     Route::get('/perkembangan/fetch-all', [PerkembanganController::class, 'fetchAll'])->name('perkembangan.fetch');
     Route::post('/perkembangan/edit', [PerkembanganController::class, 'edit'])->name('perkembangan.edit');
+    Route::get('/perkembangan/status/detail/{id}', [AllPerkembanganController::class, 'detailPer']);
 
 
     Route::get('/petugas/riwayat-perkembangan', [RiwayatController::class, 'riwayatPetugas']);

@@ -116,7 +116,11 @@ class PerkembanganController extends Controller
                     ->addColumn('action', function ($row) {
                         if ($row->status == 'dpmd ditolak' || $row->status == 'kecamatan ditolak') {
                             $actionBtn = '                    <a href="javascript:void(0);" id="' . $row->id_per . '" class="editIcon btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editdataloyeeModal" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">Ajukan Ulang</a>  ';
-                        } else {
+                        }elseif($row->status == 'dpmd diterima' || $row->status == 'kecamatan diterima'){
+                            $actionBtn = '                    <a href="/perkembangan/status/detail/' . $row->id_per . '"  class=" btn btn-warning" data-bs-toggle="modal" data-bs-target="#editdataloyeeModal" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">Detail</a>  ';
+
+                        }
+                         else {
                             $actionBtn = '
                             <ul class="table-controls">
                             <li><a href="javascript:void(0);" id="' . $row->id_per . '" class="editIcon" data-bs-toggle="modal" data-bs-target="#editdataloyeeModal" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>                                                                            

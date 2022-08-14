@@ -18,7 +18,7 @@
         <h6 class="">General Information</h6>
         <div class="" id="profile_alert"></div>
         <div class="row">
-            <div class="col-lg-11 mx-auto">
+            <div class="col-lg-12 mx-auto">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12 text-center picture-profile-s">
                         <img src="storage/picture/{{($userInfo->picture) ? $userInfo->picture : 'profile.png'}}" alt="" id="image_preview" class="img-fluid rounded-circle img-thumbnail" width="200">
