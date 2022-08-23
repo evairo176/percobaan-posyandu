@@ -4,7 +4,7 @@
         <div class="profile-info">
             <figure class="user-cover-image"></figure>
             <div class="user-info">
-                <img src="storage/picture/{{(auth()->user()->picture) ? auth()->user()->picture : 'profile.png'}}" alt="avatar">
+                <img src="/storage/picture/{{(auth()->user()->picture) ? auth()->user()->picture : '/profile.png'}}" alt="avatar">
                 <h6 class="">{{auth()->user()->name}}</h6>
                 <p class="">
                     @if(auth()->user()->role == 'super-admin')

@@ -87,6 +87,8 @@
                                     @if($per->status == null)
                                     <a class="btn btn-success" href="/kecamatan/perkembangan/status/diterima/{{$per->id_per}}">diterima</a>
                                     <a class="btn btn-danger" href="/kecamatan/perkembangan/status/ditolak/{{$per->id_per}}">ditolak</a>
+                                    @elseif($per->status == 'dpmd ditolak' || $per->status == 'kecamatan ditolak')
+                                    <a class="btn btn-danger" href="#">status ditolak</a>
                                     @endif
                                     <a class="btn btn-warning" href="/kecamatan/perkembangan/status/detail/{{$per->id_per}}">lihat detail</a>
                                 </div>

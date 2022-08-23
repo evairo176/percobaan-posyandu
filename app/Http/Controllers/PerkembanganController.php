@@ -116,11 +116,9 @@ class PerkembanganController extends Controller
                     ->addColumn('action', function ($row) {
                         if ($row->status == 'dpmd ditolak' || $row->status == 'kecamatan ditolak') {
                             $actionBtn = '                    <a href="javascript:void(0);" id="' . $row->id_per . '" class="editIcon btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editdataloyeeModal" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">Ajukan Ulang</a>  ';
-                        }elseif($row->status == 'dpmd diterima' || $row->status == 'kecamatan diterima'){
+                        } elseif ($row->status == 'dpmd diterima' || $row->status == 'kecamatan diterima') {
                             $actionBtn = '                    <a href="/perkembangan/status/detail/' . $row->id_per . '"  class=" btn btn-warning" data-bs-toggle="modal" data-bs-target="#editdataloyeeModal" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">Detail</a>  ';
-
-                        }
-                         else {
+                        } else {
                             $actionBtn = '
                             <ul class="table-controls">
                             <li><a href="javascript:void(0);" id="' . $row->id_per . '" class="editIcon" data-bs-toggle="modal" data-bs-target="#editdataloyeeModal" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>                                                                            
@@ -652,5 +650,137 @@ class PerkembanganController extends Controller
 
             return response()->json(array('data_perkembangan' => $data_perkembangan, 'ttl' => $ttl));
         }
+    }
+
+    public function exportGrafik(Request $request)
+    {
+        // $data_perkembangan  = DB::table('districts')
+        //     ->select(DB::raw("(name) as name_kec"))    
+        //     ->where('regency_id', 3212)
+        //     ->orderBy('name', 'asc')
+        //     ->pluck('name_kec');
+        $tahun  = Perkembangan::select(DB::raw("YEAR(tahun_rekap) as tahun"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            // ->groupBy(DB::raw("Year(tahun_rekap)"))DB::raw('YEAR(created_at)  year')
+            ->pluck('tahun');
+        $per_tahun = Perkembangan::select(DB::raw("SUM(pra) as total_pra"), DB::raw("YEAR(tahun_rekap) as tahun"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->get();
+        // dd($per_tahun);
+        $total_pra = Perkembangan::select(DB::raw("SUM(pra) as total_pra"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('total_pra');
+        $total_mad = Perkembangan::select(DB::raw("SUM(mad) as total_mad"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('total_mad');
+        $total_pur = Perkembangan::select(DB::raw("SUM(pur) as total_pur"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('total_pur');
+        $total_man = Perkembangan::select(DB::raw("SUM(man) as total_man"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('total_man');
+        $jml_bgn = Perkembangan::select(DB::raw("SUM(jml_bgn) as jml_bgn"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('jml_bgn');
+        $jml_kader = Perkembangan::select(DB::raw("SUM(jml_kader) as jml_kader"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('jml_kader');
+        $jml_terlatih = Perkembangan::select(DB::raw("SUM(jml_terlatih) as jml_terlatih"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('jml_terlatih');
+        $s = Perkembangan::select(DB::raw("SUM(s) as s"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('s');
+        $k = Perkembangan::select(DB::raw("SUM(k) as k"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('k');
+        $d = Perkembangan::select(DB::raw("SUM(d) as d"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('d');
+        $n = Perkembangan::select(DB::raw("SUM(n) as n"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('n');
+        $kb_aktif = Perkembangan::select(DB::raw("SUM(kb_aktif) as kb_aktif"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('kb_aktif');
+        $k4 = Perkembangan::select(DB::raw("SUM(k4) as k4"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('k4');
+        $fe3 = Perkembangan::select(DB::raw("SUM(fe3) as fe3"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('fe3');
+        $campak = Perkembangan::select(DB::raw("SUM(campak) as campak"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('campak');
+        $bcg = Perkembangan::select(DB::raw("SUM(bcg) as bcg"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('bcg');
+        $dpt = Perkembangan::select(DB::raw("SUM(dpt) as dpt"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('dpt');
+        $hbo = Perkembangan::select(DB::raw("SUM(hbo) as hbo"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('hbo');
+        $polio = Perkembangan::select(DB::raw("SUM(polio) as polio"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('polio');
+        $gizi = Perkembangan::select(DB::raw("SUM(gizi) as gizi"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('gizi');
+        $diare = Perkembangan::select(DB::raw("SUM(diare) as diare"))
+            // ->whereYear('tahun_rekap', $request->tahun)
+            ->groupBy(DB::raw("Year(tahun_rekap)"))
+            ->pluck('diare');
+
+        // dd($data_total);
+        $data = [
+            'menu' => 'table',
+            'submenu' => 'Input Detail Perkembangan',
+            // 'per_tahun' => $per_tahun,
+            'tahun' => $tahun,
+            'data_pra' => $total_pra,
+            'data_mad' => $total_mad,
+            'data_man' => $total_man,
+            'data_pur' => $total_pur,
+            'data_jml_bgn' => $jml_bgn,
+            'data_jml_kader' => $jml_kader,
+            'data_jml_terlatih' => $jml_terlatih,
+            'data_s' => $s,
+            'data_k' => $k,
+            'data_d' => $d,
+            'data_n' => $n,
+            'data_kb_aktif' => $kb_aktif,
+            'data_k4' => $k4,
+            'data_fe3' => $fe3,
+            'data_campak' => $campak,
+            'data_bcg' => $bcg,
+            'data_dpt' => $dpt,
+            'data_hbo' => $hbo,
+            'data_polio' => $polio,
+            'data_gizi' => $gizi,
+            'data_diare' => $diare,
+        ];
+        return view('pages.backend.dpmd.export-grafik', $data);
     }
 }

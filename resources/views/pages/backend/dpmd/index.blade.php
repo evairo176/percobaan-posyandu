@@ -88,6 +88,8 @@
                                     <a class="btn btn-success" href="/dpmd/perkembangan/status/diterima/{{$per->id_per}}">diterima</a>
                                     <a class="btn btn-danger" href="/dpmd/perkembangan/status/ditolak/{{$per->id_per}}">ditolak</a>
                                     <a class="btn btn-warning" href="/dpmd/perkembangan/status/detail/{{$per->id_per}}">lihat detail</a>
+                                    @elseif($per->status == 'dpmd ditolak' || $per->status == 'kecamatan ditolak')
+                                    <a class="btn btn-danger" href="#">status ditolak</a>
                                     @elseif($per->status == null)
                                     <a class="btn btn-secondary" href="#">Menunggu validasi kecamatan</a>
                                     @else

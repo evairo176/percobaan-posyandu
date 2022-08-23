@@ -23,6 +23,10 @@
     text-transform: uppercase;
     vertical-align: middle;
 }
+.g-btn {
+    display: flex;
+    justify-content: space-between;
+}
 </style>
 <div class="col-lg-12">
     <div class="statbox widget box box-shadow">
@@ -40,8 +44,8 @@
             <div class="row"> 
                 <div class="col-md-12"> 
                     <div class="table-responsive">
-                            <div class="row">
-                                <div class="col-md-4 mb-4">
+                            <div class="g-btn mb-3">
+             
                                     
                                         <form>
                                             @php
@@ -67,6 +71,9 @@
                                             </div>
                                         </form>
                                         
+                           
+                                <div class="btn-group">
+                                    <a href="/export-grafik" class="btn btn-danger">Export Grafik</a>
                                 </div>
                             </div>
                            <table class="table table-t text-left">

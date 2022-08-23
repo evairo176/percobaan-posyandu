@@ -187,6 +187,9 @@ route::group(['middleware' => ['auth', 'login_check:super-admin']], function () 
     Route::get('/dpmd/perkembangan/status/ditolak/{id}', [AllPerkembanganController::class, 'updateStatusDitolak']);
 
     Route::get('/dpmd/riwayat-perkembangan', [RiwayatController::class, 'riwayatDPMD']);
+
+    // grafik
+    Route::get('/export-grafik', [PerkembanganController::class, 'exportGrafik']);
 });
 route::group(['middleware' => ['auth', 'login_check:petugas_kecamatan']], function () {
 

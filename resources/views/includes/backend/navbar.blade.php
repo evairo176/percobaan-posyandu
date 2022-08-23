@@ -42,7 +42,7 @@ $website = DB::table('tb_website')->where('id', 1)->first();
                     <div class="user-profile-section">
                         <div class="media mx-auto">
                             <a href="/profile">
-                                <img id="picture_navbar" src="storage/picture/{{(auth()->user()->picture) ? auth()->user()->picture : 'profile.png'}}" class="img-fluid mr-2" alt="avatar">
+                                <img id="picture_navbar" src="/storage/picture/{{(auth()->user()->picture) ? auth()->user()->picture : '/profile.png'}}" class="img-fluid mr-2" alt="avatar">
                             </a>
                             <div class="media-body">
                                 <h5 id="name_user">{{auth()->user()->name}}</h5>
