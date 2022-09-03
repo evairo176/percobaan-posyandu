@@ -29,6 +29,7 @@
         width: 50%;
     }
 </style>
+<!-- menambahkan komentar saja -->
 @endpush
 @section('content')
 
